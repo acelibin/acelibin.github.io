@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>前端路由相关知识 | acelibin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="引子曾经用过微信的weui，感觉很不错的样子，用于微信开发很有帮助。看了下它的官网，发现当我在不同页面间进行跳转的时候，仅仅是url发生变化，而所有源码都是在同一个页面，这应该就是spa应用了。
+当初因为不太懂，自己做页面的时候通过js结合css来实现了类似这种效果，发现勉强够用，但是不足的地方也很明显。在css还未生效的时候会出现其他部分的内容，这样就不好了。
+前几天偶然间发现前端路由这个概念，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端路由相关知识">
+<meta property="og:url" content="http://yoursite.com/2017/02/01/前端路由相关知识/index.html">
+<meta property="og:site_name" content="acelibin">
+<meta property="og:description" content="引子曾经用过微信的weui，感觉很不错的样子，用于微信开发很有帮助。看了下它的官网，发现当我在不同页面间进行跳转的时候，仅仅是url发生变化，而所有源码都是在同一个页面，这应该就是spa应用了。
+当初因为不太懂，自己做页面的时候通过js结合css来实现了类似这种效果，发现勉强够用，但是不足的地方也很明显。在css还未生效的时候会出现其他部分的内容，这样就不好了。
+前几天偶然间发现前端路由这个概念，">
+<meta property="og:updated_time" content="2017-02-01T11:35:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端路由相关知识">
+<meta name="twitter:description" content="引子曾经用过微信的weui，感觉很不错的样子，用于微信开发很有帮助。看了下它的官网，发现当我在不同页面间进行跳转的时候，仅仅是url发生变化，而所有源码都是在同一个页面，这应该就是spa应用了。
+当初因为不太懂，自己做页面的时候通过js结合css来实现了类似这种效果，发现勉强够用，但是不足的地方也很明显。在css还未生效的时候会出现其他部分的内容，这样就不好了。
+前几天偶然间发现前端路由这个概念，">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">acelibin</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">格物致知</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-前端路由相关知识" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/01/前端路由相关知识/" class="article-date">
+  <time datetime="2017-02-01T11:31:33.000Z" itemprop="datePublished">2017-02-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端路由相关知识
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><p>曾经用过微信的<a href="https://www.weui.io" target="_blank" rel="external">weui</a>，感觉很不错的样子，用于微信开发很有帮助。看了下它的官网，发现当我在不同页面间进行跳转的时候，仅仅是url发生变化，而所有源码都是在同一个页面，这应该就是spa应用了。</p>
+<p>当初因为不太懂，自己做页面的时候通过js结合css来实现了类似这种效果，发现勉强够用，但是不足的地方也很明显。在css还未生效的时候会出现其他部分的内容，这样就不好了。</p>
+<p>前几天偶然间发现<strong><em>前端路由</em></strong>这个概念，一路顺着缕了一下相关知识，发现还是自己会的东西不够，这个东西是spa应用早就在用的了。</p>
+<a id="more"></a>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>没有找到官方的概念，只有一些网友牛人总结出来的：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">根据不同的URL地址来显示不同的内容或页面，一般由后端来实现。随着SPA（单页面应用）的广泛使用，这个工作交由前端来实现。</div></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
+<li><p>当用户在点击链接的时候，页面通过ajax加载内容，为了实现后退操作，使用前端路由在URL后面添加hash，然后通过触发hashchange来实现</p>
+</li>
+<li><p>在SPA应用中，所有的HTML都在一个文件中，通过前端路由来实现不同页面切换效果，同样通过hash来进行操作</p>
+</li>
+</ul>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>推荐几个比较好的，用的人比较多路由插件：</p>
+<ul>
+<li><a href="https://github.com/visionmedia/page.js" target="_blank" rel="external">page.js</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[英文] 这个好像国内用的人比较少</div></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://github.com/itorr/q.js" target="_blank" rel="external">Q.js</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[中文] 原生js实现的超级轻量级的插件，功能也较为简单</div></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://github.com/flatiron/director" target="_blank" rel="external">director</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[英文] 这个也是国外的插件，很好很强大</div></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://github.com/wikieswan/vipspa" target="_blank" rel="external">vipspa</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[中文] 依赖zepto或者jQuery的一个微型spa框架</div></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://github.com/kliuj/spa-routers" target="_blank" rel="external">spa-routers</a> <a href="http://blog.csdn.net/kai_l/article/details/53127868" target="_blank" rel="external">JS原生一步步实现前端路由和单页面应用</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[中文] 作者详细的介绍了实现的原理和代码，值得学习</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/01/前端路由相关知识/" data-id="ciz281xzj0007qs0w7pisdq2e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SPA/">SPA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端路由/">前端路由</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单页面应用/">单页面应用</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/04/git使用及操作/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          git使用及操作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/31/Hexo建站记录及Markdown基础语法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hexo建站记录及Markdown基础语法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPA/">SPA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端路由/">前端路由</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单页面应用/">单页面应用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/娱乐休闲/">娱乐休闲</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习/">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/愿望清单/">愿望清单</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/提升自我/">提升自我</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书/">读书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/谈判技巧/">谈判技巧</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/SPA/" style="font-size: 10px;">SPA</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/前端路由/" style="font-size: 10px;">前端路由</a> <a href="/tags/单页面应用/" style="font-size: 10px;">单页面应用</a> <a href="/tags/娱乐休闲/" style="font-size: 10px;">娱乐休闲</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/愿望清单/" style="font-size: 10px;">愿望清单</a> <a href="/tags/提升自我/" style="font-size: 10px;">提升自我</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a> <a href="/tags/谈判技巧/" style="font-size: 10px;">谈判技巧</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/12/一些谈判技巧/">一些谈判技巧</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/05/2017年展望及一些小愿望清单/">2017年展望及一些小愿望清单</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/04/git使用及操作/">git使用及操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/01/前端路由相关知识/">前端路由相关知识</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/31/Hexo建站记录及Markdown基础语法/">Hexo建站记录及Markdown基础语法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <div class="widget-wrap">
+	<h3 class="widget-title">友情链接</h3> 
+	<div class="widget"> 
+		<ul> 
+			<li><a href="https://github.com/acelibin" title="itmyhome">github</a></li> 
+		</ul> 
+	</div>
+</div>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 libin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
