@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>git使用及操作 | acelibin</title>
+  <title>Git及SourceTree的使用 | acelibin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="其实用git也是很久了，刚入行就在github安家，靠着各路大神的教程，也能够配合github客户端更新自己的站点。第一家公司使用SVN，用的也算得心应手，但是每隔一段时间，总会有人把别人的代码或者文件覆盖了的情况，而且有时SVN出现问题就只能干等着了。上家公司只有我一个前端和一个Java后端，前后端完全分离，提交代码通过一个shell脚本直接就可以发布到git仓库了，没有分支的概念，全都是我自己">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git使用及操作">
+<meta property="og:title" content="Git及SourceTree的使用">
 <meta property="og:url" content="http://yoursite.com/2017/02/04/git使用及操作/index.html">
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="其实用git也是很久了，刚入行就在github安家，靠着各路大神的教程，也能够配合github客户端更新自己的站点。第一家公司使用SVN，用的也算得心应手，但是每隔一段时间，总会有人把别人的代码或者文件覆盖了的情况，而且有时SVN出现问题就只能干等着了。上家公司只有我一个前端和一个Java后端，前后端完全分离，提交代码通过一个shell脚本直接就可以发布到git仓库了，没有分支的概念，全都是我自己">
-<meta property="og:updated_time" content="2017-02-04T14:43:18.000Z">
+<meta property="og:updated_time" content="2017-02-18T14:36:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git使用及操作">
+<meta name="twitter:title" content="Git及SourceTree的使用">
 <meta name="twitter:description" content="其实用git也是很久了，刚入行就在github安家，靠着各路大神的教程，也能够配合github客户端更新自己的站点。第一家公司使用SVN，用的也算得心应手，但是每隔一段时间，总会有人把别人的代码或者文件覆盖了的情况，而且有时SVN出现问题就只能干等着了。上家公司只有我一个前端和一个Java后端，前后端完全分离，提交代码通过一个shell脚本直接就可以发布到git仓库了，没有分支的概念，全都是我自己">
   
   
@@ -77,7 +77,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      git使用及操作
+      Git及SourceTree的使用
     </h1>
   
 
@@ -112,11 +112,35 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git branch  //查看所有分支</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git merge dev  //合并分支到master（丢掉分支历史信息）</div><div class="line">git merge --no-off  //保存分支历史信息</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git branch -d dev  //删除分支</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">先这些吧，明天再补充，洗漱，睡觉，每天上班下班3个小时车程，真累啊！</div></pre></td></tr></table></figure>
+<h3 id="SourceTree的使用"><a href="#SourceTree的使用" class="headerlink" title="SourceTree的使用"></a>SourceTree的使用</h3><p>以前自己用github客户端也是得心应手，偶尔用一下命令行也是很简单的操作，没有遇到过什么问题。项目复杂一些，需要多人合作，而且要正规的操作，所以再也不能胡来了。于是乎就看中了SourceTree这个神器，简单易用的界面，可以直接看出来代码的变化，用上手了就离不开了，大赞！</p>
+<p>既然是GUI的工具，使用起来也是很简单的：</p>
+<ol>
+<li><p>从远程库克隆：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">直接点击界面【新仓库】按钮，点击从URL克隆，填写远程库地址，选择本地文件夹，再起一个名字就OK了。</div></pre></td></tr></table></figure>
+</li>
+<li><p>本地开发代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">从远程库克隆下来的代码就可以进行开发，可以新建分支，也可以直接在这个主分支上面进行操作。</div></pre></td></tr></table></figure>
+</li>
+<li><p>add修改后的代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">点击界面左侧【workspace】下面的【文件状态】即可查看已经修改后的代码，选中要提交的部分点击【未暂存文件】复选框即可提交，点击【已暂存文件】即可撤回提交。</div></pre></td></tr></table></figure>
+</li>
+<li><p>commit代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">直接点击菜单提交即可把代码提交到本地仓库，别忘了添加提交信息哟。</div></pre></td></tr></table></figure>
+</li>
+<li><p>push代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">如果是从主分支进行的修改，先在远程库新建一个分支，然后再将本地分支push到这个新建的远程分支，方便其他人review你的代码。</div></pre></td></tr></table></figure>
+</li>
+<li><p>申请合并代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">一般是由review你代码的人进行合并，你在远程提交一个merge request，添加合并信息即可。</div></pre></td></tr></table></figure>
+</li>
+<li><p>其他操作：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">当远程库有更新的时候，SourceTree会提示你，你直接拉取即可更新本地分支代码。</div><div class="line">本地新建分支和合并分支直接点击相关菜单即可，十分便捷。</div></pre></td></tr></table></figure></li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/04/git使用及操作/" data-id="ciz3qbysx00017b0w7nqfc07o" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2017/02/04/git使用及操作/" data-id="cj0lypgk4000c1d0wbil75pk9" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svn/">svn</a></li></ul>
@@ -155,7 +179,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a><span class="category-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -165,7 +189,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/SPA/" style="font-size: 10px;">SPA</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/前端路由/" style="font-size: 10px;">前端路由</a> <a href="/tags/单页面应用/" style="font-size: 10px;">单页面应用</a> <a href="/tags/娱乐休闲/" style="font-size: 10px;">娱乐休闲</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/愿望清单/" style="font-size: 10px;">愿望清单</a> <a href="/tags/提升自我/" style="font-size: 10px;">提升自我</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a> <a href="/tags/谈判技巧/" style="font-size: 10px;">谈判技巧</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+      <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/SPA/" style="font-size: 20px;">SPA</a> <a href="/tags/Sketch/" style="font-size: 10px;">Sketch</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/切图/" style="font-size: 10px;">切图</a> <a href="/tags/前端路由/" style="font-size: 10px;">前端路由</a> <a href="/tags/单页面应用/" style="font-size: 20px;">单页面应用</a> <a href="/tags/娱乐休闲/" style="font-size: 10px;">娱乐休闲</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/愿望清单/" style="font-size: 10px;">愿望清单</a> <a href="/tags/提升自我/" style="font-size: 10px;">提升自我</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a> <a href="/tags/谈判技巧/" style="font-size: 10px;">谈判技巧</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
     </div>
   </div>
 
@@ -174,7 +198,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -187,23 +211,23 @@
       <ul>
         
           <li>
+            <a href="/2017/03/23/git提交说明规范/">git提交说明规范</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/18/vue和webpack上手记/">vue和webpack上手记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/18/Sketch切图及快捷键介绍/">Sketch切图及快捷键介绍</a>
+          </li>
+        
+          <li>
             <a href="/2017/02/12/一些谈判技巧/">一些谈判技巧</a>
           </li>
         
           <li>
             <a href="/2017/02/05/2017年展望及一些小愿望清单/">2017年展望及一些小愿望清单</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/04/git使用及操作/">git使用及操作</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/01/前端路由相关知识/">前端路由相关知识</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/31/Hexo建站记录及Markdown基础语法/">Hexo建站记录及Markdown基础语法</a>
           </li>
         
       </ul>

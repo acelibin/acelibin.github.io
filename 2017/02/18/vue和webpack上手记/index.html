@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>vue和webpack上手记 | acelibin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="新公司新领导说新项目要用vue和webpack，这两个我都简单看过两眼，跟着网上的教程做个demo的水平，现在要实战，吓得我心里一惊。不过本着迎难而上的精神，简单找了两个教程就开始了我的Vue之路。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue和webpack上手记">
+<meta property="og:url" content="http://yoursite.com/2017/02/18/vue和webpack上手记/index.html">
+<meta property="og:site_name" content="acelibin">
+<meta property="og:description" content="新公司新领导说新项目要用vue和webpack，这两个我都简单看过两眼，跟着网上的教程做个demo的水平，现在要实战，吓得我心里一惊。不过本着迎难而上的精神，简单找了两个教程就开始了我的Vue之路。">
+<meta property="og:updated_time" content="2017-02-20T14:37:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue和webpack上手记">
+<meta name="twitter:description" content="新公司新领导说新项目要用vue和webpack，这两个我都简单看过两眼，跟着网上的教程做个demo的水平，现在要实战，吓得我心里一惊。不过本着迎难而上的精神，简单找了两个教程就开始了我的Vue之路。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">acelibin</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">格物致知</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue和webpack上手记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/18/vue和webpack上手记/" class="article-date">
+  <time datetime="2017-02-18T14:57:00.000Z" itemprop="datePublished">2017-02-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端学习/">前端学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vue和webpack上手记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>新公司新领导说新项目要用vue和webpack，这两个我都简单看过两眼，跟着网上的教程做个demo的水平，现在要实战，吓得我心里一惊。不过本着迎难而上的精神，简单找了两个教程就开始了我的Vue之路。</p>
+<a id="more"></a>
+<p>插曲：本来这篇文章是要昨天发出来的，结果自己手误把做了一周的项目删了，还好折腾了一会git后很幸运的找回来了，真是惊险啊。</p>
+<p>一直都有传Vue很好上手，我也是一直跃跃欲试，但是又怕自己能力不及，半路出现问题不好解决。现在用了几天才发现真的是好用的很啊，省了很多事情，更难的是有很多插件可以解决很多问题，相应的社区也是相当的活跃，基本新手能想到的问题都已经有人解决掉了。</p>
+<p>我的起手式是从一个segmentfault上面的一个教程开始的，这里是链接：<a href="https://segmentfault.com/a/1190000007124470" target="_blank" rel="external">Vue2.0 新手完全填坑攻略—从环境搭建到发布——Jinkey 原创</a> 非常感谢大牛领路，直接从实现简单页面就带到了组件和路由，新手跟着看一遍做一遍完全可以上手，这篇文章也是站在巨人的肩膀上得来的，感谢！</p>
+<p>说到组件，曾经看过阿当大神在慕课网出的一个弹窗组件的教程，看了之后心里很有压力——怎么组件这么复杂？但是用上了Vue的组件之后，就像发现了新大陆，简直是小白专用啊，暖暖的很贴心，哈哈……</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>Vue可以通过传统插件引入的方式使用，也可以通过npm安装使用。非常推荐使用npm的方式，配合cli非常好用。</p>
+<p>安装<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm install vue-cli -g</div><div class="line">npm install webpack -g</div></pre></td></tr></table></figure></p>
+<p>创建：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">vue init webpack-simple 工程名字&lt;工程名字不能用中文&gt;</div></pre></td></tr></table></figure></p>
+<p>启动：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm run dev</div></pre></td></tr></table></figure></p>
+<h3 id="Vue起步"><a href="#Vue起步" class="headerlink" title="Vue起步"></a>Vue起步</h3><p>官方文档：<a href="http://cn.vuejs.org/" target="_blank" rel="external">Vue.js</a></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">  &#123;&#123; message &#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">message</span>: <span class="string">'Hello Vue!'</span></div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="Vue组件"><a href="#Vue组件" class="headerlink" title="Vue组件"></a>Vue组件</h3><p>Vue的组件一般是.vue后缀的文件，通过类似html页面的方式来实现一个组件一个页面，页面元素是通过<template>html代码</template>、<script>js脚本</script>、<style>css样式</style>来实现，在需要这个组件的地方import引入，然后通过components:{componentA,componentB}来进行注册，最后在需要显示的地方通过<componenta></componenta>标签来使用，是不是很简单呢。</p>
+<p>第一个组件mycomponent.vue：<br><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"firstcomponent"</span>&gt;</span><span class="comment">&lt;!--注意id不能取HTML和javascript已经使用的标签，例如header等--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>这里会显示：&#123;&#123;msg&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  data () &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">msg</span>: <span class="string">"我是一个组件"</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>然后在 App.vue 使用组件 ( 因为在 index.html 里面定义了<div id="app"></div>所以就以这个组件作为主入口，方便 )</p>
+<p><strong> 第一步，引入。</strong> 在<script></script>标签内的第一行写<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> firstcomponent <span class="keyword">from</span> <span class="string">'./component/mycomponent.vue'</span></div></pre></td></tr></table></figure></p>
+<p><strong> 第二步，注册。</strong> 在<script></script>标签内的 data 代码块后面加上 components: { a }。记得中间加英文逗号!!!<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  data () &#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="attr">msg</span>: <span class="string">'Hello Vue!'</span></div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">components</span>: &#123; firstcomponent &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong> 第三步，使用。</strong> 在<template></template>内加上<firstcomponent></firstcomponent><br><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; msg &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">firstcomponent</span>&gt;</span><span class="tag">&lt;/<span class="name">firstcomponent</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="Vue路由"><a href="#Vue路由" class="headerlink" title="Vue路由"></a>Vue路由</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/18/vue和webpack上手记/" data-id="cj0lypgjs00061d0w01qoto68" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SPA/">SPA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单页面应用/">单页面应用</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/23/git提交说明规范/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          git提交说明规范
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/18/Sketch切图及快捷键介绍/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Sketch切图及快捷键介绍</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/SPA/" style="font-size: 20px;">SPA</a> <a href="/tags/Sketch/" style="font-size: 10px;">Sketch</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/切图/" style="font-size: 10px;">切图</a> <a href="/tags/前端路由/" style="font-size: 10px;">前端路由</a> <a href="/tags/单页面应用/" style="font-size: 20px;">单页面应用</a> <a href="/tags/娱乐休闲/" style="font-size: 10px;">娱乐休闲</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/愿望清单/" style="font-size: 10px;">愿望清单</a> <a href="/tags/提升自我/" style="font-size: 10px;">提升自我</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a> <a href="/tags/谈判技巧/" style="font-size: 10px;">谈判技巧</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/23/git提交说明规范/">git提交说明规范</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/18/vue和webpack上手记/">vue和webpack上手记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/18/Sketch切图及快捷键介绍/">Sketch切图及快捷键介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/12/一些谈判技巧/">一些谈判技巧</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/05/2017年展望及一些小愿望清单/">2017年展望及一些小愿望清单</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <div class="widget-wrap">
+	<h3 class="widget-title">友情链接</h3> 
+	<div class="widget"> 
+		<ul> 
+			<li><a href="https://github.com/acelibin" title="itmyhome">github</a></li> 
+		</ul> 
+	</div>
+</div>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 libin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
