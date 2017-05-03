@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hello World | acelibin</title>
+  <title>Vue.js 中使用第三方库的方法 | acelibin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+  <meta name="description" content="在 Vuejs 项目中使用 JavaScript 库，可以每个文件里面分别import，但是太繁琐也不利于后期维护。有一个优雅方式是将其代理到 Vue 的原型对象上去。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/01/31/hello-world/index.html">
+<meta property="og:title" content="Vue.js 中使用第三方库的方法">
+<meta property="og:url" content="http://yoursite.com/2017/05/03/Vue-js-中使用第三方库的方法/index.html">
 <meta property="og:site_name" content="acelibin">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta property="og:updated_time" content="2017-02-12T04:45:41.000Z">
+<meta property="og:description" content="在 Vuejs 项目中使用 JavaScript 库，可以每个文件里面分别import，但是太繁琐也不利于后期维护。有一个优雅方式是将其代理到 Vue 的原型对象上去。">
+<meta property="og:updated_time" content="2017-05-03T00:33:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="twitter:title" content="Vue.js 中使用第三方库的方法">
+<meta name="twitter:description" content="在 Vuejs 项目中使用 JavaScript 库，可以每个文件里面分别import，但是太繁琐也不利于后期维护。有一个优雅方式是将其代理到 Vue 的原型对象上去。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -63,10 +63,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Vue-js-中使用第三方库的方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/01/31/hello-world/" class="article-date">
-  <time datetime="2017-01-31T03:43:05.000Z" itemprop="datePublished">2017-01-31</time>
+    <a href="/2017/05/03/Vue-js-中使用第三方库的方法/" class="article-date">
+  <time datetime="2017-05-03T00:12:31.000Z" itemprop="datePublished">2017-05-03</time>
 </a>
     
   </div>
@@ -77,7 +77,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      Vue.js 中使用第三方库的方法
     </h1>
   
 
@@ -85,21 +85,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+        <p>在 Vuejs 项目中使用 JavaScript 库，可以每个文件里面分别import，但是太繁琐也不利于后期维护。有一个优雅方式是将其代理到 Vue 的原型对象上去。</p>
 <a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<h3 id="举个栗子："><a href="#举个栗子：" class="headerlink" title="举个栗子："></a>举个栗子：</h3><p>例如引入 axios 库:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">import axios from &apos;axios&apos;;</div><div class="line">Vue.prototype.$ajax = axios;</div></pre></td></tr></table></figure>
+<p>使用的时候，<code>this.$ajax.post()</code>，很方便。再来一个 moment 库，这个也是使用较多的一个：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">import moment from &apos;moment&apos;;</div><div class="line">Object.defineProperty(Vue.prototype, &apos;$moment&apos;, &#123; value: moment &#125;);</div></pre></td></tr></table></figure>
+<p>使用的时候，<code>this.$moment()</code></p>
+<h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a>工作原理：</h3><p><strong>Object.defineProperty</strong></p>
+<p>一般而言, 可以按照下面的方式来给对象设置属性:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">Vue.prototype.$moment = moment;</div></pre></td></tr></table></figure>
+<p>可以这样做, 但是 <code>Object.defineProperty</code> 允许我们通过一个 descriptor 来定义属性。Descriptor 运行我们去设置对象属性的一些底层(low-level)细节, 如是否允许属性可写? 是否允许属性在 for 循环中被遍历。</p>
+<p>通常, 我们不会为此感到困扰, 因为大部分时候, 对于属性赋值, 我们不需要考虑这样的细节。但这有一个明显的优点: 通过 descriptor 创建的属性默认是只读的。</p>
+<p>这就意味着, 一些处于迷糊状态的(coffee-deprived)开发者不能在组件内去做一些很愚蠢的事情, 就像这样:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">this.$http = &apos;Assign some random thing to the instance method&apos;;</div><div class="line">this.$http.get(&apos;/&apos;); // TypeError: this.$http.get is not a function</div></pre></td></tr></table></figure>
+<p>此外, 试图给只读实例的方法重新赋值会得到 <code>TypeError: Cannot assign to read only property</code> 的错误.</p>
+<h3 id=""><a href="#" class="headerlink" title="$"></a>$</h3><p>你可能会注意到, 代理第三库的属性会有一个 $ 前缀, 也可能看到其它类似 <code>$refs</code>, <code>$on</code>, <code>$mount</code> 的属性和方式, 它们也有这个前缀.</p>
+<p>这个不是强制要求, 给属性添加 $ 前缀是提供那些处于迷糊状态(coffee-deprived)的开发者这是一个公开的 API, 和 Vuejs 的一些内部属性和方法区分开来.</p>
+<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><p>你还可能注意到, 在组件内是通过 <code>this.libraryName</code> 的方式来使用第三方库的, 当你知道它是一个实例方法时就不会感到意外了. 但与全局变量不同, 通过 this 来使用第三方库时, 必须确保 this 处于正确的作用域. 在回调方法中 this 的作用域会有不同, 但箭头式回调风格能保证 this 的作用域是正确的:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">this.$http.get(&apos;/&apos;).then(res =&gt; &#123;</div><div class="line">  if (res.status !== 200) &#123;</div><div class="line">    this.$http.get(&apos;/&apos;) // etc</div><div class="line">    // Only works in a fat arrow callback.</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>感谢下面两位作者：</p>
+<p>英文：<a href="http://vuejsdevelopers.com/2017/04/22/vue-js-libraries-plugins/?jsdojo_id=fef_lip&amp;utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">Use Any Javascript Library With Vue.js</a></p>
+<p>译文：<a href="https://github.com/dwqs/blog/issues/51" target="_blank" rel="external">如何在 Vue.js 中使用第三方库</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/01/31/hello-world/" data-id="cj288ubq500077b0wxpenx41o" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2017/05/03/Vue-js-中使用第三方库的方法/" data-id="cj288ubpy00047b0w1z69s16d" class="article-share-link">分享</a>
       
       
     </footer>
@@ -108,15 +120,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/01/31/Hexo建站记录及Markdown基础语法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Hexo建站记录及Markdown基础语法
-        
-      </div>
-    </a>
   
+    <a href="/2017/03/23/git提交说明规范/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">git提交说明规范</div>
+    </a>
   
 </nav>
 
