@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Sketch切图及快捷键介绍 | acelibin</title>
+  <title>Vue 中使用第三方库的方法 | acelibin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本来很早就会用PS切图的，但是先后几任公司都不用我切图，所以越发的生疏了。一些简单的操作第一想到的居然是美图秀秀，Mac上没有美图秀秀的客户端，所以就用了网页版的，也是挺好用。再推荐一个好用简单的在线工具：标你妹啊，名字看着很粗俗，但是用于PSD标注很强大，跟Markman有的一拼的样子。">
+  <meta name="description" content="在 Vuejs 项目中使用 JavaScript 库，可以每个文件里面分别import，但是太繁琐也不利于后期维护。有一个优雅方式是将其代理到 Vue 的原型对象上去。
+银弹就是 Object.defineProperty">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Sketch切图及快捷键介绍">
-<meta property="og:url" content="http://yoursite.com/2017/02/18/Sketch切图及快捷键介绍/index.html">
+<meta property="og:title" content="Vue 中使用第三方库的方法">
+<meta property="og:url" content="http://yoursite.com/2017/04/03/Vue-中使用第三方库的方法/index.html">
 <meta property="og:site_name" content="acelibin">
-<meta property="og:description" content="本来很早就会用PS切图的，但是先后几任公司都不用我切图，所以越发的生疏了。一些简单的操作第一想到的居然是美图秀秀，Mac上没有美图秀秀的客户端，所以就用了网页版的，也是挺好用。再推荐一个好用简单的在线工具：标你妹啊，名字看着很粗俗，但是用于PSD标注很强大，跟Markman有的一拼的样子。">
-<meta property="og:updated_time" content="2017-02-18T14:54:51.000Z">
+<meta property="og:description" content="在 Vuejs 项目中使用 JavaScript 库，可以每个文件里面分别import，但是太繁琐也不利于后期维护。有一个优雅方式是将其代理到 Vue 的原型对象上去。
+银弹就是 Object.defineProperty">
+<meta property="og:updated_time" content="2017-06-03T08:24:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sketch切图及快捷键介绍">
-<meta name="twitter:description" content="本来很早就会用PS切图的，但是先后几任公司都不用我切图，所以越发的生疏了。一些简单的操作第一想到的居然是美图秀秀，Mac上没有美图秀秀的客户端，所以就用了网页版的，也是挺好用。再推荐一个好用简单的在线工具：标你妹啊，名字看着很粗俗，但是用于PSD标注很强大，跟Markman有的一拼的样子。">
+<meta name="twitter:title" content="Vue 中使用第三方库的方法">
+<meta name="twitter:description" content="在 Vuejs 项目中使用 JavaScript 库，可以每个文件里面分别import，但是太繁琐也不利于后期维护。有一个优雅方式是将其代理到 Vue 的原型对象上去。
+银弹就是 Object.defineProperty">
   
   
     <link rel="icon" href="/favicon.png">
@@ -63,12 +66,16 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Sketch切图及快捷键介绍" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Vue-中使用第三方库的方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/02/18/Sketch切图及快捷键介绍/" class="article-date">
-  <time datetime="2017-02-18T14:38:36.000Z" itemprop="datePublished">2017-02-18</time>
+    <a href="/2017/04/03/Vue-中使用第三方库的方法/" class="article-date">
+  <time datetime="2017-04-03T00:12:31.000Z" itemprop="datePublished">2017-04-03</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端学习/">前端学习</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -77,7 +84,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Sketch切图及快捷键介绍
+      Vue 中使用第三方库的方法
     </h1>
   
 
@@ -85,26 +92,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本来很早就会用PS切图的，但是先后几任公司都不用我切图，所以越发的生疏了。一些简单的操作第一想到的居然是美图秀秀，Mac上没有美图秀秀的客户端，所以就用了网页版的，也是挺好用。再推荐一个好用简单的在线工具：<strong><a href="//biaonimeia.com">标你妹啊</a></strong>，名字看着很粗俗，但是用于PSD标注很强大，跟Markman有的一拼的样子。</p>
+        <p>在 Vuejs 项目中使用 JavaScript 库，可以每个文件里面分别import，但是太繁琐也不利于后期维护。有一个优雅方式是将其代理到 Vue 的原型对象上去。</p>
+<p>银弹就是 <strong>Object.defineProperty</strong></p>
 <a id="more"></a>
-<p>说重点，现在公司UI是用的sketch作图，给我的也直接是sketch图，木有切图木有标注，现在才发现有标注的UI是多么贴心。以前大概扫过一眼sketch的使用，现在没办法只能现学一下了。本着需要什么就学什么的精神，搜了一下教程，也不难嘛~~</p>
-<ol>
-<li><p>查看尺寸</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">鼠标点击你要查看的图片，右侧即出现该图片的尺寸数据。按住Alt键，此时鼠标滑动即可看见该图片距离其他图片的距离。</div></pre></td></tr></table></figure>
-</li>
-<li><p>切图导出</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">按住S键，鼠标在你要切的图标上面点击，窗口右侧可以预览所要切的图标，下方有相关操作，点击导出即可。同时也可选择导出@2x和@3x的图片。</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>不用不知道，用了才发现sketch真的好强大，PS上面需要好几步的操作，在这里两下就能搞定，以后我的标准就是：不给sketch图的UI不是好UI^^</p>
+<h3 id="举个栗子："><a href="#举个栗子：" class="headerlink" title="举个栗子："></a>举个栗子：</h3><p>例如引入 axios 库:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">import axios from &apos;axios&apos;;</div><div class="line">Vue.prototype.$ajax = axios;</div></pre></td></tr></table></figure>
+<p>使用的时候，<code>this.$ajax.post()</code>，很方便。再来一个 moment 库，这个也是使用较多的一个：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">import moment from &apos;moment&apos;;</div><div class="line">Object.defineProperty(Vue.prototype, &apos;$moment&apos;, &#123; value: moment &#125;);</div></pre></td></tr></table></figure>
+<p>使用的时候，<code>this.$moment()</code></p>
+<h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a>工作原理：</h3><p><strong>Object.defineProperty</strong></p>
+<p>一般而言, 可以按照下面的方式来给对象设置属性:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">Vue.prototype.$moment = moment;</div></pre></td></tr></table></figure>
+<p>可以这样做, 但是 <code>Object.defineProperty</code> 允许我们通过一个 descriptor 来定义属性。Descriptor 运行我们去设置对象属性的一些底层(low-level)细节, 如是否允许属性可写? 是否允许属性在 for 循环中被遍历。</p>
+<p>通常, 我们不会为此感到困扰, 因为大部分时候, 对于属性赋值, 我们不需要考虑这样的细节。但这有一个明显的优点: 通过 descriptor 创建的属性默认是只读的。</p>
+<p>这就意味着, 一些处于迷糊状态的(coffee-deprived)开发者不能在组件内去做一些很愚蠢的事情, 就像这样:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">this.$http = &apos;Assign some random thing to the instance method&apos;;</div><div class="line">this.$http.get(&apos;/&apos;); // TypeError: this.$http.get is not a function</div></pre></td></tr></table></figure>
+<p>此外, 试图给只读实例的方法重新赋值会得到 <code>TypeError: Cannot assign to read only property</code> 的错误.</p>
+<h3 id=""><a href="#" class="headerlink" title="$"></a>$</h3><p>你可能会注意到, 代理第三库的属性会有一个 $ 前缀, 也可能看到其它类似 <code>$refs</code>, <code>$on</code>, <code>$mount</code> 的属性和方式, 它们也有这个前缀.</p>
+<p>这个不是强制要求, 给属性添加 $ 前缀是提供那些处于迷糊状态(coffee-deprived)的开发者这是一个公开的 API, 和 Vuejs 的一些内部属性和方法区分开来.</p>
+<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><p>你还可能注意到, 在组件内是通过 <code>this.libraryName</code> 的方式来使用第三方库的, 当你知道它是一个实例方法时就不会感到意外了. 但与全局变量不同, 通过 this 来使用第三方库时, 必须确保 this 处于正确的作用域. 在回调方法中 this 的作用域会有不同, 但箭头式回调风格能保证 this 的作用域是正确的:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">this.$http.get(&apos;/&apos;).then(res =&gt; &#123;</div><div class="line">  if (res.status !== 200) &#123;</div><div class="line">    this.$http.get(&apos;/&apos;) // etc</div><div class="line">    // Only works in a fat arrow callback.</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>感谢下面两位作者：</p>
+<p>英文：<a href="http://vuejsdevelopers.com/2017/04/22/vue-js-libraries-plugins/?jsdojo_id=fef_lip&amp;utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">Use Any Javascript Library With Vue.js</a></p>
+<p>译文：<a href="https://github.com/dwqs/blog/issues/51" target="_blank" rel="external">如何在 Vue.js 中使用第三方库</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/18/Sketch切图及快捷键介绍/" data-id="cj3h0brka0003q70w35eumz6g" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2017/04/03/Vue-中使用第三方库的方法/" data-id="cj3h0eg730000qg0wb79zrkpv" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sketch/">Sketch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/切图/">切图</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
 
     </footer>
   </div>
@@ -112,19 +130,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/02/18/vue和webpack上手记/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/05/03/判断设备-UA-的方法/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          vue和webpack上手记
+          判断设备 UA 的方法
         
       </div>
     </a>
   
   
-    <a href="/2017/02/12/一些谈判技巧/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/03/23/git提交说明规范/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">一些谈判技巧</div>
+      <div class="article-nav-title">git提交说明规范</div>
     </a>
   
 </nav>
