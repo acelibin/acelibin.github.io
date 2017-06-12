@@ -15,7 +15,7 @@
 <meta property="og:description" content="webpack 现在几乎是每个前端必会的工具，但是它的一些配置很容易弄晕初学者。经过我不断的学（复制）习（粘贴），终于弄明白了一点，在这里做个总结。
 认识其实以前我是用的 gulp，作为流式构建工具（stream building tools），它仅有几个特定的 API，使用的时候也是很简单，这个以后再写。
 刚开始对于 webpack 我也是拒绝的，这么复杂，似乎跟 gulp 没什么区别。后来才发">
-<meta property="og:updated_time" content="2017-06-12T09:15:52.000Z">
+<meta property="og:updated_time" content="2017-06-12T10:08:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack 的基本使用方法">
 <meta name="twitter:description" content="webpack 现在几乎是每个前端必会的工具，但是它的一些配置很容易弄晕初学者。经过我不断的学（复制）习（粘贴），终于弄明白了一点，在这里做个总结。
@@ -132,6 +132,7 @@
 <h3 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h3><p>将第三方库如 jQuery 单独拿出来，需要用到 ProvidePlugin（webpack 内置插件）：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"> module.exports = &#123;</div><div class="line">    entry: &#123;</div><div class="line">        app: &apos;自己的代码入口&apos;,</div><div class="line">        vendor: [&apos;jquery&apos;] //第三方库</div><div class="line">    &#125;,</div><div class="line">    output: &#123;</div><div class="line">        filename: &apos;自己打包后生成的文件名&apos;,</div><div class="line">        path: &apos;路径&apos;</div><div class="line">    &#125;,</div><div class="line">    plugins: [</div><div class="line">        new webpack.ProvidePlugin(&#123;</div><div class="line">            $: &apos;jquery&apos;//可以使jquery变成全局变量，不用再自己文件require(&apos;jquery&apos;)了</div><div class="line">        &#125;), </div><div class="line">        new webpack.optimize.CommonsChunkPlugin(&apos;vendor&apos;, &apos;vendor.bundle.js&apos;) //第三方库打包生成的文件</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="完整的配置"><a href="#完整的配置" class="headerlink" title="完整的配置"></a>完整的配置</h3><p>这个下次再说吧。</p>
+<p><strong> 参考链接：<a href="https://doc.webpack-china.org/" target="_blank" rel="external">webpack 中文文档</a> </strong></p>
 
       
     </div>
