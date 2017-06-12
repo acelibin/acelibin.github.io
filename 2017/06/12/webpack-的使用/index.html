@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>webpack 的基本使用方法 | acelibin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="webpack 现在几乎是每个前端必会的工具，但是它的一些配置很容易弄晕初学者。经过我不断的学（复制）习（粘贴），终于弄明白了一点，在这里做个总结。
+认识其实以前我是用的 gulp，作为流式构建工具（stream building tools），它仅有几个特定的 API，使用的时候也是很简单，这个以后再写。
+刚开始对于 webpack 我也是拒绝的，这么复杂，似乎跟 gulp 没什么区别。后来才发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack 的基本使用方法">
+<meta property="og:url" content="http://yoursite.com/2017/06/12/webpack-的使用/index.html">
+<meta property="og:site_name" content="acelibin">
+<meta property="og:description" content="webpack 现在几乎是每个前端必会的工具，但是它的一些配置很容易弄晕初学者。经过我不断的学（复制）习（粘贴），终于弄明白了一点，在这里做个总结。
+认识其实以前我是用的 gulp，作为流式构建工具（stream building tools），它仅有几个特定的 API，使用的时候也是很简单，这个以后再写。
+刚开始对于 webpack 我也是拒绝的，这么复杂，似乎跟 gulp 没什么区别。后来才发">
+<meta property="og:updated_time" content="2017-06-12T09:15:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack 的基本使用方法">
+<meta name="twitter:description" content="webpack 现在几乎是每个前端必会的工具，但是它的一些配置很容易弄晕初学者。经过我不断的学（复制）习（粘贴），终于弄明白了一点，在这里做个总结。
+认识其实以前我是用的 gulp，作为流式构建工具（stream building tools），它仅有几个特定的 API，使用的时候也是很简单，这个以后再写。
+刚开始对于 webpack 我也是拒绝的，这么复杂，似乎跟 gulp 没什么区别。后来才发">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">acelibin</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">格物致知</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-webpack-的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/12/webpack-的使用/" class="article-date">
+  <time datetime="2017-06-12T05:38:38.000Z" itemprop="datePublished">2017-06-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端学习/">前端学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      webpack 的基本使用方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>webpack 现在几乎是每个前端必会的工具，但是它的一些配置很容易弄晕初学者。经过我不断的学（复制）习（粘贴），终于弄明白了一点，在这里做个总结。</p>
+<h3 id="认识"><a href="#认识" class="headerlink" title="认识"></a>认识</h3><p>其实以前我是用的 gulp，作为流式构建工具（stream building tools），它仅有几个特定的 API，使用的时候也是很简单，这个以后再写。</p>
+<p>刚开始对于 webpack 我也是拒绝的，这么复杂，似乎跟 gulp 没什么区别。后来才发现，其实区别还是很大的。</p>
+<p>webpack 是模块化构建系统（module building system），它的作用是把一切资源（js/html/css/jpg）都模块化处理，实现了按需加载。</p>
+<p>webpack 也是一个高度可配置的，它有四个核心概念：入口(entry)、输出(output)、loader、插件(plugins)。</p>
+<ul>
+<li>entry: 定义整个编译过程的起点</li>
+<li>output: 定义整个编译过程的终点</li>
+<li>module: 定义模块module的处理方式</li>
+<li>plugin 对编译完成后的内容进行二度加工</li>
+<li>resolve.alias 定义模块的别名</li>
+</ul>
+<a id="more"></a>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm install webpack webpack-dev-server --save-dev</div></pre></td></tr></table></figure>
+<p>webpack.config.js</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">const path = require(&apos;path&apos;);</div><div class="line"></div><div class="line">module. exports =&#123;</div><div class="line">	entry:&apos;./index.js&apos;,//入口文件</div><div class="line">	output:&#123;</div><div class="line">		path:__dirname+&apos;/dist&apos;,//另一种写法：path.resolve(__dirname, &apos;dist&apos;)，其中__dirname是nodejs的全局变量</div><div class="line">    filename:&apos;bundle.js&apos;//打包后的文件名</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>tips: 对于多个入口的页面采用如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">entry: &#123;</div><div class="line">	pageOne: &apos;./src/pageOne/a.js&apos;,</div><div class="line">	pageTwo: &apos;./src/pageTwo/b.js&apos;,</div><div class="line">	pageThree: &apos;./src/pageThree/c.js&apos;</div><div class="line">&#125;</div><div class="line">output: &#123;</div><div class="line">	filename: &apos;[name].js&apos;,//webpack 会自动生成相应的文件dist/a.js...</div><div class="line">	path: __dirname + &apos;/dist&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h3><p>loader 用于对模块的源代码进行转换，可以使你在 require() 或”加载”模块时预处理文件。</p>
+<p>常用的 loader 有 autoprefixer、postcss-loader、css-loader、style-loader、url-loader、file-loader、babel-loader。对于每个的详细用法可以参考相应的文档说明。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var autoprefixer = require(&apos;autoprefixer&apos;);</div><div class="line"></div><div class="line">module: &#123;</div><div class="line">    rules: [&#123;</div><div class="line">        test: /\.css$/,</div><div class="line">        use: [&#123; loader: &apos;postcss-loader&apos; &#125;,&#123; loader: &apos;style-loader&apos; &#125;, &#123; loader: &apos;css-loader&apos;, options: &#123; modules: true &#125; &#125;]</div><div class="line">    &#125;, &#123;</div><div class="line">        test: /\.js$/,</div><div class="line">        loader: &apos;babel-loader&apos;,//高级版 js 处理</div><div class="line">        exclude: /node_modules/ //exclude不包括</div><div class="line">    &#125;, &#123;</div><div class="line">        test: /\.(png|jpg|gif|svg)$/,</div><div class="line">        loader: &apos;file-loader&apos;,//文件处理</div><div class="line">        options: &#123;</div><div class="line">            name: &apos;[name].[ext]?[hash]&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;,&#123;</div><div class="line">        test: /\.(png|jpg|gif|woff|woff2|eot|ttf|svg)$/,</div><div class="line">        loader: &apos;url-loader?limit=8192&apos;//图片处理</div><div class="line">      &#125;]</div><div class="line">	postcss:[autoprefixer(&#123;browsers:[&apos;last 2 versions&apos;]&#125;)]//自动补全</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>说明：</p>
+<ul>
+<li>test 正则匹配文件格式</li>
+<li>loader 执行顺序从右往左</li>
+<li>css-loader 处理 css 的一些 url 及路径 </li>
+<li>style-loader 是将 css 文件采用js动态写入 html 页面</li>
+</ul>
+<h3 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h3><p>插件用于解决 Loader 无法解决的事情。<br>常用插件有：html-webpack-plugin（自动生成 HTML 文件）、extract-text-webpack-plugin（提取 CSS 文件）、CommonsChunkPlugin（提供公共代码）等。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);</div><div class="line">var ExtractTextPlugin = require(&quot;extract-text-webpack-plugin&quot;);</div><div class="line">var CommonsChunkPlugin = require(&quot;CommonsChunkPlugin&quot;);</div><div class="line"></div><div class="line">module.exports = &#123;</div><div class="line">    entry: &apos;./index.js&apos;,</div><div class="line">    output: &#123;</div><div class="line">        path: __dirname + &apos;/dist&apos;,</div><div class="line">        filename: &apos;bundle.js&apos;</div><div class="line">    &#125;,</div><div class="line">    loaders: [&#123;</div><div class="line">        test: /\.css$/,</div><div class="line">        loader: ExtractTextPlugin.extract(&quot;style-loader&quot;, &quot;css-loader&quot;, &quot;postcss-loader&quot;),</div><div class="line">        options: &#123;</div><div class="line">            postcss: [</div><div class="line">                autoprefixer()</div><div class="line">            ],</div><div class="line">        &#125;,</div><div class="line">    &#125;],</div><div class="line">    plugins: [</div><div class="line">        new HtmlWebpackPlugin(&#123;</div><div class="line">            title: &apos;标题&apos;,</div><div class="line">            filename: &apos;admin.html&apos;,</div><div class="line">            template: &apos;header.html&apos;,</div><div class="line">            inject: &apos;body&apos;, //插入位置</div><div class="line">            favicon: &apos;./images/favico.ico&apos;,</div><div class="line">            minify: true,</div><div class="line">            hash: true,</div><div class="line">            cache: false,</div><div class="line">            showErrors: false,</div><div class="line">            &quot;chunks&quot;: &#123;</div><div class="line">                &quot;head&quot;: &#123;</div><div class="line">                    &quot;entry&quot;: &quot;assets/head_bundle.js&quot;,</div><div class="line">                    &quot;css&quot;: [&quot;main.css&quot;]</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;),</div><div class="line">        new ExtractTextPlugin(&quot;[name].[hash].css&quot;),</div><div class="line">        new CommonsChunkPlugin(&apos;common.js&apos;,[&apos;main&apos;,&apos;index&apos;]), //只提取 main 和 index 节点并生成 common.js，去掉方括号内则表示提取所有公共部分并生成 common.js</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="webpack-dev-server"><a href="#webpack-dev-server" class="headerlink" title="webpack-dev-server"></a>webpack-dev-server</h3><p>webpack-dev-server 是一个小型的 Node.js Express 服务器,它使用 webpack-dev-middleware 来服务于 webpack 的包。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var WebpackDevServer = require(&apos;webpack-dev-server&apos;);</div><div class="line"></div><div class="line">var compiler = webpack(config);</div><div class="line">var server = new WebpackDevServer(compiler, &#123;</div><div class="line">	contentBase: &quot;./public&quot;,  //以public为根目录提供文件,默认情况下，webpack-dev-server会从项目的根目录提供文件，可以通过此选项设置文件的目录名</div><div class="line">	colors: true,//设置终端输出字体颜色</div><div class="line">	historyApiFallback: true,//当设置为true时，访问所有服务器上不存在的文件，都会被重定向到/，也就是index.html文件</div><div class="line">	inline: true//设为true时可以在文件发生变化时，更新页面</div><div class="line">&#125;);</div><div class="line"></div><div class="line">server.listen(8080, &quot;localhost&quot;, function() &#123;</div><div class="line">	//可以不要这个回调</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="externals"><a href="#externals" class="headerlink" title="externals"></a>externals</h3><p>如果有不想用 webpack 进行 bundle 的文件，可以使用 externals 关键字：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">externals:&#123;</div><div class="line">    &apos;Zepto&apos;:&apos;window.Zepto&apos;,</div><div class="line">    &apos;$&apos;:&apos;window.Zepto&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h3><p>将第三方库如 jQuery 单独拿出来，需要用到 ProvidePlugin（webpack 内置插件）：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"> module.exports = &#123;</div><div class="line">    entry: &#123;</div><div class="line">        app: &apos;自己的代码入口&apos;,</div><div class="line">        vendor: [&apos;jquery&apos;] //第三方库</div><div class="line">    &#125;,</div><div class="line">    output: &#123;</div><div class="line">        filename: &apos;自己打包后生成的文件名&apos;,</div><div class="line">        path: &apos;路径&apos;</div><div class="line">    &#125;,</div><div class="line">    plugins: [</div><div class="line">        new webpack.ProvidePlugin(&#123;</div><div class="line">            $: &apos;jquery&apos;//可以使jquery变成全局变量，不用再自己文件require(&apos;jquery&apos;)了</div><div class="line">        &#125;), </div><div class="line">        new webpack.optimize.CommonsChunkPlugin(&apos;vendor&apos;, &apos;vendor.bundle.js&apos;) //第三方库打包生成的文件</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="完整的配置"><a href="#完整的配置" class="headerlink" title="完整的配置"></a>完整的配置</h3><p>这个下次再说吧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/06/12/webpack-的使用/" data-id="cj3tromah000wmp0wsrw88hx8" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/05/03/判断设备-UA-的方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">判断设备 UA 的方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/SPA/" style="font-size: 20px;">SPA</a> <a href="/tags/Sketch/" style="font-size: 10px;">Sketch</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/webpack/" style="font-size: 20px;">webpack</a> <a href="/tags/切图/" style="font-size: 10px;">切图</a> <a href="/tags/前端路由/" style="font-size: 10px;">前端路由</a> <a href="/tags/单页面应用/" style="font-size: 20px;">单页面应用</a> <a href="/tags/娱乐休闲/" style="font-size: 10px;">娱乐休闲</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/愿望清单/" style="font-size: 10px;">愿望清单</a> <a href="/tags/提升自我/" style="font-size: 10px;">提升自我</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a> <a href="/tags/谈判技巧/" style="font-size: 10px;">谈判技巧</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/12/webpack-的使用/">webpack 的基本使用方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/03/判断设备-UA-的方法/">判断设备 UA 的方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/03/Vue-中使用第三方库的方法/">Vue 中使用第三方库的方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/23/git提交说明规范/">git提交说明规范</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/18/vue和webpack上手记/">vue和webpack上手记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <div class="widget-wrap">
+	<h3 class="widget-title">友情链接</h3> 
+	<div class="widget"> 
+		<ul> 
+			<li><a href="https://github.com/acelibin" title="itmyhome">github</a></li> 
+		</ul> 
+	</div>
+</div>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 libin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
