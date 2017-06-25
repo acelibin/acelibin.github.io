@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="最近做了两个表单，里面涉及到图片上传，刚开始的时候还是感觉有点慌乱，毕竟是没做过嘛，但是做完了回过头来想想，其实也没什么。
 第一次是用了 base64，这样每个图片都是转换成一串代码提交，后来又需要同时上传多个图片，就采用了 FormData 的方式。下面就简单总结一下：">
-<meta property="og:updated_time" content="2017-06-25T06:52:51.000Z">
+<meta property="og:updated_time" content="2017-06-25T10:08:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端图片上传的两种方法">
 <meta name="twitter:description" content="最近做了两个表单，里面涉及到图片上传，刚开始的时候还是感觉有点慌乱，毕竟是没做过嘛，但是做完了回过头来想想，其实也没什么。
@@ -95,7 +95,7 @@
         <p>最近做了两个表单，里面涉及到图片上传，刚开始的时候还是感觉有点慌乱，毕竟是没做过嘛，但是做完了回过头来想想，其实也没什么。</p>
 <p>第一次是用了 base64，这样每个图片都是转换成一串代码提交，后来又需要同时上传多个图片，就采用了 FormData 的方式。下面就简单总结一下：</p>
 <a id="more"></a>
-<p><strong><em>base64:</em></strong></p>
+<h2 id="base64"><a href="#base64" class="headerlink" title="base64:"></a>base64:</h2><hr>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">Base64是一种基于64个ASCII字符来表示二进制数据的表示方法。常用于在通常处理文本数据的场合，表示、传输、存储一些二进制数据。包括MIME的email、在XML中存储复杂数据。</div></pre></td></tr></table></figure>
 <p>下面是一个转换图片到 base64 上传到服务器，获取服务器地址后在页面进行预览的例子。这里需要用到 HTML5 当中的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader" target="_blank" rel="external">FileReader</a> 接口。以 Vue 展示：</p>
 <p>template 部分代码：</p>
@@ -103,7 +103,7 @@
 <p>script 部分代码：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">export default &#123;</div><div class="line">	data () &#123;</div><div class="line">	  return &#123;</div><div class="line">	    base64:&apos;&apos;</div><div class="line">	  &#125;</div><div class="line">	&#125;,</div><div class="line">	methods: &#123;</div><div class="line">	  onFileChange (e) &#123;</div><div class="line">	    var files = e.target.files || e.dataTransfer.files;</div><div class="line">	    if (!files.length)</div><div class="line">	      return;</div><div class="line">	    this.createInput(files[0]);</div><div class="line">	  &#125;,</div><div class="line">	  createInput(file)&#123;</div><div class="line">        var reader = new FileReader();</div><div class="line">        reader.onload = (e) =&gt; &#123;</div><div class="line">          let img_base64=reader.result</div><div class="line"></div><div class="line">          let data=&#123;</div><div class="line">            img_base64:img_base64</div><div class="line">          &#125;;</div><div class="line"></div><div class="line">          this.$ajax.post(&apos;url&apos;,querystring.stringify(data)</div><div class="line">          ).then(response =&gt; &#123;</div><div class="line">            let data=response.data.body;</div><div class="line">            this.base64=data.url;//返回的 url 地址</div><div class="line">          &#125;, response =&gt; &#123;</div><div class="line">            alert(&quot;出错啦！&quot;)</div><div class="line">          &#125;)</div><div class="line">        &#125;</div><div class="line">        reader.readAsDataURL(file);</div><div class="line">	  &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这样的话会有个问题，用户可能不确定要上传哪个图片，但是都被上传到后台去了，怎么办？解决办法就是让后端返回每张图片的 id，在最后提交表单的时候把 id 也一并提交上去。</p>
-<p><strong><em>FormData</em></strong></p>
+<h2 id="FormData"><a href="#FormData" class="headerlink" title="FormData"></a>FormData</h2><hr>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData" target="_blank" rel="external">FormData</a>用于通过表单提交同时上传多张图片的情形。</p>
 <p>html 代码：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;form enctype=&quot;multipart/form-data&quot;&gt;</div><div class="line">	&lt;span&gt;上传驾驶证&lt;i class=&quot;file&quot;&gt;(最多5张照片)&lt;/i&gt;&lt;/span&gt;</div><div class="line">	&lt;input accept=&quot;image/*&quot; type=&quot;file&quot; name=&quot;licence_image&quot; multiple&gt;</div><div class="line">	&lt;span&gt;上传行驶证&lt;i class=&quot;file&quot;&gt;(最多5张照片)&lt;/i&gt;&lt;/span&gt;</div><div class="line">	&lt;input accept=&quot;image/*&quot; type=&quot;file&quot; name=&quot;certificate_image&quot; multiple&gt;</div><div class="line">	&lt;span&gt;上传证件照&lt;/span&gt;</div><div class="line">	&lt;input accept=&quot;image/*&quot; type=&quot;file&quot; placeholder=&quot;请上传证件照&quot; name=&quot;head_icon&quot;&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure>
@@ -112,12 +112,13 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var formData = new FormData(document.querySelector(&quot;form&quot;));</div><div class="line"></div><div class="line">for (var i = 0; i &lt; $(&quot;input[name=&apos;licence_image&apos;]&quot;)[0].files.length; i++) &#123;</div><div class="line">	formData.append(&apos;licence_image[]&apos;, $(&quot;input[name=&apos;licence_image&apos;]&quot;)[0].files[i]);//遍历并插入到 licence_image 这个数组里面</div><div class="line">&#125;</div><div class="line"></div><div class="line">for (var i = 0; i &lt; $(&quot;input[name=&apos;certificate_image&apos;]&quot;)[0].files.length; i++) &#123;</div><div class="line">	formData.append(&apos;certificate_image[]&apos;, $(&quot;input[name=&apos;certificate_image&apos;]&quot;)[0].files[i]);//遍历逼格插入到 certificate_image 数组里面</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>至于单独的一张图片不用这么处理，只需要在最后提交的时候一起提交即可：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">	url:&apos;url&apos;,</div><div class="line">	type:&apos;post&apos;, </div><div class="line">	contentType: false,//必不可少</div><div class="line">	processData: false,//必不可少</div><div class="line">	data: formData//这里包括了所有表单的数据</div><div class="line">&#125;).done(function(data)&#123;</div><div class="line">	...</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<hr>
 <p>好了，图片上传的两种方式就简单说完了，其实是不是很简单，只要按照套路来就可以了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/06/25/前端图片上传的两种方法/" data-id="cj4cb2yqv000erp0wg3mcy7f4" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2017/06/25/前端图片上传的两种方法/" data-id="cj4cgpboz000lsc0wbf3gh0no" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FormData/">FormData</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/base64/">base64</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图片上传/">图片上传</a></li></ul>
@@ -127,6 +128,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2017/06/25/简单认识-node-npm-express/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          简单认识 node npm express
+        
+      </div>
+    </a>
   
   
     <a href="/2017/06/12/webpack-的使用/" id="article-nav-older" class="article-nav-link-wrap">
@@ -147,7 +157,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a><span class="category-list-count">7</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a><span class="category-list-count">8</span></li></ul>
     </div>
   </div>
 
@@ -157,7 +167,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/FormData/" style="font-size: 10px;">FormData</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/SPA/" style="font-size: 20px;">SPA</a> <a href="/tags/Sketch/" style="font-size: 10px;">Sketch</a> <a href="/tags/base64/" style="font-size: 10px;">base64</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/webpack/" style="font-size: 20px;">webpack</a> <a href="/tags/切图/" style="font-size: 10px;">切图</a> <a href="/tags/前端路由/" style="font-size: 10px;">前端路由</a> <a href="/tags/单页面应用/" style="font-size: 20px;">单页面应用</a> <a href="/tags/图片上传/" style="font-size: 10px;">图片上传</a> <a href="/tags/娱乐休闲/" style="font-size: 10px;">娱乐休闲</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/愿望清单/" style="font-size: 10px;">愿望清单</a> <a href="/tags/提升自我/" style="font-size: 10px;">提升自我</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a> <a href="/tags/谈判技巧/" style="font-size: 10px;">谈判技巧</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+      <a href="/tags/FormData/" style="font-size: 10px;">FormData</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/SPA/" style="font-size: 20px;">SPA</a> <a href="/tags/Sketch/" style="font-size: 10px;">Sketch</a> <a href="/tags/base64/" style="font-size: 10px;">base64</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/webpack/" style="font-size: 20px;">webpack</a> <a href="/tags/切图/" style="font-size: 10px;">切图</a> <a href="/tags/前端路由/" style="font-size: 10px;">前端路由</a> <a href="/tags/单页面应用/" style="font-size: 20px;">单页面应用</a> <a href="/tags/图片上传/" style="font-size: 10px;">图片上传</a> <a href="/tags/娱乐休闲/" style="font-size: 10px;">娱乐休闲</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/愿望清单/" style="font-size: 10px;">愿望清单</a> <a href="/tags/提升自我/" style="font-size: 10px;">提升自我</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a> <a href="/tags/谈判技巧/" style="font-size: 10px;">谈判技巧</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
     </div>
   </div>
 
@@ -166,7 +176,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -177,6 +187,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/06/25/简单认识-node-npm-express/">简单认识 node npm express</a>
+          </li>
         
           <li>
             <a href="/2017/06/25/前端图片上传的两种方法/">前端图片上传的两种方法</a>
@@ -192,10 +206,6 @@
         
           <li>
             <a href="/2017/04/03/Vue-中使用第三方库的方法/">Vue 中使用第三方库的方法</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/23/git提交说明规范/">git提交说明规范</a>
           </li>
         
       </ul>

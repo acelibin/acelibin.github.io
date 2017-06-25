@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>简单认识 node npm express | acelibin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="作为新时期的前端，再用着 jQuery 可是会被那些后端同学笑话了。当然实际情况依项目而定。现在流行的各种 MV* 框架，这几个可是经常要用到的，我就做个简单介绍吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单认识 node npm express">
+<meta property="og:url" content="http://yoursite.com/2017/06/25/简单认识-node-npm-express/index.html">
+<meta property="og:site_name" content="acelibin">
+<meta property="og:description" content="作为新时期的前端，再用着 jQuery 可是会被那些后端同学笑话了。当然实际情况依项目而定。现在流行的各种 MV* 框架，这几个可是经常要用到的，我就做个简单介绍吧。">
+<meta property="og:updated_time" content="2017-06-25T10:07:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单认识 node npm express">
+<meta name="twitter:description" content="作为新时期的前端，再用着 jQuery 可是会被那些后端同学笑话了。当然实际情况依项目而定。现在流行的各种 MV* 框架，这几个可是经常要用到的，我就做个简单介绍吧。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">acelibin</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">格物致知</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-简单认识-node-npm-express" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/25/简单认识-node-npm-express/" class="article-date">
+  <time datetime="2017-06-25T08:33:24.000Z" itemprop="datePublished">2017-06-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端学习/">前端学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      简单认识 node npm express
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>作为新时期的前端，再用着 jQuery 可是会被那些后端同学笑话了。当然实际情况依项目而定。现在流行的各种 MV* 框架，这几个可是经常要用到的，我就做个简单介绍吧。</p>
+<a id="more"></a>
+<h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2><hr>
+<p>node 就是 node.js 的简称，是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。</p>
+<p>因为是用 javascript 编码，所以对于前端来说，这是一个比较容易上手的服务端”语言”。</p>
+<p>首先需要从<a href="https://nodejs.org/en/" target="_blank" rel="external">官网</a>下载安装包，然后在命令行(终端)输入<code>node -v</code>进行查看版本号即表明安装成功。</p>
+<p>与其他服务端语言不同，node 不只是实现服务端，同时还实现了整个 http 服务器。</p>
+<p>node 主要由各种功能不同的模块组成，通过其中一个 http 模块来创建 http 服务器，客户端通过浏览器发送 http 请求，服务器再返回响应数据。</p>
+<p>server.js</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var http = require(&apos;http&apos;);</div><div class="line"></div><div class="line">http.createServer(function (request, response) &#123;</div><div class="line"></div><div class="line">	// 发送 HTTP 头部 </div><div class="line">	// HTTP 状态值: 200 : OK</div><div class="line">	// 内容类型: text/plain</div><div class="line">	response.writeHead(200, &#123;&apos;Content-Type&apos;: &apos;text/plain&apos;&#125;);</div><div class="line"></div><div class="line">	// 发送响应数据 &quot;Hello World&quot;</div><div class="line">	response.end(&apos;Hello World\n&apos;);</div><div class="line">&#125;).listen(8888);</div><div class="line"></div><div class="line">// 终端打印如下信息</div><div class="line">console.log(&apos;Server running at http://127.0.0.1:8888/&apos;);</div></pre></td></tr></table></figure>
+<p>终端：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">node server.js</div></pre></td></tr></table></figure>
+<p>以上操作就是一个简单的例子，打开浏览器 <a href="http://127.0.0.1:8888" target="_blank" rel="external">http://127.0.0.1:8888</a> 即可看到 Hello World </p>
+<h2 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h2><hr>
+<p>npm 其实就是一个 node 的包管理工具，方便下载安装第三方包。在安装 node 的时候已经集成了最新版本的 npm，在终端输入<code>npm -v</code>即可查看版本号。</p>
+<p>通过 npm 安装包，只需要</p>
+<pre><code>npm install express
+</code></pre><p>使用的时候通过</p>
+<pre><code>var express = require(&apos;express&apos;);
+</code></pre><p>即可实现安装和使用，不需要指定路径。</p>
+<p>安装的时候分本地和全局两种，全局需要添加 <code>-g</code>参数。</p>
+<p>对于 npm 还有一个比较重要的是 <strong>package.json</strong> 文件，用于管理包的各种信息，方便别人使用的时候安装相应版本的依赖。</p>
+<p>在自己使用的时候，需要先初始化：</p>
+<pre><code>npm init
+</code></pre><p>填写相应的信息即可生成一个 package.json 文件，别人在他的电脑里<code>npm install</code>即可安装所有的依赖。</p>
+<p>现在 Facebook 出了一个新的包管理工具 <a href="https://yarnpkg.com/zh-Hans/" target="_blank" rel="external">Yarn</a>，它的优点是可以锁定版本号，不会出现不同版本导致项目不能运行的情况。</p>
+<p>PS: <code>npm install</code>其实常用的方法是加上参数，这样就不用手动管理 package.json 文件了。</p>
+<pre><code>install &lt;module-name&gt; --save-dev  简写为 -D，自动把模块和版本号添加到devdependencies部分
+
+install &lt;module-name&gt; --save  简写为-S，自动把模块和版本号添加到dependencies部分
+</code></pre><p><code>devdependencies</code>是开发时使用的依赖，比如 gulp 工具，<code>dependencies</code>是生产时使用的依赖，比如 jQuery。</p>
+<h2 id="express"><a href="#express" class="headerlink" title="express"></a>express</h2><hr>
+<p><a href="https://expressjs.com/zh-cn/" target="_blank" rel="external">express</a> 是一个 node.js 的 web 框架，它有很强大的特性来帮助你快速完成一个 web 应用。</p>
+<p>它可以设置中间件来响应 http 请求，定义了路由表来执行不同的 http 请求动作，可以通过向模板传递参数来实现动态渲染 html 页面。</p>
+<p>安装 express 和安装其他 node 包一样，通过 npm 来进行安装，同时，对于大型应用，express 提供了 express 生成器来自动生成一个应用的基本框架。</p>
+<pre><code>npm install express  或者 npm i express-generator
+</code></pre><p>express 常用中间件有<code>body-parser</code>、<code>cookie-parser</code>、<code>multer</code>，分别用来处理 JSON/Raw/Text/URL 编码数据，cookie 和 表单数据。</p>
+<hr>
+<p>好了，终于简单介绍完了，可以开始用 express 做一个小东西玩玩了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/06/25/简单认识-node-npm-express/" data-id="cj4cgpbp6000psc0wcoxabhmm" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/express/">express</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/06/25/前端图片上传的两种方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">前端图片上传的两种方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a><span class="category-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/FormData/" style="font-size: 10px;">FormData</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/SPA/" style="font-size: 20px;">SPA</a> <a href="/tags/Sketch/" style="font-size: 10px;">Sketch</a> <a href="/tags/base64/" style="font-size: 10px;">base64</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/webpack/" style="font-size: 20px;">webpack</a> <a href="/tags/切图/" style="font-size: 10px;">切图</a> <a href="/tags/前端路由/" style="font-size: 10px;">前端路由</a> <a href="/tags/单页面应用/" style="font-size: 20px;">单页面应用</a> <a href="/tags/图片上传/" style="font-size: 10px;">图片上传</a> <a href="/tags/娱乐休闲/" style="font-size: 10px;">娱乐休闲</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/愿望清单/" style="font-size: 10px;">愿望清单</a> <a href="/tags/提升自我/" style="font-size: 10px;">提升自我</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a> <a href="/tags/谈判技巧/" style="font-size: 10px;">谈判技巧</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/25/简单认识-node-npm-express/">简单认识 node npm express</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/25/前端图片上传的两种方法/">前端图片上传的两种方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/12/webpack-的使用/">webpack 的基本使用方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/03/判断设备-UA-的方法/">判断设备 UA 的方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/03/Vue-中使用第三方库的方法/">Vue 中使用第三方库的方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <div class="widget-wrap">
+	<h3 class="widget-title">友情链接</h3> 
+	<div class="widget"> 
+		<ul> 
+			<li><a href="https://github.com/acelibin" title="itmyhome">github</a></li> 
+		</ul> 
+	</div>
+</div>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 libin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
