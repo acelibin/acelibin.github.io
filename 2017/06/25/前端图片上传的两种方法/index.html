@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="最近做了两个表单，里面涉及到图片上传，刚开始的时候还是感觉有点慌乱，毕竟是没做过嘛，但是做完了回过头来想想，其实也没什么。
 第一次是用了 base64，这样每个图片都是转换成一串代码提交，后来又需要同时上传多个图片，就采用了 FormData 的方式。下面就简单总结一下：">
-<meta property="og:updated_time" content="2017-06-25T10:08:20.000Z">
+<meta property="og:updated_time" content="2017-07-03T08:12:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端图片上传的两种方法">
 <meta name="twitter:description" content="最近做了两个表单，里面涉及到图片上传，刚开始的时候还是感觉有点慌乱，毕竟是没做过嘛，但是做完了回过头来想想，其实也没什么。
@@ -103,6 +103,9 @@
 <p>script 部分代码：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">export default &#123;</div><div class="line">	data () &#123;</div><div class="line">	  return &#123;</div><div class="line">	    base64:&apos;&apos;</div><div class="line">	  &#125;</div><div class="line">	&#125;,</div><div class="line">	methods: &#123;</div><div class="line">	  onFileChange (e) &#123;</div><div class="line">	    var files = e.target.files || e.dataTransfer.files;</div><div class="line">	    if (!files.length)</div><div class="line">	      return;</div><div class="line">	    this.createInput(files[0]);</div><div class="line">	  &#125;,</div><div class="line">	  createInput(file)&#123;</div><div class="line">        var reader = new FileReader();</div><div class="line">        reader.onload = (e) =&gt; &#123;</div><div class="line">          let img_base64=reader.result</div><div class="line"></div><div class="line">          let data=&#123;</div><div class="line">            img_base64:img_base64</div><div class="line">          &#125;;</div><div class="line"></div><div class="line">          this.$ajax.post(&apos;url&apos;,querystring.stringify(data)</div><div class="line">          ).then(response =&gt; &#123;</div><div class="line">            let data=response.data.body;</div><div class="line">            this.base64=data.url;//返回的 url 地址</div><div class="line">          &#125;, response =&gt; &#123;</div><div class="line">            alert(&quot;出错啦！&quot;)</div><div class="line">          &#125;)</div><div class="line">        &#125;</div><div class="line">        reader.readAsDataURL(file);</div><div class="line">	  &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这样的话会有个问题，用户可能不确定要上传哪个图片，但是都被上传到后台去了，怎么办？解决办法就是让后端返回每张图片的 id，在最后提交表单的时候把 id 也一并提交上去。</p>
+<p><strong>注意：</strong></p>
+<p>往后台提交base64字符串的时候，里面的加号“+”会被识别成空格，所以需要替换一下，“%2B”是加号的编码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">let newBase64 = base64.replace(/\+/g, &quot;%2B&quot;);</div></pre></td></tr></table></figure>
 <h2 id="FormData"><a href="#FormData" class="headerlink" title="FormData"></a>FormData</h2><hr>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData" target="_blank" rel="external">FormData</a>用于通过表单提交同时上传多张图片的情形。</p>
 <p>html 代码：</p>
