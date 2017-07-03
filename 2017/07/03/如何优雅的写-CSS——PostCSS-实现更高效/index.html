@@ -3,14 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: 前端学习 | acelibin</title>
+  <title>如何优雅的写 CSS —— PostCSS 实现更高效 | acelibin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="acelibin">
-<meta property="og:url" content="http://yoursite.com/categories/前端学习/page/2/index.html">
+  <meta name="description" content="说起 postcss到底是做什么的，很多人都会困惑不已，毕竟有了 sass 和 gulp，还要一个上手难度更高的 postcss 做什么？
+首先，sass 的工作流程是重新定义一套规则，然后转化为 CSS 代码，而 postcss 则是直接对 css 代码进行转换。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何优雅的写 CSS —— PostCSS 实现更高效">
+<meta property="og:url" content="http://yoursite.com/2017/07/03/如何优雅的写-CSS——PostCSS-实现更高效/index.html">
 <meta property="og:site_name" content="acelibin">
+<meta property="og:description" content="说起 postcss到底是做什么的，很多人都会困惑不已，毕竟有了 sass 和 gulp，还要一个上手难度更高的 postcss 做什么？
+首先，sass 的工作流程是重新定义一套规则，然后转化为 CSS 代码，而 postcss 则是直接对 css 代码进行转换。">
+<meta property="og:updated_time" content="2017-07-03T08:06:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="acelibin">
+<meta name="twitter:title" content="如何优雅的写 CSS —— PostCSS 实现更高效">
+<meta name="twitter:description" content="说起 postcss到底是做什么的，很多人都会困惑不已，毕竟有了 sass 和 gulp，还要一个上手难度更高的 postcss 做什么？
+首先，sass 的工作流程是重新定义一套规则，然后转化为 CSS 代码，而 postcss 则是直接对 css 代码进行转换。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -59,82 +66,76 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/03/23/git提交说明规范/" class="archive-article-date">
-  <time datetime="2017-03-23T04:39:44.000Z" itemprop="datePublished">3月 23</time>
+        <section id="main"><article id="post-如何优雅的写-CSS——PostCSS-实现更高效" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/03/如何优雅的写-CSS——PostCSS-实现更高效/" class="article-date">
+  <time datetime="2017-07-03T07:35:05.000Z" itemprop="datePublished">2017-07-03</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端学习/">前端学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/23/git提交说明规范/">git提交说明规范</a>
+    <h1 class="article-title" itemprop="name">
+      如何优雅的写 CSS —— PostCSS 实现更高效
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/02/18/vue和webpack上手记/" class="archive-article-date">
-  <time datetime="2017-02-18T14:57:00.000Z" itemprop="datePublished">2月 18</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/18/vue和webpack上手记/">vue和webpack上手记</a>
-    </h1>
-  
+        <p>说起 postcss到底是做什么的，很多人都会困惑不已，毕竟有了 sass 和 gulp，还要一个上手难度更高的 postcss 做什么？</p>
+<p>首先，sass 的工作流程是重新定义一套规则，然后转化为 CSS 代码，而 postcss 则是直接对 css 代码进行转换。</p>
+<a id="more"></a>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><a href="http://postcss.org/" target="_blank" rel="external">PostCSS</a> 的原理是识别 css 节点，然后对节点进行相应的转换重新生成 css 代码，它本身只是一个相当于 gulp 或者 webpack 的平台，但是通过它提供的插件可以实现很多功能。</p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>它的插件都是用 javascript 代码写成，所以你也可以写一个自己的插件。一个很常用的插件就是 <a href="https://github.com/postcss/autoprefixer" target="_blank" rel="external">Autoprefixer</a>，它可以帮你自动完成针对不同浏览器的代码前缀。</p>
+<p>原来的代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.container&#123;</div><div class="line">    display: flex;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>转换之后的代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.container&#123;</div><div class="line">    display: -webkit-box;</div><div class="line">    display: -webkit-flex;</div><div class="line">    display: -ms-flexbox;</div><div class="line">    display: flex;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>PostCSS 有很多强大的用法，但是最常用的方法是结合 sass 来使用，将编译成的 css 代码再用 PostCSS 进行优化。</p>
+<p>当然，基本的用法还是要结合 gulp 或者 webpack 来使用。</p>
+<p>在 gulp 中：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">gulp.task(&apos;autoprefixer&apos;, function () &#123;</div><div class="line">    var postcss      = require(&apos;gulp-postcss&apos;);</div><div class="line">    var sourcemaps   = require(&apos;gulp-sourcemaps&apos;);</div><div class="line">    var autoprefixer = require(&apos;autoprefixer&apos;);</div><div class="line"></div><div class="line">    return gulp.src(&apos;./src/*.css&apos;)</div><div class="line">        .pipe(sourcemaps.init())</div><div class="line">        .pipe(postcss([ autoprefixer() ]))</div><div class="line">        .pipe(sourcemaps.write(&apos;.&apos;))</div><div class="line">        .pipe(gulp.dest(&apos;./dest&apos;));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>在 webpack 中：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">    module: &#123;</div><div class="line">        rules: [</div><div class="line">            &#123;</div><div class="line">                test:   /\.css$/,</div><div class="line">                use: [&quot;style-loader&quot;, &quot;css-loader&quot;, &quot;postcss-loader&quot;]</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>同时需要新建一个 postcss.config.js 文件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  plugins: [</div><div class="line">    require(&apos;autoprefixer&apos;)</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>作为一个很强大的工具，只用到了一个 Autoprefixer 插件的功能，其实是大材小用的，但是这对于很多项目也已经是足够了，以后有其他复杂的项目需要使用的时候再去细细研究吧。</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/02/01/前端路由相关知识/" class="archive-article-date">
-  <time datetime="2017-02-01T11:31:33.000Z" itemprop="datePublished">2月 1</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/01/前端路由相关知识/">前端路由相关知识</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/03/如何优雅的写-CSS——PostCSS-实现更高效/" data-id="cj4nu1avf003dii0wybk19kf3" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BEM/">BEM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/postcss/">postcss</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scss/">scss</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/07/03/如何优雅的写-CSS——SASS-的使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何优雅的写 CSS —— SASS 的使用</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
-
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/categories/前端学习/">&laquo; 上一页</a><a class="page-number" href="/categories/前端学习/">1</a><span class="page-number current">2</span>
-  </nav>
 </section>
         
           <aside id="sidebar">
