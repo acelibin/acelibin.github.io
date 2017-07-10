@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/29/时间戳与时间的转换/index.html">
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="一直在用 moment.js 来转换时间，特别方便，因为自己懒，也没研究过它的代码，只是傻瓜式的拿过来就用了。可是，今天在小程序里面就遇到问题了，引用不了。。。估计也是我自己的问题，本来用到的地方不多，算了，还是自己弄一下吧。">
-<meta property="og:updated_time" content="2017-06-29T12:15:13.000Z">
+<meta property="og:updated_time" content="2017-07-10T03:34:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="时间戳与时间的转换">
 <meta name="twitter:description" content="一直在用 moment.js 来转换时间，特别方便，因为自己懒，也没研究过它的代码，只是傻瓜式的拿过来就用了。可是，今天在小程序里面就遇到问题了，引用不了。。。估计也是我自己的问题，本来用到的地方不多，算了，还是自己弄一下吧。">
@@ -101,7 +101,7 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">new Date().getTime() // 1498737541918</div><div class="line"></div><div class="line">//或者</div><div class="line"></div><div class="line">Number(new Date()) // 同上</div></pre></td></tr></table></figure>
 <h2 id="时间戳转换时间"><a href="#时间戳转换时间" class="headerlink" title="时间戳转换时间"></a>时间戳转换时间</h2><hr>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function formatDateTime(datetime) &#123;</div><div class="line">  var year = datetime.getFullYear()</div><div class="line">  var month = datetime.getMonth() + 1</div><div class="line">  var day = datetime.getDate()</div><div class="line"></div><div class="line">  var hour = datetime.getHours()</div><div class="line">  var minute = datetime.getMinutes()</div><div class="line">  var second = datetime.getSeconds()</div><div class="line"></div><div class="line">  return [year, month, day].map(formatNumber).join(&apos;/&apos;) + &apos; &apos; + [hour, minute, second].map(formatNumber).join(&apos;:&apos;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">function formatNumber(n) &#123;</div><div class="line">  n = n.toString()</div><div class="line">  return n[1] ? n : &apos;0&apos; + n</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function formatDateTime(datetime) &#123;</div><div class="line">  var time = new Date(datetime)</div><div class="line">  var year = datetime.getFullYear()</div><div class="line">  var month = datetime.getMonth() + 1</div><div class="line">  var day = datetime.getDate()</div><div class="line"></div><div class="line">  var hour = datetime.getHours()</div><div class="line">  var minute = datetime.getMinutes()</div><div class="line">  var second = datetime.getSeconds()</div><div class="line"></div><div class="line">  return [year, month, day].map(formatNumber).join(&apos;/&apos;) + &apos; &apos; + [hour, minute, second].map(formatNumber).join(&apos;:&apos;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">function formatNumber(n) &#123;</div><div class="line">  n = n.toString()</div><div class="line">  return n[1] ? n : &apos;0&apos; + n</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="日期的加减"><a href="#日期的加减" class="headerlink" title="日期的加减"></a>日期的加减</h2><hr>
 <p><strong> 原理就是把需要加减的数转换成毫秒数，然后与原来的日期进行加减运算。</strong></p>
 <ul>
