@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="小程序出来也是很久了，刚发布的时候拿来 demo 小小的玩了一下，感觉还不错。现在终于自己着手开发了一个，满满的成就感~
 在我理解，小程序就是微信作为一个中间桥梁，可以通过微信来实现调用手机更多的硬件接口，弥补了 web 开发的先天不足。同时，相对于微信网页，流畅度提升了不少。当然里面的坑还是不少的，暂时我就把自己遇见的总结一下吧。">
-<meta property="og:updated_time" content="2017-07-01T11:14:15.000Z">
+<meta property="og:updated_time" content="2017-07-15T07:08:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小程序开发自我总结">
 <meta name="twitter:description" content="小程序出来也是很久了，刚发布的时候拿来 demo 小小的玩了一下，感觉还不错。现在终于自己着手开发了一个，满满的成就感~
@@ -97,8 +97,9 @@
 <a id="more"></a>
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><hr>
 <p><strong>HTTPS：</strong></p>
-<p>小程序上线只支持 https，所以一定要先完成从 http 到 https 的升级工作，要不然开发完了也不能上线。当然，在调试的时候还是可以用 http 的，所以可以一边开发调试，同时进行证书认证的工作。</p>
+<p>小程序上线只支持 https，所以一定要先完成从 http 到 https 的升级工作，要不然开发完了也不能上线。当然，在开发调试的时候还是可以用 http 的，所以可以一边开发调试，同时进行证书认证的工作。</p>
 <p>这里有个小的 tips，如果域名是在阿里云，可以申请一个为期一年的免费的证书，对于小公司或者个人开发者来说还是很不错的，有需要的可以去阿里云看看。</p>
+<p>[补充]：<a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a> 这里有提供免费的证书服务，但是需要自己用脚本来每隔90天重新申请一次。</p>
 <p><strong>开发者工具</strong></p>
 <p>小程序的开发者工具还是挺不错的，还可以用于微信网页开发，虽不说完美，但是基本够用。</p>
 <p>这里有个问题：当在电脑上调试的时候，app.js 里面的代码是可以正常运行的，但是在手机上预览的时候却会出现问题。比如获取用户地理位置，还没获取到就会加载了首页内容，所以如果有依赖地理位置的内容，需要判断是否获取到信息再进一步加载。</p>
@@ -143,6 +144,20 @@
 <p>具体如何使用可以参考官方文档，写的很详细了。这里提一句，在使用模板的页面，需要分别引用一下相应的文件：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;import src=&quot;../template/template.wxml&quot; /&gt;</div><div class="line">@import &quot;../template/template.wxss&quot;;</div></pre></td></tr></table></figure>
 <p>对于数据处理部分，在模板文件里该怎么循环就怎么循环，然后在调用的页面给予相应的赋值即可。这些操作都可以直接在<code>wxml</code>文件里完成，并不依赖<code>js</code>操作。</p>
+<p><strong>实现字母索引</strong></p>
+<p>很多地方都会用到像 iOS 通讯录一样通过右侧字母滑动来快速获取相应字母开头的信息，小程序没有像其他比如 mintUI 一样的组件，只能通过 <code>scroll-view</code> 这个视图容器来实现，还是有点复杂的。</p>
+<p>官方文档在这里就显得有点过于简略，只好上网查找别人的实现方法。同时，在电脑上操作和手机上操作还是有点区别，电脑上略卡顿，手机上会好很多。</p>
+<p>最重要的是要设置好<code>scroll-view</code>相关的属性，<code>scroll-y</code>上下滚动，，高度要动态设置否则会出现显示异常，<code>scroll-into-view</code>值应为某子元素id，对应子元素的 id 属性必不可少，滚动区域和字母列表循环的是同一个数组数据。</p>
+<p>滚动区域内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;scroll-view scroll-y style=&quot;height: &#123;&#123;windowHeight&#125;&#125;&quot; class=&quot;main&quot; scroll-into-view=&quot;&#123;&#123;letter&#125;&#125;&quot;&gt;</div><div class="line">  &lt;view class=&quot;list&quot; wx:for=&quot;&#123;&#123;car&#125;&#125;&quot; id=&quot;&#123;&#123;item.letter&#125;&#125;&quot;&gt;/*根据这个 id 来进行字母定位*/</div><div class="line">    &lt;view class=&quot;title&quot;&gt;</div><div class="line">      &lt;view&gt;&#123;&#123;item.letter&#125;&#125;&lt;/view&gt;</div><div class="line">    &lt;/view&gt;</div><div class="line">    &lt;view class=&quot;brand&quot;&gt;</div><div class="line">      &lt;view class=&quot;child&quot; wx:for=&quot;&#123;&#123;item.children&#125;&#125;&quot; wx:for-item=&quot;children&quot;&gt;</div><div class="line">        &#123;&#123;children.name&#125;&#125;</div><div class="line">      &lt;/view&gt;</div><div class="line">    &lt;/view&gt;</div><div class="line">  &lt;/view&gt;</div><div class="line">&lt;/scroll-view&gt;</div></pre></td></tr></table></figure>
+<p>右侧字母列表：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;view class=&quot;sidebar&quot; catchtouchstart=&quot;touchLetter&quot; catchtouchmove=&quot;moveLetter&quot;&gt;</div><div class="line">  &lt;view class=&quot;letter&quot; wx:for=&quot;&#123;&#123;car&#125;&#125;&quot;&gt;&#123;&#123;item.letter&#125;&#125;&lt;/view&gt;</div><div class="line">&lt;/view&gt;</div></pre></td></tr></table></figure>
+<p> onLoad 加载的时候要设置高度</p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">onLoad: function (options) &#123;</div><div class="line">   //系统信息接口</div><div class="line">   let res = wx.getSystemInfoSync();</div><div class="line">   this.setData(&#123;</div><div class="line">     windowHeight: res.windowHeight + &apos;px&apos;</div><div class="line">   &#125;)</div><div class="line">   </div><div class="line">   //设置数据</div><div class="line">   let datas = app.globalData.carList.brand;</div><div class="line">   this.setData(&#123;</div><div class="line">     car: datas</div><div class="line">   &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 手机点击字母事件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">touchLetter: function (e) &#123;</div><div class="line">   this.setData(&#123;</div><div class="line">     letter: e.target.dataset</div><div class="line">   &#125;);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>手机滑过字母事件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">moveLetter: function (e) &#123;</div><div class="line">  //系统信息接口</div><div class="line">  let res = wx.getSystemInfoSync();</div><div class="line">  </div><div class="line">  //每个字母的高度，这里根据 iPhone6 的屏幕为标准设置高度为 50rpx，再根据不同屏幕宽度按比例进行设置</div><div class="line">  let letterHeight = (50 * res.windowWidth) / 750;</div><div class="line">  </div><div class="line">  //手指滑过的距离</div><div class="line">  let pageY = e.changedTouches[0].pageY;</div><div class="line">  </div><div class="line">  //根据距离取整否则会出现没有值的情况</div><div class="line">  let letterIndex = Math.ceil((pageY - letterHeight) / letterHeight);</div><div class="line">  </div><div class="line">  //给 letter 赋值</div><div class="line">  this.setData(&#123;</div><div class="line">    letter: this.data.car[letterIndex - 1].letter</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><hr>
 <p>写了很多，其实很多东西我还没有接触，比如调用更多的硬件接口，估计也是有不少的坑，等我用到了再补充吧。现在就等着证书下来好上线我的第一个小程序啦。</p>
 
