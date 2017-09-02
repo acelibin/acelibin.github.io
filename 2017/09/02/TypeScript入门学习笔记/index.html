@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>TypeScript入门学习笔记 | acelibin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="TypeScript 是微软出品的一个 JavaScript 的超集，在 js 的技术上实现了一些最新的 ES 规范标准。现在前端三大框架之一的 Angular 已经开始使用 TypeScript，我也赶紧来学习一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript入门学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/09/02/TypeScript入门学习笔记/index.html">
+<meta property="og:site_name" content="acelibin">
+<meta property="og:description" content="TypeScript 是微软出品的一个 JavaScript 的超集，在 js 的技术上实现了一些最新的 ES 规范标准。现在前端三大框架之一的 Angular 已经开始使用 TypeScript，我也赶紧来学习一下。">
+<meta property="og:updated_time" content="2017-09-02T12:18:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TypeScript入门学习笔记">
+<meta name="twitter:description" content="TypeScript 是微软出品的一个 JavaScript 的超集，在 js 的技术上实现了一些最新的 ES 规范标准。现在前端三大框架之一的 Angular 已经开始使用 TypeScript，我也赶紧来学习一下。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">acelibin</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">格物致知</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-TypeScript入门学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/02/TypeScript入门学习笔记/" class="article-date">
+  <time datetime="2017-09-02T07:21:56.000Z" itemprop="datePublished">2017-09-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端学习/">前端学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TypeScript入门学习笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://www.tslang.cn/" target="_blank" rel="external">TypeScript</a> 是微软出品的一个 JavaScript 的超集，在 js 的技术上实现了一些最新的 ES 规范标准。现在前端三大框架之一的 Angular 已经开始使用 TypeScript，我也赶紧来学习一下。</p>
+<a id="more"></a>
+<p>这篇文章是在慕课网 JoJozhai 老师的课程下的学习笔记，算是一个入门指引，推荐大家去学习，课程链接：<a href="http://www.imooc.com/learn/763" target="_blank" rel="external">TypeScript入门</a></p>
+<h2 id="认识-TS"><a href="#认识-TS" class="headerlink" title="认识 TS"></a>认识 TS</h2><p>TS 必须要被编译器编译成 JS 才能才浏览器运行，自己练习可以使用在线编译器，推荐一个官方出的编译器：<a href="http://www.typescriptlang.org/play/index.html" target="_blank" rel="external">http://www.typescriptlang.org/play/index.html</a></p>
+<p>本地编译使用 npm 包</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">npm i -g typescript</div></pre></td></tr></table></figure>
+<p>然后使用 tsc 命令来转换 .ts 文件到 .js。</p>
+<p>也可以使用 IDE 的编译功能，同时使用代码提示功能。</p>
+<h2 id="字符串新特性"><a href="#字符串新特性" class="headerlink" title="字符串新特性"></a>字符串新特性</h2><p>1、多行字符串：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var content=`</div><div class="line">这是多行</div><div class="line">字符串</div><div class="line">`</div></pre></td></tr></table></figure>
+<p>2、字符串模板：在<strong>多行字符串里</strong>用表达式插入变量或调用方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var name = &apos;ts&apos;;</div><div class="line">var getName = function () &#123; return &apos;ts&apos; &#125;;</div><div class="line"></div><div class="line">console.log(`hello $&#123;name&#125;`)//变量</div><div class="line">console.log(`hello $&#123;getName()&#125;`)//表达式</div><div class="line">console.log(`</div><div class="line">&lt;div&gt;</div><div class="line">&lt;span&gt;这里是内容&lt;/span&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">`)//方便拼接字符串</div></pre></td></tr></table></figure>
+<p>3、自动拆分字符串：根据表达式自动进行切割</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function test(template,name,age)&#123;</div><div class="line">	console.log(template)</div><div class="line">	console.log(name)</div><div class="line">	console.log(age)</div><div class="line">&#125;</div><div class="line"></div><div class="line">var name=&apos;ts&apos;;</div><div class="line">var getAge=function()&#123; return 18 &#125;</div><div class="line"></div><div class="line">test`my name is $&#123;name&#125;,i&apos;m $&#123;getAge()&#125;`;</div><div class="line">//得到结果：[&quot;my name is &quot;,&quot;,i&apos;m &quot;,&quot;&quot;],ts,18</div></pre></td></tr></table></figure>
+<p>在 test() 方法里，第一个参数是整个表达式被拆分的值（作为数组），第二个参数是第一个表达式的值，第三个参数是第二个表达式的值。</p>
+<h2 id="参数新特性"><a href="#参数新特性" class="headerlink" title="参数新特性"></a>参数新特性</h2><p>1、参数类型：在参数后面使用冒号指定类型（如果不指定类型，ts 会自动推断类型并作出提示）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var name:string = &apos;ts&apos;;</div></pre></td></tr></table></figure>
+<p>any 类型可以作为任何类型<br>string 字符串<br>number 数字<br>boolean true 或者 false<br>void 声明方法的返回值，表明方法不需要任何返回值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function test(name:string):void&#123;</div><div class="line">	~~~</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>变量和方法可以声明类型，也可以给方法的参数声明类型。</p>
+<p><strong>自定义类型：</strong></p>
+<p>在 ts 里可以通过 class 类 或者 interface 接口自定义类型。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//定义类型</div><div class="line">class Person &#123;</div><div class="line">	name: string;//这是属性</div><div class="line">	age: number;//这是属性</div><div class="line">&#125;</div><div class="line"></div><div class="line">//定义变量</div><div class="line">var zhangsan:Person =new Person();</div><div class="line">//此时 zhangsan 有了两个属性，分别是 name 和 age</div></pre></td></tr></table></figure>
+<p>2、参数默认值：在参数后面用等号指定参数默认值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var name:string=&apos;ts&apos;;</div></pre></td></tr></table></figure>
+<p>给方法的变量指定默认值：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function test(a:string,b:string,c:string)&#123;</div><div class="line">	console.log(a);</div><div class="line">	console.log(b);</div><div class="line">	console.log(c);</div><div class="line">&#125;</div><div class="line">//此时调用的时候如果参数数量不对就会报错</div><div class="line">test(&apos;x&apos;);//报错</div><div class="line"></div><div class="line">//如果指定第三个参数为默认值，则可以只传前两个参数</div><div class="line">//注意：带默认值的参数只能放在最后</div><div class="line">function test(a:string,b:string,c:string=&apos;z&apos;)&#123;</div><div class="line">	console.log(a);</div><div class="line">	console.log(b);</div><div class="line">	console.log(c);</div><div class="line">&#125;</div><div class="line">test(&apos;x&apos;,&apos;y&apos;);//x,y,z</div></pre></td></tr></table></figure>
+<p>3、可选参数：在方法的参数后面用问好表示此参数是可选参数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//注意：可选参数不能在必选参数前面</div><div class="line">function test(a:string,b?:string,c:string=&apos;z&apos;)&#123;</div><div class="line">	console.log(a);</div><div class="line">	console.log(b);</div><div class="line">	console.log(c);</div><div class="line">&#125;</div><div class="line">test(&apos;x&apos;);//x,undefined,z</div></pre></td></tr></table></figure>
+<h2 id="函数新特性"><a href="#函数新特性" class="headerlink" title="函数新特性"></a>函数新特性</h2><p>1、Rest and Spread 操作符：用于声明任意数量的方法参数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function test(...args)&#123;</div><div class="line">	//这里的...就是 Rest and Spread 操作符</div><div class="line">	//args 就是一个数组</div><div class="line">	args.forEach(function(arg)&#123;</div><div class="line">		console.log(arg)</div><div class="line">	&#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line">//调用的时候传入多少个参数都是合法的</div><div class="line">test(1,2,3);</div><div class="line">test(4,5,6,7);</div></pre></td></tr></table></figure>
+<p>反向使用 Rest and Spread 操作符：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function test(a,b,c)&#123;</div><div class="line">	console.log(a);</div><div class="line">	console.log(b);</div><div class="line">	console.log(c);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//根据方法参数个数来调用，这里有3个</div><div class="line">var args1=[1,2];</div><div class="line">test(...args1);//1,2,undefined</div><div class="line">var args2=[4,5,6,7];</div><div class="line">test(...args2);//4,5,6</div></pre></td></tr></table></figure></p>
+<p>2、generator 函数：控制函数的执行过程，手动暂停和恢复执行。ES6通过 yield 关键字来实现这个功能。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//generator 函数通过在 function 后面加一个星号来表示</div><div class="line">function* doSth()&#123;</div><div class="line">	console.log(&apos;start&apos;);</div><div class="line">	yield;//关键字，相当于断点</div><div class="line">	console.log(&apos;finish&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">doSth();//这样调用不会有效，必须声明成一个变量，再调用 .next()</div><div class="line">var func=doSth();</div><div class="line">func.next();//此时打印 start 即停止</div><div class="line">func.next();//此时完整打印完毕</div></pre></td></tr></table></figure>
+<p>3、析构表达式：将对象或数组拆解成任意数量的变量</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function getStock()&#123;</div><div class="line">	return &#123;</div><div class="line">		code:&apos;IBM&apos;,</div><div class="line">		price:100</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">//ES5方法：</div><div class="line">var stock = getStock();</div><div class="line">var code = stock.code;</div><div class="line">var price = stock.price;</div><div class="line"></div><div class="line">//使用析构表达式：</div><div class="line">var &#123; code , price &#125; = getStock();</div><div class="line">console.log(code);//IBM</div><div class="line">console.log(price);//100</div></pre></td></tr></table></figure>
+<p>注意：{}里的变量名要与函数内的对象名一致。如果要另起新的名字：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var &#123; code:codex , price &#125; = getStock();</div><div class="line">console.log(codex);//IBM</div></pre></td></tr></table></figure>
+<p>对于嵌套的对象重复使用析构表达式即可：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">function getStock()&#123;</div><div class="line">	return &#123;</div><div class="line">		code:&apos;IBM&apos;,</div><div class="line">		price:&#123;</div><div class="line">			price1:200,</div><div class="line">			price2:400</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">var &#123; code , price:&#123;price2&#125; &#125; = getStock();</div><div class="line">console.log(code);//IBM</div><div class="line">console.log(price2);//400</div></pre></td></tr></table></figure>
+<p>针对数组的析构表达式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var arr=[1,2,3,4,5];</div><div class="line"></div><div class="line">var [n1,n2]=arr;</div><div class="line">console.log(n1);//1</div><div class="line"></div><div class="line">var [,,n3,n4]=arr;</div><div class="line">console.log(n3);//3</div><div class="line"></div><div class="line">var [n1,n2,...others]=arr;</div><div class="line">console.log(others);//3,4,5</div></pre></td></tr></table></figure>
+<p>作为方法的参数使用：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var arr=[1,2,3,4,5];</div><div class="line">function test ([n1,n2,...others])&#123;</div><div class="line">	console.log(n1);//1</div><div class="line">	console.log(n2);//2</div><div class="line">	console.log(others);//3,4,5</div><div class="line">&#125;</div><div class="line">test(arr);</div></pre></td></tr></table></figure>
+<h2 id="表达式与循环"><a href="#表达式与循环" class="headerlink" title="表达式与循环"></a>表达式与循环</h2><p>1、箭头表达式：用于声明匿名函数，消除传统匿名函数的 this 指针问题</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var sum=(a1,a2)=&gt;a1 + a2;//对于只有一行的函数，可以省略大括号和 return</div><div class="line"></div><div class="line">//对于多行的写法：</div><div class="line">var sum=(a1,a2)=&gt;&#123;</div><div class="line">	return a1 + a2</div><div class="line">&#125;</div><div class="line"></div><div class="line">//没有参数:</div><div class="line">var sum=()=&gt;&#123;&#125;</div><div class="line"></div><div class="line">//单个参数：</div><div class="line">var sum= n =&gt; &#123;</div><div class="line">	console.log(n)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2、for of 循环</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//forEach()</div><div class="line">var arr=[1,2,3,4,5];</div><div class="line">arr.desc=&apos;good&apos;;//属性</div><div class="line"></div><div class="line">arr.forEach(value =&gt; console.log(value));//1,2,3,4,5;没有 good</div><div class="line"></div><div class="line">//for in 循环，得到数组的键</div><div class="line">//在 js 里任何对象或者集合都是键值对的集合，键就是属性的名字，值就是属性的值。</div><div class="line">for(var n in arr)&#123;</div><div class="line">	console.log(n);//0,1,2,3,4,desc</div><div class="line">	console.log(arr[n]);//1,2,3,4,5,good</div><div class="line">&#125;</div><div class="line"></div><div class="line">//for of 可以在循环中 break，忽略属性，也可以循环字符串</div><div class="line">for(var n of arr)&#123;</div><div class="line">	console.log(n);//1,2,3,4,5;没有 good</div><div class="line">	if(n&gt;3) break;</div><div class="line">	console.log(n);//1,2,3</div><div class="line">&#125;</div><div class="line">for(var n of &apos;good&apos;)&#123;</div><div class="line">	console.log(n);//g,o,o,d</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="面向对象特性"><a href="#面向对象特性" class="headerlink" title="面向对象特性"></a>面向对象特性</h2><p>1、class 类</p>
+<p><strong> 定义 </strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">	//类的属性</div><div class="line">	age;</div><div class="line">	eat()&#123;</div><div class="line">		console.log(&apos;i&apos;m eating&apos;)</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//实例化</div><div class="line">var p1= new Person();</div><div class="line">p1.age=&apos;11&apos;;</div><div class="line">p1.eat();</div></pre></td></tr></table></figure>
+<p><strong> 访问控制符 </strong></p>
+<p>public：默认，可以在类的内部和外部访问<br>private：私有，只可以在类的内部访问<br>protected：受保护的，在类的内部和子类被访问到</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">	private age;</div><div class="line">	private eat()&#123;</div><div class="line">		console.log(age);//类的内部可以访问</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong> 构造函数 </strong></p>
+<p>类的构造函数其实就是类的内部一个特殊的方法，只有在类被实例化的时候只被调用一次。可以用来指定实例化的时候的参数。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">	constructor()&#123;</div><div class="line">		console.log(&apos;haha&apos;)</div><div class="line">	&#125;</div><div class="line">	age;</div><div class="line">	eat()&#123;</div><div class="line">		console.log(age);//类的内部可以访问</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var p1= new Person();</div><div class="line">p1.age=&apos;11&apos;;</div><div class="line">p1.eat();</div></pre></td></tr></table></figure>
+<p>构造函数的使用：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">	name;</div><div class="line">	constructor(name:string)&#123;</div><div class="line">		this.name=name;</div><div class="line">	&#125;</div><div class="line">	eat()&#123;</div><div class="line">		console.log(this.name);//类的内部可以访问</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//上面的类也可以写成：</div><div class="line">class Person &#123;</div><div class="line">	constructor(public name:string)&#123;</div><div class="line">		//这里的 public 不能省略</div><div class="line">	&#125;</div><div class="line">	eat()&#123;</div><div class="line">		console.log(this.name);//类的内部可以访问</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var p1= new Person(&apos;ts&apos;);</div><div class="line">p1.eat();</div></pre></td></tr></table></figure>
+<p><strong> 类的继承 </strong></p>
+<p>通过 extends（声明继承关系） 和 super（调用父类的构造函数） 关键字</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">	constructor(public name:string)&#123;</div><div class="line">	&#125;</div><div class="line">	eat()&#123;</div><div class="line">		console.log(this.name);//类的内部可以访问</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">class Teacher extends Person &#123;</div><div class="line">	code:string;</div><div class="line">	work()&#123;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">var t1=new Teacher(&apos;Jay&apos;);</div><div class="line">t1.eat();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//父类</div><div class="line">class Person &#123;</div><div class="line">	constructor(public name:string)&#123;</div><div class="line">	&#125;</div><div class="line">	eat()&#123;</div><div class="line">		console.log(&quot;i&apos;m eating&quot;);//类的内部可以访问</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">//子类</div><div class="line">class Teacher extends Person &#123;</div><div class="line">	constructor(name:string,code:string)&#123;</div><div class="line">		super(name)//子类的构造函数必须要调用父类的构造函数</div><div class="line">		this.code=code;</div><div class="line">	&#125;</div><div class="line">	code:string;</div><div class="line">	work()&#123;</div><div class="line">		super.eat();//调用父类的其他方法</div><div class="line">		this.doWork();</div><div class="line">	&#125;</div><div class="line">	doWork()&#123;</div><div class="line">		console.log(&quot;i&apos;m working&quot;)</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">var t1=new Teacher(&apos;Jay&apos;,&apos;1&apos;);</div><div class="line">t1.eat();</div></pre></td></tr></table></figure>
+<p>2、泛型 generic，指参数化的类型，用于限制集合的内容</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">class Person()&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line">var workers:Array&lt;Person&gt;=[];//表示这个数组只能放 Person</div><div class="line">workers[0]=new Person()</div></pre></td></tr></table></figure>
+<p>3、接口 interfa，用于建立某种代码约定，使得其他开发者在调用某个方法或者创建新的类的时候必须遵循接口所定义的代码约定。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//用作方法的参数的类型声明的时候，调用类的时候要遵循接口所约定的属性</div><div class="line">interface IPerson()&#123;</div><div class="line">	name:string;</div><div class="line">	age:number;</div><div class="line">&#125;</div><div class="line">class Person()&#123;</div><div class="line">	constructor (public config:IPerson)&#123;</div><div class="line">	</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">var p1=new Person(&#123;</div><div class="line">	name:&apos;aa&apos;,</div><div class="line">	age:12</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//所有实现接口的类必须要实现接口里面的方法</div><div class="line">interface Animal()&#123;</div><div class="line">	eat()</div><div class="line">&#125;</div><div class="line">class Dog implements Animal()&#123;</div><div class="line">	eat()&#123;</div><div class="line">		console.log(&apos;meat&apos;)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>4、模块 module，将代码分割为可重用的单元。在 ts 里一个文件就是一个模块。export 和 import 关键字，不同文件可以同时有引用和暴露属性、方法和类。</p>
+<p>a.ts<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var name;//不对外暴露</div><div class="line">export var people;//对外暴露</div></pre></td></tr></table></figure></p>
+<p>b.ts<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">import &#123; people &#125; form &apos;./a&apos;</div><div class="line">console.log(people)</div></pre></td></tr></table></figure></p>
+<p>5、注解 annotation，为程序的元素（类、方法、变量）加上说明，供指定工具或框架使用。</p>
+<p>6、类型定义文件：<br>*.d.ts 帮助开发者使用已有的 js 工具包，如 jQuery。<br>类型定义文件来源：<a href="https://github.com/DefinitelyTyped/DefinitelyTyped" target="_blank" rel="external">https://github.com/DefinitelyTyped/DefinitelyTyped</a><br>查找类型定义文件工具：<a href="https://github.com/typings/typings" target="_blank" rel="external">https://github.com/typings/typings</a><br>PS: TypeScript 现在已经可以通过 npm install @types/库名 来安装类型定义文件了，这样可以把ts项目所需要的定义文件描述到npm包里，维护起来更加方便。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这里只是一个入门介绍，可以在使用 Angular 的时候结合官方文档进行深入学习。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/02/TypeScript入门学习笔记/" data-id="cj72zidjc0000810wi0ouryv6" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TypeScript/">TypeScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/07/20/关于字符串和数组的一些操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">关于字符串和数组的一些操作</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a><span class="category-list-count">16</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular/" style="font-size: 10px;">Angular</a> <a href="/tags/BEM/" style="font-size: 20px;">BEM</a> <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/FormData/" style="font-size: 10px;">FormData</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/SPA/" style="font-size: 15px;">SPA</a> <a href="/tags/Sketch/" style="font-size: 10px;">Sketch</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/base64/" style="font-size: 10px;">base64</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/postcss/" style="font-size: 15px;">postcss</a> <a href="/tags/scss/" style="font-size: 20px;">scss</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time/" style="font-size: 10px;">time</a> <a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/切图/" style="font-size: 10px;">切图</a> <a href="/tags/前端路由/" style="font-size: 10px;">前端路由</a> <a href="/tags/单页面应用/" style="font-size: 15px;">单页面应用</a> <a href="/tags/图片上传/" style="font-size: 10px;">图片上传</a> <a href="/tags/娱乐休闲/" style="font-size: 10px;">娱乐休闲</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/小程序/" style="font-size: 10px;">小程序</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/愿望清单/" style="font-size: 10px;">愿望清单</a> <a href="/tags/提升自我/" style="font-size: 10px;">提升自我</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a> <a href="/tags/谈判技巧/" style="font-size: 10px;">谈判技巧</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/02/TypeScript入门学习笔记/">TypeScript入门学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/关于字符串和数组的一些操作/">关于字符串和数组的一些操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/15/几个简单的前端算法/">几个简单的前端算法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/03/如何优雅的写-CSS——PostCSS-实现更高效/">如何优雅的写 CSS —— PostCSS 实现更高效</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/03/如何优雅的写-CSS——SASS-的使用/">如何优雅的写 CSS —— SASS 的使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <div class="widget-wrap">
+	<h3 class="widget-title">友情链接</h3> 
+	<div class="widget"> 
+		<ul> 
+			<li><a href="https://github.com/acelibin" title="itmyhome">github</a></li> 
+		</ul> 
+	</div>
+</div>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 libin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
