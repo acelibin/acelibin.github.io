@@ -3,21 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Vue 中使用第三方库的方法 | acelibin</title>
+  <title>正则表达式快用快查 | acelibin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在 Vuejs 项目中使用 JavaScript 库，可以每个文件里面分别import，但是太繁琐也不利于后期维护。有一个优雅方式是将其代理到 Vue 的原型对象上去。
-银弹就是 Object.defineProperty">
+  <meta name="description" content="正则会用的时候真的很好用，但是概念真的太多，几乎每次用的时候都要现用现查，要么就是找一些现成的，这里自己做一个笔记吧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue 中使用第三方库的方法">
-<meta property="og:url" content="http://yoursite.com/2017/04/03/Vue-中使用第三方库的方法/index.html">
+<meta property="og:title" content="正则表达式快用快查">
+<meta property="og:url" content="http://yoursite.com/2017/11/06/正则表达式快用快查/index.html">
 <meta property="og:site_name" content="acelibin">
-<meta property="og:description" content="在 Vuejs 项目中使用 JavaScript 库，可以每个文件里面分别import，但是太繁琐也不利于后期维护。有一个优雅方式是将其代理到 Vue 的原型对象上去。
-银弹就是 Object.defineProperty">
-<meta property="og:updated_time" content="2017-06-03T08:24:44.000Z">
+<meta property="og:description" content="正则会用的时候真的很好用，但是概念真的太多，几乎每次用的时候都要现用现查，要么就是找一些现成的，这里自己做一个笔记吧">
+<meta property="og:updated_time" content="2017-11-06T10:41:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vue 中使用第三方库的方法">
-<meta name="twitter:description" content="在 Vuejs 项目中使用 JavaScript 库，可以每个文件里面分别import，但是太繁琐也不利于后期维护。有一个优雅方式是将其代理到 Vue 的原型对象上去。
-银弹就是 Object.defineProperty">
+<meta name="twitter:title" content="正则表达式快用快查">
+<meta name="twitter:description" content="正则会用的时候真的很好用，但是概念真的太多，几乎每次用的时候都要现用现查，要么就是找一些现成的，这里自己做一个笔记吧">
   
   
     <link rel="icon" href="/favicon.png">
@@ -66,10 +63,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Vue-中使用第三方库的方法" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-正则表达式快用快查" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/03/Vue-中使用第三方库的方法/" class="article-date">
-  <time datetime="2017-04-03T00:12:31.000Z" itemprop="datePublished">2017-04-03</time>
+    <a href="/2017/11/06/正则表达式快用快查/" class="article-date">
+  <time datetime="2017-11-06T10:32:24.000Z" itemprop="datePublished">2017-11-06</time>
 </a>
     
   <div class="article-category">
@@ -84,7 +81,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Vue 中使用第三方库的方法
+      正则表达式快用快查
     </h1>
   
 
@@ -92,37 +89,50 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在 Vuejs 项目中使用 JavaScript 库，可以每个文件里面分别import，但是太繁琐也不利于后期维护。有一个优雅方式是将其代理到 Vue 的原型对象上去。</p>
-<p>银弹就是 <strong>Object.defineProperty</strong></p>
+        <p>正则会用的时候真的很好用，但是概念真的太多，几乎每次用的时候都要现用现查，要么就是找一些现成的，这里自己做一个笔记吧</p>
 <a id="more"></a>
-<h3 id="举个栗子："><a href="#举个栗子：" class="headerlink" title="举个栗子："></a>举个栗子：</h3><p>例如引入 axios 库:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">import axios from &apos;axios&apos;;</div><div class="line">Vue.prototype.$ajax = axios;</div></pre></td></tr></table></figure>
-<p>使用的时候，<code>this.$ajax.post()</code>，很方便。再来一个 moment 库，这个也是使用较多的一个：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">import moment from &apos;moment&apos;;</div><div class="line">Object.defineProperty(Vue.prototype, &apos;$moment&apos;, &#123; value: moment &#125;);</div></pre></td></tr></table></figure>
-<p>使用的时候，<code>this.$moment()</code></p>
-<h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a>工作原理：</h3><p><strong>Object.defineProperty</strong></p>
-<p>一般而言, 可以按照下面的方式来给对象设置属性:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">Vue.prototype.$moment = moment;</div></pre></td></tr></table></figure>
-<p>可以这样做, 但是 <code>Object.defineProperty</code> 允许我们通过一个 descriptor 来定义属性。Descriptor 运行我们去设置对象属性的一些底层(low-level)细节, 如是否允许属性可写? 是否允许属性在 for 循环中被遍历。</p>
-<p>通常, 我们不会为此感到困扰, 因为大部分时候, 对于属性赋值, 我们不需要考虑这样的细节。但这有一个明显的优点: 通过 descriptor 创建的属性默认是只读的。</p>
-<p>这就意味着, 一些处于迷糊状态的(coffee-deprived)开发者不能在组件内去做一些很愚蠢的事情, 就像这样:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">this.$http = &apos;Assign some random thing to the instance method&apos;;</div><div class="line">this.$http.get(&apos;/&apos;); // TypeError: this.$http.get is not a function</div></pre></td></tr></table></figure>
-<p>此外, 试图给只读实例的方法重新赋值会得到 <code>TypeError: Cannot assign to read only property</code> 的错误.</p>
-<h3 id=""><a href="#" class="headerlink" title="$"></a>$</h3><p>你可能会注意到, 代理第三库的属性会有一个 $ 前缀, 也可能看到其它类似 <code>$refs</code>, <code>$on</code>, <code>$mount</code> 的属性和方式, 它们也有这个前缀.</p>
-<p>这个不是强制要求, 给属性添加 $ 前缀是提供那些处于迷糊状态(coffee-deprived)的开发者这是一个公开的 API, 和 Vuejs 的一些内部属性和方法区分开来.</p>
-<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><p>你还可能注意到, 在组件内是通过 <code>this.libraryName</code> 的方式来使用第三方库的, 当你知道它是一个实例方法时就不会感到意外了. 但与全局变量不同, 通过 this 来使用第三方库时, 必须确保 this 处于正确的作用域. 在回调方法中 this 的作用域会有不同, 但箭头式回调风格能保证 this 的作用域是正确的:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">this.$http.get(&apos;/&apos;).then(res =&gt; &#123;</div><div class="line">  if (res.status !== 200) &#123;</div><div class="line">    this.$http.get(&apos;/&apos;) // etc</div><div class="line">    // Only works in a fat arrow callback.</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>感谢下面两位作者：</p>
-<p>英文：<a href="http://vuejsdevelopers.com/2017/04/22/vue-js-libraries-plugins/?jsdojo_id=fef_lip&amp;utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">Use Any Javascript Library With Vue.js</a></p>
-<p>译文：<a href="https://github.com/dwqs/blog/issues/51" target="_blank" rel="external">如何在 Vue.js 中使用第三方库</a></p>
+<p>先上神器： </p>
+<p>图形工具：<a href="http://regexper.com" target="_blank" rel="external">http://regexper.com</a></p>
+<p>查找当前目录下所有的.txt文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">find ./ -name *txt</div></pre></td></tr></table></figure>
+<p>基础知识：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">\b</div><div class="line">单词边界   \ba\b  查找字母 a </div><div class="line">g</div><div class="line">表示全局  global</div><div class="line">\</div><div class="line">转义</div><div class="line">()</div><div class="line">用括号表示分组，提取的时候用$1，$2表示第一组、第二组...</div><div class="line">^</div><div class="line">表示开头</div><div class="line">$</div><div class="line">表示结尾</div><div class="line">&#123;n&#125;</div><div class="line">表示数量</div><div class="line">[/-]</div><div class="line">表示或，/或者-，one of的意思</div><div class="line">[^abc]</div><div class="line">反向类，表示选择不是a或b或c的</div><div class="line">i</div><div class="line">忽略大小写 ignore</div><div class="line">m</div><div class="line">多行搜索 multi</div><div class="line">\r</div><div class="line">回车符</div><div class="line">\n</div><div class="line">换行符</div><div class="line">\0</div><div class="line">空字符</div></pre></td></tr></table></figure>
+<p>定义正则：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var reg=/\bis\b/g</div><div class="line">&apos;He is a boy, is he?&apos;.replace(reg,&apos;IS&apos;)</div><div class="line">He IS a boy, IS he?</div><div class="line"></div><div class="line">var reg=new RegExp(&apos;\\bis\\b&apos;, &apos;g&apos;)</div></pre></td></tr></table></figure>
+<p>字符类：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&apos;a1b2c3d4e5&apos;.replace(/[abc]/g, &apos;X&apos;)</div><div class="line">X1X2X3d4e5</div><div class="line"></div><div class="line">&apos;a1b2c3d4e5&apos;.replace(/[^abc]/g, &apos;X&apos;)//取反</div><div class="line">aXbXcXXXXX</div></pre></td></tr></table></figure>
+<p>范围类：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[a-z]//小写字母</div><div class="line">&apos;a1b2c3d4e5&apos;.replace(/[abc]/g, &apos;Q&apos;)</div><div class="line">Q1Q2Q3Q4Q5</div><div class="line"></div><div class="line">[a-zA-z]//大小写</div><div class="line"></div><div class="line">[0-9-]//数字和横线</div><div class="line">&apos;2016-09-01&apos;.replace(/[0-9-]/,&apos;A&apos;)</div><div class="line">AAAAAAAAAA</div></pre></td></tr></table></figure>
+<p>预定义类：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.</div><div class="line">除了回车与换行的任意字</div><div class="line">\d</div><div class="line">数字</div><div class="line">\D</div><div class="line">非数字</div><div class="line">\s</div><div class="line">空白字符  space</div><div class="line">\S</div><div class="line">非空白字符</div><div class="line">\w</div><div class="line">单词字符，字母数字下划线  word</div><div class="line">\W</div><div class="line">非单词字符</div></pre></td></tr></table></figure>
+<p>边界：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">^</div><div class="line">开始</div><div class="line">$</div><div class="line">结尾</div><div class="line">\b</div><div class="line">单词边界</div><div class="line">\B</div><div class="line">非单词边界</div></pre></td></tr></table></figure>
+<p>量词：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">？</div><div class="line">最多一个</div><div class="line">+</div><div class="line">至少一个</div><div class="line">*</div><div class="line">任意个</div><div class="line">&#123;n&#125;</div><div class="line">n次</div><div class="line">&#123;n,m&#125;</div><div class="line">n到m次</div><div class="line">&#123;n,&#125;</div><div class="line">至少出现n次</div></pre></td></tr></table></figure>
+<p>贪婪模式：尽可能多的匹配</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&apos;123456789&apos;.replace(/\d&#123;3,6&#125;/g,&apos;X&apos;)</div><div class="line">X789</div></pre></td></tr></table></figure>
+<p>非贪婪模式：匹配成功一次即可，后续不继续匹配。在量词后面加上？</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&apos;123456789&apos;.match(/\d&#123;3,5&#125;?/g)</div><div class="line">[&apos;123&apos;,&apos;456&apos;,&apos;789&apos;]</div><div class="line">&apos;12345678&apos;.replace(/\d&#123;3,6&#125;?/g,&apos;X&apos;)</div><div class="line">XX78</div></pre></td></tr></table></figure>
+<p>分组：通过( )实现</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&apos;a1b2c3d4&apos;.replace(/([a-z]\d)&#123;3&#125;/g,&apos;X&apos;)</div><div class="line">Xd4</div></pre></td></tr></table></figure>
+<p>或：|</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&apos;supermen&apos;.replace(/super|men/g,&apos;X&apos;)</div><div class="line">XX</div><div class="line">&apos;supernsupmen&apos;.replace(/sup(er|me)n/g,&apos;X&apos;)</div><div class="line">XX</div></pre></td></tr></table></figure>
+<p>反向引用：分组之后用变量捕获分组信息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&apos;2017-09-01&apos;.replace(/(\d&#123;4&#125;)-(\d&#123;2&#125;)-(\d&#123;2&#125;)/g,&apos;$2/$3/$1&apos;)</div><div class="line">09/01/2017</div></pre></td></tr></table></figure>
+<p>忽略分组：不希望捕获分组信息，在（）内添加 ?: 即可</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&apos;2017-09-01&apos;.replace(/(\d&#123;4&#125;)-(?:\d&#123;2&#125;)-(\d&#123;2&#125;)/g,&apos;$2$1&apos;)</div><div class="line">201701   此时忽略第二个分组信息</div></pre></td></tr></table></figure>
+<p>对象属性：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">g</div><div class="line">全局</div><div class="line">i</div><div class="line">大小写敏感</div><div class="line">m</div><div class="line">多行</div></pre></td></tr></table></figure>
+<p>方法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">test</div><div class="line">测试是否匹配，返回true和false</div><div class="line">reg.test(&apos;内容&apos;)//返回布尔值</div><div class="line">因为有lastIndex属性，所以会出现结果变化的情形</div><div class="line"></div><div class="line">exec</div><div class="line">匹配结果返回数组</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/03/Vue-中使用第三方库的方法/" data-id="cj9o24kkx000b780wij38kgdo" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2017/11/06/正则表达式快用快查/" data-id="cj9o24kmb001b780wm8dh36cw" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li></ul>
 
     </footer>
   </div>
@@ -130,19 +140,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/05/03/判断设备-UA-的方法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          判断设备 UA 的方法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/23/git提交说明规范/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/11/06/Express-与-MongoDB-入门/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">git提交说明规范</div>
+      <div class="article-nav-title">Express 与 MongoDB 入门</div>
     </a>
   
 </nav>
