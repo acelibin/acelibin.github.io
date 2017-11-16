@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/16/import和export的使用/index.html">
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="最近发现自己基础知识还差的远，很多东西知其然不知其所以然。现在很多项目都可以借助现成的工具来实现，所以真的是越来越少关注了。但是，基础知识是一个工程师的必备素养，也是你提高的基石，所以我就从一些简单的问题开始做一个系列的记录吧。现在从模块化编程开始吧。">
-<meta property="og:updated_time" content="2017-11-16T07:52:51.000Z">
+<meta property="og:updated_time" content="2017-11-16T07:57:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="import和export的使用">
 <meta name="twitter:description" content="最近发现自己基础知识还差的远，很多东西知其然不知其所以然。现在很多项目都可以借助现成的工具来实现，所以真的是越来越少关注了。但是，基础知识是一个工程师的必备素养，也是你提高的基石，所以我就从一些简单的问题开始做一个系列的记录吧。现在从模块化编程开始吧。">
@@ -125,6 +125,8 @@
 <p><strong>CommonJS加载ES6模块：通过import()函数</strong></p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="comment">// es6.mjs</span></div><div class="line"><span class="keyword">let</span> foo = &#123; <span class="attr">bar</span>: <span class="string">'my-default'</span> &#125;;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> foo;</div><div class="line">foo = <span class="literal">null</span>;</div></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="comment">// commonjs.js</span></div><div class="line"><span class="keyword">const</span> es_namespace = <span class="keyword">await</span> <span class="keyword">import</span>(<span class="string">'./es'</span>);</div><div class="line"><span class="comment">// es_namespace = &#123;</span></div><div class="line"><span class="comment">//   get default() &#123;</span></div><div class="line"><span class="comment">//     ...</span></div><div class="line"><span class="comment">//   &#125;</span></div><div class="line"><span class="comment">// &#125;</span></div><div class="line"><span class="built_in">console</span>.log(es_namespace.default);</div><div class="line"><span class="comment">// &#123; bar:'my-default' &#125;</span></div></pre></td></tr></table></figure>
+<p><strong>参考</strong></p>
+<p>感谢阮一峰老师的<a href="http://es6.ruanyifeng.com/#docs/module" target="_blank" rel="external">ES6入门教程</a>。</p>
 
       
     </div>
