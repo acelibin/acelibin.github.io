@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="Promise的作用：解决回调问题，为异步操作提供统一的接口，还可以链式调用。
 原理：先定义好需要回调的多个函数，然后在每个函数内部“发射（传递）”出下一个函数需要的数据，然后通过链式调用来执行。如果传递的是reject值则停止。">
-<meta property="og:updated_time" content="2017-11-17T11:14:56.000Z">
+<meta property="og:updated_time" content="2017-11-18T10:11:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决回调地狱——Promise的使用">
 <meta name="twitter:description" content="Promise的作用：解决回调问题，为异步操作提供统一的接口，还可以链式调用。
@@ -133,6 +133,15 @@
 <p>finally()：用于不管前面的结果如何，接下来都要执行的操作</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">server.listen(<span class="number">0</span>)</div><div class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// run test</span></div><div class="line">  &#125;)</div><div class="line">  .finally(server.stop);<span class="comment">//不管前面怎样，都要关掉服务器</span></div><div class="line">  </div><div class="line"><span class="comment">//实现代码</span></div><div class="line"><span class="built_in">Promise</span>.prototype.finally = <span class="function"><span class="keyword">function</span> (<span class="params">callback</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> P = <span class="keyword">this</span>.constructor;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.then(</div><div class="line">    <span class="function"><span class="params">value</span>  =&gt;</span> P.resolve(callback()).then(<span class="function"><span class="params">()</span> =&gt;</span> value),</div><div class="line">    reason =&gt; P.resolve(callback()).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="keyword">throw</span> reason &#125;)</div><div class="line">  );</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <p>上面代码中，不管前面的 Promise 是fulfilled还是rejected，都会执行回调函数callback。</p>
+<hr>
+<h3 id="async"><a href="#async" class="headerlink" title="async"></a>async</h3><p>async是ES7标准提出的函数，async 函数返回值是 Promise 对象，可以直接使用 then() 方法进行调用。async 函数的 await 命令后面则可以是 Promise 或者 原始类型的值（Number，string，boolean，但这时等同于同步操作）。</p>
+<p>正常情况下，await 命令后面跟着的是 Promise ，如果不是的话，也会被转换成一个 立即 resolve 的 Promise</p>
+<p>使用：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getData</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"这里是返回的数据"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> getData()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>async 函数返回的 Promise 对象，必须等到内部所有的 await 命令的 Promise 对象执行完，才会发生状态改变</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">const</span> delay = <span class="function"><span class="params">timeout</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span>=&gt;</span> setTimeout(resolve, timeout));</div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">await</span> delay(<span class="number">1000</span>);</div><div class="line">    <span class="keyword">await</span> delay(<span class="number">2000</span>);</div><div class="line">    <span class="keyword">await</span> delay(<span class="number">3000</span>);</div><div class="line">    <span class="keyword">return</span> <span class="string">'done'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">f().then(<span class="function"><span class="params">v</span> =&gt;</span> <span class="built_in">console</span>.log(v)); <span class="comment">// 等待6s后才输出 'done'</span></div></pre></td></tr></table></figure>
 <p>参考：<a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="external">http://es6.ruanyifeng.com/#docs/promise</a></p>
 
       

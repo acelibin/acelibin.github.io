@@ -5,16 +5,16 @@
   
   <title>JavaScript异步操作进化史 | acelibin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JavaScript是一种“单线程”的语言，执行的时候要一个一个进行，如果遇见ajax请求网络阻塞则会影响下一个任务的继续，所以产生了异步操作的需求。">
+  <meta name="description" content="JavaScript是一种“单线程”的语言，同一时刻，有且仅有一处代码正在执行。执行的时候要一个一个进行，如果遇见ajax请求网络阻塞则会影响下一个任务的继续，所以产生了异步操作的需求。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript异步操作进化史">
 <meta property="og:url" content="http://yoursite.com/2017/11/17/JavaScript异步操作进化史/index.html">
 <meta property="og:site_name" content="acelibin">
-<meta property="og:description" content="JavaScript是一种“单线程”的语言，执行的时候要一个一个进行，如果遇见ajax请求网络阻塞则会影响下一个任务的继续，所以产生了异步操作的需求。">
-<meta property="og:updated_time" content="2017-11-17T11:03:11.000Z">
+<meta property="og:description" content="JavaScript是一种“单线程”的语言，同一时刻，有且仅有一处代码正在执行。执行的时候要一个一个进行，如果遇见ajax请求网络阻塞则会影响下一个任务的继续，所以产生了异步操作的需求。">
+<meta property="og:updated_time" content="2017-11-18T10:04:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript异步操作进化史">
-<meta name="twitter:description" content="JavaScript是一种“单线程”的语言，执行的时候要一个一个进行，如果遇见ajax请求网络阻塞则会影响下一个任务的继续，所以产生了异步操作的需求。">
+<meta name="twitter:description" content="JavaScript是一种“单线程”的语言，同一时刻，有且仅有一处代码正在执行。执行的时候要一个一个进行，如果遇见ajax请求网络阻塞则会影响下一个任务的继续，所以产生了异步操作的需求。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -89,8 +89,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>JavaScript是一种“单线程”的语言，执行的时候要一个一个进行，如果遇见ajax请求网络阻塞则会影响下一个任务的继续，所以产生了异步操作的需求。</p>
+        <p>JavaScript是一种“单线程”的语言，同一时刻，有且仅有一处代码正在执行。执行的时候要一个一个进行，如果遇见ajax请求网络阻塞则会影响下一个任务的继续，所以产生了异步操作的需求。</p>
 <a id="more"></a>
+<h3 id="异步概念"><a href="#异步概念" class="headerlink" title="异步概念"></a>异步概念</h3><p>JS为了防止在不同线程同时操作DOM产生冲突，没有多线程。在HTML5中引入的Web Worker允许JavaScript脚本创建多个线程，但是子线程完全受主线程控制，且不得操作DOM。所以，这个新标准并没有改变JavaScript单线程的本质。</p>
+<p>同步和异步与以前的认知不太相符。在主线程上排队执行的任务通过同步进行，不在主线程的任务保存在任务队列中，等待主线程“召唤”才会进入主线程并被执行。</p>
+<blockquote>
+<p>同步：只有前一个任务执行完毕，才能执行后一个任务。</p>
+<p>异步：不会立即执行，在未来被“召唤”才会被执行。</p>
+</blockquote>
+<p>简单介绍下进程和线程：</p>
+<blockquote>
+<p>进程（process）是指在系统中正在运行的一个应用程序，是系统资源分配的基本单位，在内存中有其完备的数据空间和代码空间，拥有完整的虚拟空间地址。一个进程所拥有的数据和变量只属于它自己。</p>
+<p>线程（thread）是进程内相对独立的可执行单元，所以也被称为轻量进程（lightweight processes）；是操作系统进行任务调度的基本单元。它与父进程的其它线程共享该进程所拥有的全部代码空间和全局变量，但拥有独立的堆栈（即局部变量对于线程来说是私有的）。</p>
+<p>进程和线程都具有就绪、阻塞和运行三种基本状态。</p>
+</blockquote>
 <h3 id="回调函数：每个任务只能指定一个回调函数。"><a href="#回调函数：每个任务只能指定一个回调函数。" class="headerlink" title="回调函数：每个任务只能指定一个回调函数。"></a>回调函数：每个任务只能指定一个回调函数。</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">f2</span>) </span>&#123;</div><div class="line">  <span class="comment">// f1 的代码</span></div><div class="line">  <span class="comment">// f1 执行完成后，调用回调函数</span></div><div class="line">  f2();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="事件监听：任务的执行不取决于代码的顺序，而取决于某个事件是否发生。"><a href="#事件监听：任务的执行不取决于代码的顺序，而取决于某个事件是否发生。" class="headerlink" title="事件监听：任务的执行不取决于代码的顺序，而取决于某个事件是否发生。"></a>事件监听：任务的执行不取决于代码的顺序，而取决于某个事件是否发生。</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> eventOne = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  </div><div class="line">    alert(<span class="string">"第一个监听事件"</span>);  </div><div class="line">&#125;  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">eventTwo</span>(<span class="params"></span>)</span>&#123;  </div><div class="line">    alert(<span class="string">"第二个监听事件"</span>);  </div><div class="line">&#125; </div><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"test"</span>);  </div><div class="line">    btn.addEventListener(<span class="string">"click"</span>,eventOne);  </div><div class="line">    btn.addEventListener(<span class="string">"click"</span>,eventTwo);  </div><div class="line">    btn.removeEventListener(<span class="string">"click"</span>,eventOne); <span class="comment">//移除事件一，最后只会输出事件二 </span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>封装函数写法:</strong></p>
