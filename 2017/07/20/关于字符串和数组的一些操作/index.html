@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="字符串和数组是两个很常用的数据类型了，也有很多操作方法，但是一不小心总会将这两种操作方法弄混/手动捂脸
 最近看了下 ES6，里面有一些很好用的方法，在这里也一并总结一下。">
-<meta property="og:updated_time" content="2017-07-21T07:30:41.000Z">
+<meta property="og:updated_time" content="2017-11-29T02:36:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于字符串和数组的一些操作">
 <meta name="twitter:description" content="字符串和数组是两个很常用的数据类型了，也有很多操作方法，但是一不小心总会将这两种操作方法弄混/手动捂脸
@@ -151,7 +151,7 @@
 <p><strong>特殊记忆：</strong></p>
 <p>slice(start,end): 剪切，返回被剪切的元素</p>
 <blockquote>
-<p>start 为-1表示最后一个元素，end 可以没有</p>
+<p>start 为-1表示最后一个元素，end 可以没有表示到末尾</p>
 </blockquote>
 <p>splice(index,number,item): 剪切或者添加，原数组被改变，返回被删除的元素。</p>
 <blockquote>
@@ -161,18 +161,25 @@
 <blockquote>
 <p>[…[1,2], …[3,4], …[5,6]];  //[1,2,3,4,5,6]<br>[…’hello’];  //[“h”,”e”,”l”,”l”,”o”]</p>
 </blockquote>
-<p><strong>forEach</strong> 调用数组的每个元素，并传递给回调函数</p>
+<p><strong>forEach</strong> 遍历，调用数组的每个元素，并传递给回调函数</p>
 <blockquote>
 <p>array.forEach(function(currentValue, index, arr), thisValue)</p>
 </blockquote>
-<p><strong>map</strong> 映射</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">x,index</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(x,index)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p><strong>map</strong> 映射加转换，不改变原数组</p>
 <blockquote>
 <p>array.map(callback,[ thisObject]);</p>
 </blockquote>
-<p><strong>filter</strong> 过滤</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">arr.map(<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> x+<span class="number">10</span>;<span class="comment">//每个元素+10</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p><strong>filter</strong> 过滤，不改变原数组</p>
 <blockquote>
 <p>array.filter(callback,[ thisObject]);</p>
 </blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">arr.filter(<span class="function"><span class="keyword">function</span>(<span class="params">x,index</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> index%<span class="number">3</span>||x&gt;=<span class="number">8</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p><strong>every</strong> 对数组每个元素进行判断，必须所有都符合才返回true<br><strong>some</strong> 部分符合即返回true</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">arr.every(<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> x&gt;<span class="number">10</span>;<span class="comment">//返回true或者false</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p><strong>reduce</strong> 让数组中的前一项和后一项做某种计算并累计最终值，不改原数组</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">arr.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> x+y<span class="comment">//计算连加</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <h2 id="字符串方法"><a href="#字符串方法" class="headerlink" title="字符串方法"></a>字符串方法</h2><table>
 <thead>
 <tr>
