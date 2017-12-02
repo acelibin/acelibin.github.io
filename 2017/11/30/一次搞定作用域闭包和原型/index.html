@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一次搞定作用域闭包和原型 | acelibin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="发现自己一直在追求新技术的道路上狂奔，却忽视了最基础的东西。本来我是觉得上手一个新技能很重要，这样在做东西的时候不会被淘汰。最近一个大神点醒了我：新出来的框架/库那么多，一个人精力也很有限，很容易在追新的道路上越来越累，也越来越迷茫。当你掌握了所有基础的东西之后，你就会发现新的东西无非就是在基础上面的拓展。这样在学习使用一个新的框架的时候，根据文档API很快就能上手。我觉得很有道理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一次搞定作用域闭包和原型">
+<meta property="og:url" content="http://yoursite.com/2017/11/30/一次搞定作用域闭包和原型/index.html">
+<meta property="og:site_name" content="acelibin">
+<meta property="og:description" content="发现自己一直在追求新技术的道路上狂奔，却忽视了最基础的东西。本来我是觉得上手一个新技能很重要，这样在做东西的时候不会被淘汰。最近一个大神点醒了我：新出来的框架/库那么多，一个人精力也很有限，很容易在追新的道路上越来越累，也越来越迷茫。当你掌握了所有基础的东西之后，你就会发现新的东西无非就是在基础上面的拓展。这样在学习使用一个新的框架的时候，根据文档API很快就能上手。我觉得很有道理。">
+<meta property="og:image" content="http://on982w4kr.bkt.clouddn.com/%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1.jpeg">
+<meta property="og:image" content="http://on982w4kr.bkt.clouddn.com/%E7%BB%84%E5%90%88%E5%BC%8F%E7%BB%A7%E6%89%BF%E7%9A%84%E7%BC%BA%E9%99%B7.jpeg">
+<meta property="og:updated_time" content="2017-12-02T10:59:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一次搞定作用域闭包和原型">
+<meta name="twitter:description" content="发现自己一直在追求新技术的道路上狂奔，却忽视了最基础的东西。本来我是觉得上手一个新技能很重要，这样在做东西的时候不会被淘汰。最近一个大神点醒了我：新出来的框架/库那么多，一个人精力也很有限，很容易在追新的道路上越来越累，也越来越迷茫。当你掌握了所有基础的东西之后，你就会发现新的东西无非就是在基础上面的拓展。这样在学习使用一个新的框架的时候，根据文档API很快就能上手。我觉得很有道理。">
+<meta name="twitter:image" content="http://on982w4kr.bkt.clouddn.com/%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1.jpeg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">acelibin</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">格物致知</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-一次搞定作用域闭包和原型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/30/一次搞定作用域闭包和原型/" class="article-date">
+  <time datetime="2017-11-30T13:18:57.000Z" itemprop="datePublished">2017-11-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端学习/">前端学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一次搞定作用域闭包和原型
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>发现自己一直在追求新技术的道路上狂奔，却忽视了最基础的东西。本来我是觉得上手一个新技能很重要，这样在做东西的时候不会被淘汰。最近一个大神点醒了我：新出来的框架/库那么多，一个人精力也很有限，很容易在追新的道路上越来越累，也越来越迷茫。当你掌握了所有基础的东西之后，你就会发现新的东西无非就是在基础上面的拓展。这样在学习使用一个新的框架的时候，根据文档API很快就能上手。我觉得很有道理。</p>
+<a id="more"></a>
+<h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p>函数也是对象，是Function类型的实例，函数名实际上是一个指向函数对象的指针。</p>
+<p>1、一个函数可以有多个名字：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">num1, num2</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> num1 + num2;</div><div class="line">&#125;</div><div class="line"><span class="comment">//这与下面使用函数表达式定义函数的方式几乎相差无几。</span></div><div class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params">num1, num2</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> num1 + num2;</div><div class="line">&#125;;<span class="comment">//这个分号不能少，因为这是一个变量</span></div></pre></td></tr></table></figure>
+<p>2、函数是对象，函数名是指针：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">num1,num2</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> num1+num2;</div><div class="line">&#125;</div><div class="line">alert(sunm(<span class="number">10</span>,<span class="number">10</span>));<span class="comment">//20</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> anotherSum=sum;</div><div class="line">anotherSum(<span class="number">10</span>,<span class="number">10</span>);<span class="comment">//20</span></div><div class="line"></div><div class="line">sum=<span class="literal">null</span>;</div><div class="line">anotherSum(<span class="number">10</span>,<span class="number">10</span>);<span class="comment">//20</span></div><div class="line"><span class="comment">//即使将sum设置为null仍可以正常调用函数</span></div><div class="line"></div><div class="line"><span class="comment">//使用不带括号的函数名是访问函数指针，而非调用函数</span></div></pre></td></tr></table></figure>
+<p>3、函数可以作为参数传递给另一个函数：因为函数名本身就是一个变量，所以函数可以作为值来使用。还可以将一个函数作为另一个函数的结果返回。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">callSomeFunction</span>(<span class="params">someFunction,someArgument</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> someFunction(someArgument)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//使用：</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">num</span>)</span>&#123; <span class="keyword">return</span> num+<span class="number">10</span>&#125;</div><div class="line"><span class="keyword">var</span> result=callSomeFunction(add,<span class="number">10</span>);</div><div class="line">alert(result)<span class="comment">//20</span></div></pre></td></tr></table></figure>
+<p>4、函数内部属性：</p>
+<p>（1）在函数内部有两个特殊的对象：arguments和this，arguments是一个类数组对象，包含传入函数中的所有参数。arguments还有一个叫callee的属性，该属性是一个指针，指向拥有这个arguments对象的函数。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">//arguments.length是实参长度，函数名.length是形参</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">num</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(num&lt;=<span class="number">1</span>)&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span> num*factorial(num<span class="number">-1</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//解耦函数名可以替换成arguments.callee</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">num</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(num&lt;=<span class="number">1</span>)&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span> num*<span class="built_in">arguments</span>.callee(num<span class="number">-1</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>（2）函数对象的另一个属性是caller：这个属性保存着调用当前函数的函数的引用，如果是在全局作用域中调用当前函数，它的值为null。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    inner()</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">inner</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(inner.caller);<span class="comment">//inner.caller也可以用arguments.callee.caller替换来实现松耦合</span></div><div class="line">&#125;</div><div class="line">outer();<span class="comment">//得到 function outer()&#123;inner()&#125;，因为outer()调用了inner()，所以inner.caller就指向outer();</span></div></pre></td></tr></table></figure>
+<p>5、函数属性和方法：</p>
+<p>（1）每个函数都有两个属性：length和prototype</p>
+<blockquote>
+<p>length表示每个函数希望接收的命名参数的个数。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayName</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">	alert(name)</div><div class="line">&#125;</div><div class="line">alert(sayName.length);<span class="comment">//1,只有一个参数</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>prototype是保存所有实例方法的所在，即toString()和valueOf()等方法都是保存在prototype名下，只不过是通过各自对象的实例访问罢了。prototype属性不可枚举，不能通过for in 访问。</p>
+</blockquote>
+<p>（2）每个函数都有两个非继承而来的方法：call()和apply()，用途都是在特定的作用域中调用函数，实际上等于设置函数体内this对象的值。</p>
+<blockquote>
+<p>call()方法比较常用，接收两个参数，第一个参数是this，其余参数都直接传递给函数，即参数必须逐个列出来：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">num1,num2</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> num1+num2;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">callSum</span>(<span class="params">num1,num2</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> sum.call(<span class="keyword">this</span>,num1,num2)</div><div class="line">&#125;</div><div class="line">callSum(<span class="number">10</span>,<span class="number">10</span>);<span class="comment">//20</span></div></pre></td></tr></table></figure>
+<p>6、其他继承的方法如toString()、toLocaleString()、valueOf()都返回函数的代码。</p>
+<hr>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>JS中的作用域分为全局作用域、函数作用域和块级作用域（ES6新增）。作用域在定义一个函数时就确定好了，不会在执行中改变。</p>
+<blockquote>
+<p>全局作用域：在浏览器中是window，在node环境中是global。</p>
+<p>函数作用域：属于这个函数的全部变量都可以在整个函数范围内使用及复用。</p>
+<p>*块级作用域：现在是通过let和{}来实现。只在{}代码块内有效，也就不存在变量提升的问题。let和块级作用域还有一些特殊的地方需要注意，这里不再展开。</p>
+</blockquote>
+<p>作用域和执行上下文密不可分：</p>
+<ul>
+<li>执行上下文是一段程序运行所需要的最小数据的集合。</li>
+<li>作用域是当前上下文环境中，按照具体规则能够访问到的标识符（变量）的范围。</li>
+</ul>
+<p>变量和函数的优先级：</p>
+<blockquote>
+<p>函数是一等公民，所以函数声明会被提升到当前作用域顶端，再然后变量声明会提升，函数声明和变量声明冲突时会覆盖变量声明。变量的声明会提升但是赋值不会提升。</p>
+</blockquote>
+<p><strong>this</strong>：这是一个麻烦的东西。要记住，this只有执行时才可以确定指代的是谁，定义时是无法确认的。</p>
+<p>使用场景：</p>
+<ul>
+<li>作为构造函数调用（此时this指向新生成的对象）</li>
+<li>作为对象属性执行（此时this指向这个对象）</li>
+<li>作为普通函数执行（此时this指代全局）</li>
+<li>call/apply/bind（call用的较多，此时this指代call内部的参数，如果为空则指向全局）</li>
+</ul>
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> a=&#123;</div><div class="line">	<span class="attr">name</span>:<span class="string">'A'</span>,</div><div class="line">	<span class="attr">fn</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">a.fn();<span class="comment">//this===a</span></div><div class="line">a.fn.call(&#123;<span class="attr">name</span>:<span class="string">'B'</span>&#125;);<span class="comment">//this===&#123;name:'B'&#125;</span></div><div class="line"><span class="keyword">var</span> fn1=a.fn;</div><div class="line">fn1();<span class="comment">//this===window</span></div></pre></td></tr></table></figure>
+<hr>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>当函数可以记住并访问所在的作用域时，就产生了闭包，即使函数是在当前的作用域之外执行。</p>
+<blockquote>
+<p>闭包的作用：（1）从外部访问局部变量（2）将变量的值保存在内存中</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> n=<span class="number">100</span>;</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">inner</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(n);<span class="comment">//100</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> inner;<span class="comment">//将函数return出去即可实现从外部读取内部的变量</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> fn=outer();</div><div class="line">fn(<span class="number">101</span>);<span class="comment">//全局变量优先级低于局部变量</span></div></pre></td></tr></table></figure>
+<p>上面的代码，<code>inner()</code>的作用域能够访问<code>outer()</code>的内部作用域，然后<code>inner</code>所引用的函数对象被当做返回值传递到外部。<code>outer()</code>被执行后，其内部的返回值（也就是<code>inner()</code>函数）被赋值给变量fn，实际上是通过不同的标识符引用了内部的函数<code>inner()</code>。这就是<code>inner()</code>在自己定义的作用域之外的地方执行。</p>
+<p>JS的垃圾回收机制会销毁执行之后的函数内部作用域，但是由于闭包的存在，阻止了回收，因为被从外部调用了。这种从外部引用函数内部作用域的情况就叫闭包。</p>
+<p>不是例子的栗子：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(i)</div><div class="line">	&#125;,i*<span class="number">1000</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的循环运行结果是什么？是不是预期是每隔一秒log出0-9的数字，然而并不是，而是10个10。因为<code>setTimeout()</code>是一个异步方式执行的函数，它会在所有的循环之后才会执行，即使时间变为0（面试知识点，但别这么做~~）。那我再改进一下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="built_in">console</span>.log(i)</div><div class="line">		&#125;,i*<span class="number">1000</span>)</div><div class="line">	&#125;)()<span class="comment">//立即执行函数</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我立即执行，但是隔一秒出来了10个10，显然也不对。因为这个IIFE（立即执行函数的作用域是空的）。最后我们改进一下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</div><div class="line">		setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="built_in">console</span>.log(i)</div><div class="line">		&#125;,i*<span class="number">1000</span>)</div><div class="line">	&#125;)(i)<span class="comment">//立即执行函数</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这回才真正如你所愿。</p>
+<blockquote>
+<p>栈内存和堆内存：栈内存一般存储大小固定的数据，一般是值类型数据。堆内存一般存储大小不固定的数据，一般是引用类型数据。引用类型的指针一般存储在栈内存中。</p>
+<p>内存泄露：JS会在创建变量时自动分配内存，在不被使用时自动释放，这个过程称为垃圾回收。如果没有正常回收则为内存泄露。一般情况如下：</p>
+<ul>
+<li>意外创建的全局变量</li>
+<li>被遗忘的定时器setInterval或者回调函数</li>
+<li>闭包阻止内存回收</li>
+<li>DOM的引用（如果不用了要赋值为null）</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h3><ul>
+<li>所有的引用类型都有对象特性，即可自由扩展属性（null除外）。</li>
+<li>每个引用类型都有一个<code>__proto__</code>（隐式原型）属性，属性值是一个普通的对象。</li>
+<li>每个函数也都有一个<code>prototype</code>（显式原型）属性，属性值也是一个普通的对象。<blockquote>
+<p><code>prototype</code>的属性值指向函数的原型对象，这个原型对象又有一个<code>constructor</code>属性，这个属性包含一个指向<code>prototype</code>属性所在函数的指针。默认只有一个<code>constructor</code>属性，其他的属性和方法都是从Object继承而来。</p>
+</blockquote>
+</li>
+<li>所有的引用类型的<code>__proto__</code>指向它的构造函数的<code>prototype</code>属性值，即隐式原型===显式原型。<blockquote>
+<p>当调用构造函数创建一个实例后，实例内部包含一个<code>__proto__</code>属性，该属性的值指向构造函数的原型对象。即连接只存在于实例与构造函数的原型之间，而不是实例与构造函数之间。换句话说，<code>prototype</code>就是通过调用构造函数而创建的那个对象实例的原型对象。</p>
+</blockquote>
+</li>
+<li>当试图得到一个引用类型（或对象）的某个属性时，如果这个对象本身没有这个属性，那么会去它的<code>__proto__</code>（即它的构造函数的<code>prototype</code>）中查找。</li>
+</ul>
+<p><img src="http://on982w4kr.bkt.clouddn.com/%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1.jpeg" alt="理解原型对象"></p>
+<p>由上面最后一条引申出<strong>原型链</strong>：查找某个对象的属性或方法时，先从对象自身查找，找不到会往上到它的构造函数的原型<code>prototype</code>上查找，直到找到或者null。</p>
+<blockquote>
+<p>确定是本身的对象和方法还是原型上的，可以用isPropertyOf()</p>
+</blockquote>
+<p><strong>继承</strong></p>
+<p>JS的继承主要是依靠原型链来实现的，基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法。</p>
+<p>继承分为两种情况，构造函数的继承和普通对象的继承（即创建一个新的对象）。</p>
+<p>1、通过new来实现继承（构造函数）——有缺陷</p>
+<blockquote>
+<p>每个构造函数都有一个原型对象，原型对象都有一个指向构造函数的指针，new出来的实例都有一个指向原型对象的内部指针。<br>new出来的对象<code>obj.__proto__</code>指向构造函数<code>Obj.prototype</code>，构造函数<code>Obj.prototype.__proto__</code>指向<code>Object.prototype</code>，同时构造函数<code>Obj.prototype</code>还自带一个<code>construcor</code>属性指向构造函数Obj本身。</p>
+</blockquote>
+<p>new操作符的作用：</p>
+<blockquote>
+<ol>
+<li>创建一个新对象</li>
+<li>将构造函数的作用域赋给新对象（因此this就指向了新对象）</li>
+<li>执行构造函数中的代码（为这个对象添加属性）</li>
+<li>返回新对象</li>
+</ol>
+</blockquote>
+<p><strong>注意</strong>：new出来的不同实例上的同名方法不是同一个Function的实例</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">age,name</span>)</span>&#123;</div><div class="line">	<span class="keyword">this</span>.age=age,</div><div class="line">	<span class="keyword">this</span>.name=name,</div><div class="line">	<span class="keyword">this</span>.sayName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		alert(<span class="keyword">this</span>.name)</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//可以写成如下形式：</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">age,name</span>)</span>&#123;</div><div class="line">	<span class="keyword">this</span>.age=age,</div><div class="line">	<span class="keyword">this</span>.name=name,</div><div class="line">	<span class="keyword">this</span>.sayName=<span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">'alert(this.name)'</span>);<span class="comment">//逻辑上是等价的</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//可以通过如下方法判断：</span></div><div class="line">person1.sayName==person2.sayName;<span class="comment">//false</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>因为new出来的实例不能共享原型的属性和方法，无法达到复用。</p>
+</blockquote>
+<p>2、原型链继承——有缺陷，看例子</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">this</span>.colors=[<span class="string">'red'</span>,<span class="string">'green'</span>]</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line"></div><div class="line">SubType.prototype=<span class="keyword">new</span> SuperType();<span class="comment">//继承</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> instance1=<span class="keyword">new</span> SubType();</div><div class="line"></div><div class="line">instance1.colors.push(<span class="string">'black'</span>);</div><div class="line">alert(instance1.colors);<span class="comment">//'red,green,black'</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> instance2=<span class="keyword">new</span> SubType();</div><div class="line">alert(instance2.colors)<span class="comment">//'red,green,black'</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>修改一个实例的属性会导致所有的实例属性都被改变。同时也不能向父类传递参数。</p>
+</blockquote>
+<p>3、组合式继承：使用原型链实现对原型属性和方法的继承，然后通过借用构造函数实现对实例属性的继承，还可以通过<code>call()</code>来传递参数——这是最常用的方法。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">	<span class="keyword">this</span>.name=name;</div><div class="line">	<span class="keyword">this</span>.colors=[<span class="string">'red'</span>,<span class="string">'green'</span>];</div><div class="line">&#125;</div><div class="line">SuperType.prototype.sayName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	alert(<span class="keyword">this</span>.name)</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">	SuperType.call(<span class="keyword">this</span>.name);<span class="comment">//继承属性且传递了一个name参数，第二次调用超类型</span></div><div class="line">	<span class="keyword">this</span>.age=age;</div><div class="line">&#125;</div><div class="line"><span class="comment">//继承方法：</span></div><div class="line">SubType.prototype=<span class="keyword">new</span> SuperType();<span class="comment">//第一次调用超类型，SubType已经得到超类型的属性</span></div><div class="line">SubType.prototype.constructor=SubType;</div><div class="line">SubType.prototype.sayAge=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	alert(<span class="keyword">this</span>.age);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> instance1=<span class="keyword">new</span> SubType(<span class="string">'Apple'</span>,<span class="string">'10'</span>);<span class="comment">//这次又将属性实例化一次，只不过是屏蔽了原型中的同名属性。</span></div><div class="line"></div><div class="line">instance1.colors.push(<span class="string">'black'</span>);<span class="comment">//这回就不会影响其他实例了</span></div><div class="line">alert(instance1.colors);<span class="comment">//'red,green,black'</span></div><div class="line">instance1.sayName();<span class="comment">//Apple</span></div><div class="line">instance1.sayAge();<span class="comment">//10</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>这个方法避免了单独使用原型链和构造函数的缺陷，是较常用的实现继承的方式。但是同样不完美，需要调用两次超类型构造函数，一次是创建子类型原型的时候，一次是在子类型内部。</p>
+</blockquote>
+<p><img src="http://on982w4kr.bkt.clouddn.com/%E7%BB%84%E5%90%88%E5%BC%8F%E7%BB%A7%E6%89%BF%E7%9A%84%E7%BC%BA%E9%99%B7.jpeg" alt="组合式继承的缺陷"></p>
+<p>4、原型式继承：ES5通过<code>Object.create()</code>方法规范化了原型式继承——类似浅拷贝创建了一个副本，但是同样有缺陷</p>
+<blockquote>
+<p><code>Object.create()</code>第一个参数用作新对象原型的对象，第二个参数为新对象定义额外属性的对象。</p>
+</blockquote>
+<p>只有一个参数：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">'apple'</span>,</div><div class="line">    <span class="attr">age</span>: <span class="number">10</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> obj1=<span class="built_in">Object</span>.create(obj);</div><div class="line">obj1;<span class="comment">//此时obj1.__proto__=&#123;name:'apple',age:10&#125;</span></div></pre></td></tr></table></figure>
+<p>有第二个参数：可覆盖原来的属性值，也可添加新的属性值</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">'apple'</span>,</div><div class="line">    <span class="attr">age</span>: <span class="number">10</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> obj1=<span class="built_in">Object</span>.create(obj,&#123;</div><div class="line">	<span class="attr">age</span>:&#123;</div><div class="line">		<span class="attr">value</span>:<span class="number">12</span></div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line">obj1;<span class="comment">//此时obj1=&#123;age:12&#125;,obj1.__proto__=&#123;name:'apple'&#125;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>包含引用类型值的属性始终都会共享相应的值</p>
+</blockquote>
+<p>5、寄生式继承——略，不推荐。</p>
+<p>6、寄生组合式继承——完美继承</p>
+<blockquote>
+<p>通过借用构造函数来继承属性，通过原型链的混成形式来继承方法。基本思路是：不必为了指定子类型的原型而调用超类型的构造函数，我们所需的无非就是超类型原型的一个副本而已。本质上就是使用寄生式继承来继承超类型的原型，然后再将结果指定给子类型的原型。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Parent.prototype.play = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params">name, age</span>) </span>&#123;</div><div class="line">    Parent.call(<span class="keyword">this</span>, name);</div><div class="line">    <span class="keyword">this</span>.age = age;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Child.prototype = <span class="built_in">Object</span>.create(Parent.prototype);</div><div class="line"></div><div class="line"><span class="keyword">var</span> t=<span class="keyword">new</span> Child(<span class="string">'Apple'</span>,<span class="number">10</span>);</div><div class="line">t.play();<span class="comment">//Apple</span></div></pre></td></tr></table></figure>
+<p>参考：<br>（1）《JavaScript高级程序设计（第三版）》<br>（2）<a href="https://segmentfault.com/a/1190000002440502" target="_blank" rel="external">JavaScript继承方式详解</a><br>（3）<a href="http://www.cnblogs.com/wangfupeng1988/p/4001284.html" target="_blank" rel="external">深入理解javascript原型和闭包系列
+</a><br>（4）<a href="https://www.imooc.com/learn/277" target="_blank" rel="external">JavaScript深入浅出</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/30/一次搞定作用域闭包和原型/" data-id="cjanzy7ue0011q90wa5sba50i" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/作用域/">作用域</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原型/">原型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础/">基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/闭包/">闭包</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/01/ES6简单使用介绍/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ES6简单使用介绍
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/23/WEB安全——了解XSS和CSRF攻击/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">WEB安全——了解XSS和CSRF攻击</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular/" style="font-size: 13.33px;">Angular</a> <a href="/tags/BEM/" style="font-size: 16.67px;">BEM</a> <a href="/tags/CSRF/" style="font-size: 10px;">CSRF</a> <a href="/tags/ES6/" style="font-size: 20px;">ES6</a> <a href="/tags/Express/" style="font-size: 10px;">Express</a> <a href="/tags/FormData/" style="font-size: 10px;">FormData</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Mongoose/" style="font-size: 10px;">Mongoose</a> <a href="/tags/SPA/" style="font-size: 13.33px;">SPA</a> <a href="/tags/Sketch/" style="font-size: 10px;">Sketch</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/WEB安全/" style="font-size: 10px;">WEB安全</a> <a href="/tags/XSS/" style="font-size: 10px;">XSS</a> <a href="/tags/base64/" style="font-size: 10px;">base64</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/postcss/" style="font-size: 13.33px;">postcss</a> <a href="/tags/scss/" style="font-size: 16.67px;">scss</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time/" style="font-size: 10px;">time</a> <a href="/tags/vue/" style="font-size: 13.33px;">vue</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a> <a href="/tags/作用域/" style="font-size: 10px;">作用域</a> <a href="/tags/切图/" style="font-size: 10px;">切图</a> <a href="/tags/前端路由/" style="font-size: 10px;">前端路由</a> <a href="/tags/单页面应用/" style="font-size: 13.33px;">单页面应用</a> <a href="/tags/原型/" style="font-size: 10px;">原型</a> <a href="/tags/图片上传/" style="font-size: 10px;">图片上传</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/基础知识/" style="font-size: 16.67px;">基础知识</a> <a href="/tags/娱乐休闲/" style="font-size: 10px;">娱乐休闲</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/小程序/" style="font-size: 10px;">小程序</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/愿望清单/" style="font-size: 10px;">愿望清单</a> <a href="/tags/提升自我/" style="font-size: 10px;">提升自我</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a> <a href="/tags/谈判技巧/" style="font-size: 10px;">谈判技巧</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/01/ES6简单使用介绍/">ES6简单使用介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/30/一次搞定作用域闭包和原型/">一次搞定作用域闭包和原型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/23/WEB安全——了解XSS和CSRF攻击/">WEB安全——了解XSS和CSRF攻击</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/17/解决回调地狱——Promise的使用/">解决回调地狱——Promise的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/17/JavaScript异步操作进化史/">JavaScript异步操作进化史</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <div class="widget-wrap">
+	<h3 class="widget-title">友情链接</h3> 
+	<div class="widget"> 
+		<ul> 
+			<li><a href="https://github.com/acelibin" title="itmyhome">github</a></li> 
+			<li><a href="https://segmentfault.com/u/libinlibin" title="itmyhome">segmentfault</a></li> 
+		</ul> 
+	</div>
+</div>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 libin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
