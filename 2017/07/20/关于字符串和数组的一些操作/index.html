@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="字符串和数组是两个很常用的数据类型了，也有很多操作方法，但是一不小心总会将这两种操作方法弄混/手动捂脸
 最近看了下 ES6，里面有一些很好用的方法，在这里也一并总结一下。">
-<meta property="og:updated_time" content="2017-11-29T02:36:26.000Z">
+<meta property="og:updated_time" content="2017-12-04T09:22:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于字符串和数组的一些操作">
 <meta name="twitter:description" content="字符串和数组是两个很常用的数据类型了，也有很多操作方法，但是一不小心总会将这两种操作方法弄混/手动捂脸
@@ -95,13 +95,13 @@
         <p>字符串和数组是两个很常用的数据类型了，也有很多操作方法，但是一不小心总会将这两种操作方法弄混/手动捂脸</p>
 <p>最近看了下 ES6，里面有一些很好用的方法，在这里也一并总结一下。</p>
 <a id="more"></a>
-<h3 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var arr=[];</div><div class="line">//或者</div><div class="line">var arr= new Array()</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var a=&quot;新闻&quot;;</div></pre></td></tr></table></figure>
+<h3 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h3><figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr=[];</div><div class="line"><span class="comment">//或者</span></div><div class="line"><span class="keyword">var</span> arr= <span class="keyword">new</span> <span class="built_in">Array</span>()</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> a=<span class="string">"新闻"</span>;</div></pre></td></tr></table></figure>
 <p>赋值：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var arr= new Array();//可以直接用数字约定数组长度，var arr= new Array(2);表示只有两个元素</div><div class="line">arr[0]=&quot;新闻&quot;;</div><div class="line">arr[1]=&quot;直播&quot;;</div><div class="line">//或者</div><div class="line">var arr=new Array(&quot;新闻&quot;,&quot;直播&quot;);</div></pre></td></tr></table></figure>
-<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">console.log(arr[1]);//索引从0开始</div></pre></td></tr></table></figure>
-<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">arr[1]=&quot;微博&quot;;//直接赋值即可覆盖</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">var a=&quot;新闻&quot;; var a=&quot;微博&quot;; //直接赋值新的会代替旧的值</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> arr= <span class="keyword">new</span> <span class="built_in">Array</span>();<span class="comment">//可以直接用数字约定数组长度，var arr= new Array(2);表示只有两个元素</span></div><div class="line">arr[<span class="number">0</span>]=<span class="string">"新闻"</span>;</div><div class="line">arr[<span class="number">1</span>]=<span class="string">"直播"</span>;</div><div class="line"><span class="comment">//或者</span></div><div class="line"><span class="keyword">var</span> arr=<span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">"新闻"</span>,<span class="string">"直播"</span>);</div></pre></td></tr></table></figure>
+<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(arr[<span class="number">1</span>]);<span class="comment">//索引从0开始</span></div></pre></td></tr></table></figure>
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><figure class="highlight js"><table><tr><td class="code"><pre><div class="line">arr[<span class="number">1</span>]=<span class="string">"微博"</span>;<span class="comment">//直接赋值即可覆盖</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> a=<span class="string">"新闻"</span>; <span class="keyword">var</span> a=<span class="string">"微博"</span>; <span class="comment">//直接赋值新的会代替旧的值</span></div></pre></td></tr></table></figure>
 <h3 id="数组方法"><a href="#数组方法" class="headerlink" title="数组方法"></a>数组方法</h3><table>
 <thead>
 <tr>
@@ -215,7 +215,15 @@
 <blockquote>
 <p>从 separator 处分割，取 number 个</p>
 </blockquote>
-<h2 id="捂脸"><a href="#捂脸" class="headerlink" title="捂脸"></a>捂脸</h2><p>好像没什么干货啊，没什么总结的，就酱。</p>
+<p><strong>ES6新增方法：</strong></p>
+<ul>
+<li>includes()判断字符串（数组）是否含有某一字符串（值），返回true或者false；</li>
+<li>startsWith()判断是否以某一字符串开头</li>
+<li>endsWith()判断是否以某一字符串结尾</li>
+<li>repeat(n)将字符串重复n次</li>
+</ul>
+<p><strong>常用</strong></p>
+<p>字符串模板：一般用于表示多行字符串，使用两个``符号表示，如果包含变量，则将变量写在<code>${}</code>中</p>
 
       
     </div>
