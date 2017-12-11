@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/04/git使用及操作/index.html">
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="其实用git也是很久了，刚入行就在github安家，靠着各路大神的教程，也能够配合github客户端更新自己的站点。第一家公司使用SVN，用的也算得心应手，但是每隔一段时间，总会有人把别人的代码或者文件覆盖了的情况，而且有时SVN出现问题就只能干等着了。上家公司只有我一个前端和一个Java后端，前后端完全分离，提交代码通过一个shell脚本直接就可以发布到git仓库了，没有分支的概念，全都是我自己">
-<meta property="og:updated_time" content="2017-02-18T14:36:57.000Z">
+<meta property="og:updated_time" content="2017-12-11T03:36:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git及SourceTree的使用">
 <meta name="twitter:description" content="其实用git也是很久了，刚入行就在github安家，靠着各路大神的教程，也能够配合github客户端更新自己的站点。第一家公司使用SVN，用的也算得心应手，但是每隔一段时间，总会有人把别人的代码或者文件覆盖了的情况，而且有时SVN出现问题就只能干等着了。上家公司只有我一个前端和一个Java后端，前后端完全分离，提交代码通过一个shell脚本直接就可以发布到git仓库了，没有分支的概念，全都是我自己">
@@ -69,6 +69,10 @@
   <time datetime="2017-02-04T13:58:08.000Z" itemprop="datePublished">2017-02-04</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/其它/">其它</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -90,28 +94,38 @@
 <a id="more"></a>
 <p>新公司是需要每个人建立自己的分支，然后交给大牛review一下再由他负责合并到<code>master</code>上面。但是因为已经有了我的两次直接<code>push</code>，一下子慌了，不知道要怎么处理了（遇事就慌的毛病是改不掉了- -）。</p>
 <p>老子说：慌鸡巴毛。静下心来想了想，先在git仓库里找到我push之前的commit id，然后在线建立自己的分支，再然后删掉本地分支，从远程仓库fetch一份到本地，这样事情就解决了，so easy!</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1、找到远程仓库需要分支的地方的commitID，在此处在线建立分支，输入分支名称和commit id即可。</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">2、删掉本地分支：</div><div class="line">git checkout dev  //切换到本地分支</div><div class="line">git checkout -d dev  //删掉本地分支</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">3、fetch远程分支到本地：</div><div class="line">git fetch origin dev:dev  //会自动在本地新建分支</div></pre></td></tr></table></figure>
+<ol>
+<li>找到远程仓库需要分支的地方的commitID，在此处在线建立分支，输入分支名称和commit id即可。</li>
+<li>删掉本地分支：<br>git checkout dev  //切换到本地分支<br>git checkout -d dev  //删掉本地分支</li>
+<li>fetch远程分支到本地：<br>git fetch origin dev:dev  //会自动在本地新建分支</li>
+</ol>
 <p>吃一堑长一智，举一反三，所以，多人协作的正确流程就应该是：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">每个人拉取一份分支到本地干活，然后add修改的具体文件，然后commit然  </div><div class="line">后push到远程分支，在远程仓库下发起一个合并请求，大牛review合格了  </div><div class="line">就会给你合并，over。</div></pre></td></tr></table></figure>
+<blockquote>
+<p>每个人拉取一份分支到本地干活，然后add修改的具体文件，然后commit然后push到远程分支，在远程仓库下发起一个合并请求，大牛review合格了就会给你合并，over。</p>
+</blockquote>
 <p>代码表示就是：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1、git checkout dev  //切换到本地分支</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">2、git add &lt;file&gt;  //最好是具体文件，防止把没改完的也提交上去</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">3、git commit -m &quot;提交说明&quot;  //最好要有说明</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">4、git push origin dev  //提交到远程分支</div></pre></td></tr></table></figure>
-<p>一些git常用代码：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git init  //初始化本地仓库，把当前目录当成git仓库</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git status //查看状态</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git log  //查看提交日志</div><div class="line">git log --pertty=oneline  //单行显示</div><div class="line">git relog  //命令历史记录</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git reset --hard &lt;commit id&gt;  //版本回退，commit id写前几位即可</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git diff &lt;filename&gt;  //查看上次提交的修改内容</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout -- readme.txt  //撤销工作区的修改</div><div class="line">git reset HEAD readme.txt  //撤销暂存区的修改</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git rm &lt;filename&gt;  //删除仓库文件</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git checkout -b dev  //创建并切换到dev分支</div><div class="line">相当于：</div><div class="line">git branch dev  //创建dev分支</div><div class="line">git checkout dev  //切换到dev分支</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git branch  //查看所有分支</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git merge dev  //合并分支到master（丢掉分支历史信息）</div><div class="line">git merge --no-off  //保存分支历史信息</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git branch -d dev  //删除分支</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1、git checkout dev  //切换到本地分支</div><div class="line">2、git add &lt;file&gt;  //最好是具体文件，防止把没改完的也提交上去</div><div class="line">3、git commit -m &quot;提交说明&quot;  //最好要有说明</div><div class="line">4、git push origin dev  //提交到远程分支</div></pre></td></tr></table></figure>
+<p>一些git常用操作：</p>
+<ul>
+<li><code>git init</code> 初始化本地仓库，把当前目录当成git仓库</li>
+<li><code>git status</code> 查看状态</li>
+<li><code>git log</code> 查看提交日志</li>
+<li><code>git log --pertty=oneline</code> 单行显示</li>
+<li><code>git relog</code> 命令历史记录</li>
+<li><code>git reset --hard &lt;commit id&gt;</code> 版本回退，commit id写前几位即可</li>
+<li><code>git diff &lt;filename&gt;</code> 查看上次提交的修改内容</li>
+<li><code>git checkout -- readme.txt</code> 撤销工作区的修改</li>
+<li><code>git reset HEAD readme.txt</code> 撤销暂存区的修改</li>
+<li><code>git rm &lt;filename&gt;</code> 删除仓库文件</li>
+<li><code>git checkout -b dev</code> 创建并切换到dev分支<blockquote>
+<p>相当于：<br><code>git branch dev</code> 创建dev分支<br><code>git checkout dev</code> 切换到dev分支</p>
+</blockquote>
+</li>
+<li><code>git branch</code> 查看所有分支</li>
+<li><code>git merge dev</code> 合并分支到master（丢掉分支历史信息）</li>
+<li><code>git merge --no-off</code> 保存分支历史信息</li>
+<li><code>git branch -d dev</code> 删除分支</li>
+</ul>
 <h3 id="SourceTree的使用"><a href="#SourceTree的使用" class="headerlink" title="SourceTree的使用"></a>SourceTree的使用</h3><p>以前自己用github客户端也是得心应手，偶尔用一下命令行也是很简单的操作，没有遇到过什么问题。项目复杂一些，需要多人合作，而且要正规的操作，所以再也不能胡来了。于是乎就看中了SourceTree这个神器，简单易用的界面，可以直接看出来代码的变化，用上手了就离不开了，大赞！</p>
 <p>既然是GUI的工具，使用起来也是很简单的：</p>
 <ol>
@@ -140,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/04/git使用及操作/" data-id="cjarrfxvi000lc00wuicw3f0b" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2017/02/04/git使用及操作/" data-id="cjb1mk555000jiy0w20obt49e" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svn/">svn</a></li></ul>
@@ -179,7 +193,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端学习/">前端学习</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES-TS/">ES/TS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NodeJS/">NodeJS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其它/">其它</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识/">基础知识</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架-库/">框架/库</a><span class="category-list-count">5</span></li></ul>
     </div>
   </div>
 
@@ -189,7 +203,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Angular/" style="font-size: 13.33px;">Angular</a> <a href="/tags/BEM/" style="font-size: 16.67px;">BEM</a> <a href="/tags/CSRF/" style="font-size: 10px;">CSRF</a> <a href="/tags/ES6/" style="font-size: 20px;">ES6</a> <a href="/tags/Express/" style="font-size: 10px;">Express</a> <a href="/tags/FormData/" style="font-size: 10px;">FormData</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Mongoose/" style="font-size: 10px;">Mongoose</a> <a href="/tags/SPA/" style="font-size: 13.33px;">SPA</a> <a href="/tags/Sketch/" style="font-size: 10px;">Sketch</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/WEB安全/" style="font-size: 10px;">WEB安全</a> <a href="/tags/XSS/" style="font-size: 10px;">XSS</a> <a href="/tags/base64/" style="font-size: 10px;">base64</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/postcss/" style="font-size: 13.33px;">postcss</a> <a href="/tags/scss/" style="font-size: 16.67px;">scss</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time/" style="font-size: 10px;">time</a> <a href="/tags/vue/" style="font-size: 13.33px;">vue</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a> <a href="/tags/作用域/" style="font-size: 10px;">作用域</a> <a href="/tags/切图/" style="font-size: 10px;">切图</a> <a href="/tags/前端路由/" style="font-size: 10px;">前端路由</a> <a href="/tags/单页面应用/" style="font-size: 13.33px;">单页面应用</a> <a href="/tags/原型/" style="font-size: 10px;">原型</a> <a href="/tags/图片上传/" style="font-size: 10px;">图片上传</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/基础知识/" style="font-size: 16.67px;">基础知识</a> <a href="/tags/娱乐休闲/" style="font-size: 10px;">娱乐休闲</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/小程序/" style="font-size: 10px;">小程序</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/愿望清单/" style="font-size: 10px;">愿望清单</a> <a href="/tags/提升自我/" style="font-size: 10px;">提升自我</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/读书/" style="font-size: 10px;">读书</a> <a href="/tags/谈判技巧/" style="font-size: 10px;">谈判技巧</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+      <a href="/tags/Angular/" style="font-size: 13.33px;">Angular</a> <a href="/tags/BEM/" style="font-size: 16.67px;">BEM</a> <a href="/tags/CSRF/" style="font-size: 10px;">CSRF</a> <a href="/tags/ES6/" style="font-size: 20px;">ES6</a> <a href="/tags/Express/" style="font-size: 10px;">Express</a> <a href="/tags/FormData/" style="font-size: 10px;">FormData</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Mongoose/" style="font-size: 10px;">Mongoose</a> <a href="/tags/SPA/" style="font-size: 13.33px;">SPA</a> <a href="/tags/Sketch/" style="font-size: 10px;">Sketch</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/WEB安全/" style="font-size: 10px;">WEB安全</a> <a href="/tags/XSS/" style="font-size: 10px;">XSS</a> <a href="/tags/base64/" style="font-size: 10px;">base64</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/postcss/" style="font-size: 13.33px;">postcss</a> <a href="/tags/scss/" style="font-size: 16.67px;">scss</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time/" style="font-size: 10px;">time</a> <a href="/tags/vue/" style="font-size: 13.33px;">vue</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a> <a href="/tags/作用域/" style="font-size: 10px;">作用域</a> <a href="/tags/切图/" style="font-size: 10px;">切图</a> <a href="/tags/前端路由/" style="font-size: 10px;">前端路由</a> <a href="/tags/单页面应用/" style="font-size: 13.33px;">单页面应用</a> <a href="/tags/原型/" style="font-size: 10px;">原型</a> <a href="/tags/图片上传/" style="font-size: 10px;">图片上传</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/基础知识/" style="font-size: 16.67px;">基础知识</a> <a href="/tags/小程序/" style="font-size: 10px;">小程序</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/技巧/" style="font-size: 10px;">技巧</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/目标/" style="font-size: 10px;">目标</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/组件/" style="font-size: 10px;">组件</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
     </div>
   </div>
 
@@ -198,7 +212,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -209,6 +223,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/12/10/原来这就是-封装Vue组价/">原来这就是[封装Vue组件]</a>
+          </li>
         
           <li>
             <a href="/2017/12/04/ES6简单使用介绍/">ES6简单使用介绍</a>
@@ -224,10 +242,6 @@
         
           <li>
             <a href="/2017/11/16/import和export的使用/">import和export的使用</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/06/正则表达式快用快查/">正则表达式快用快查</a>
           </li>
         
       </ul>
