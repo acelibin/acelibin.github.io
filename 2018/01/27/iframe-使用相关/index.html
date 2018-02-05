@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/27/iframe-使用相关/index.html">
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="一直有个认知就是最好不要用iframe，这么多年也没用过几次。最近一个项目因为一些原因需要用到这个，而且需要实现父子页面间互相通信，这可难住宝宝了。好在办法总比困难多，最后用一种不友好的方式解决了。">
-<meta property="og:updated_time" content="2018-01-27T10:18:29.000Z">
+<meta property="og:updated_time" content="2018-02-05T14:15:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iframe 使用相关">
 <meta name="twitter:description" content="一直有个认知就是最好不要用iframe，这么多年也没用过几次。最近一个项目因为一些原因需要用到这个，而且需要实现父子页面间互相通信，这可难住宝宝了。好在办法总比困难多，最后用一种不友好的方式解决了。">
@@ -98,12 +98,15 @@
 <p>槽点就是当用户真的答完题了，我也这么提示，就显得一点不友好了，体验太差了。</p>
 <h3 id="认识iframe"><a href="#认识iframe" class="headerlink" title="认识iframe"></a>认识iframe</h3><p>iframe具有自己的属性和方法，主要如下：</p>
 <blockquote>
-<p>frameborder 边框，默认为1，0表示无边框<br>height/width 宽高，单位是px<br>marginheight/marginwidth 框架内容到框架的边距，单位是px<br>name 框架的名称<br>src 嵌套页面的URL地址</p>
+<p>frameborder 边框，默认为1，0表示无边框（设为0可以取消内部滚动条）<br>height/width 宽高，单位是px<br>marginheight/marginwidth 框架内容到框架的边距，单位是px<br>name 框架的名称<br>src 嵌套页面的URL地址<br>scrolling 是否允许滚动</p>
 </blockquote>
-<p>脚本：</p>
+<p>获取iframe内部的内容：</p>
 <blockquote>
-<p>contentWindow 访问iframe元素所包含的HTML页面的window对象<br>contentDocument 访问iframe元素所包含的HTML页面的document对象<br>window.parent 从框架中引用它的父框架的window</p>
+<p>contentWindow 访问iframe元素所包含的HTML页面的window对象<br>contentDocument 访问iframe元素所包含的HTML页面的document对象<br>window.frames[‘name’]</p>
+<p>window.parent 从框架中引用它的父框架的window<br>window.top 最顶级容器的window对象</p>
 </blockquote>
+<p><strong> 防止自己的网页被别人当成iframe加载 </strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="built_in">window</span>!=<span class="built_in">window</span>.top)&#123;</div><div class="line">	<span class="built_in">window</span>.top.location.href=correctUrl;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <hr>
 <h3 id="大杀器-postMessage"><a href="#大杀器-postMessage" class="headerlink" title="大杀器:postMessage"></a>大杀器:postMessage</h3><p>记得是有这么个东西，但是一直没细看是怎么用的。抽出空来的时候看了下一个前辈写的教程 <a href="https://www.cnblogs.com/dolphinX/p/3464056.html" target="_blank" rel="external">《html5 postMessage解决跨域、跨窗口消息传递》</a>，讲解的很详细，还有非常好的demo，真是贴心。</p>
 <p>试了一下，连360浏览器的兼容模式下[IE11]都可以正常关闭弹窗，棒棒哒。</p>
@@ -140,6 +143,7 @@
 <ul>
 <li><a href="https://www.cnblogs.com/dolphinX/p/3464056.html" target="_blank" rel="external">html5 postMessage解决跨域、跨窗口消息传递</a></li>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage" target="_blank" rel="external">MDN：window.postMessage</a></li>
+<li><a href="https://segmentfault.com/a/1190000004502619" target="_blank" rel="external">iframe,我们来谈一谈</a></li>
 </ul>
 
       
