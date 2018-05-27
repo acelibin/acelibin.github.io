@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>微信授权相关 | acelibin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="微信现在是越发的强大了，小程序也是越来越强悍，但是回想起来自己第一次接触微信授权相关的时候，一头雾水不知从何做起。现在已经写了好多需要微信授权登录的页面，所以来总结一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信授权相关">
+<meta property="og:url" content="http://yoursite.com/2018/05/27/微信授权相关/index.html">
+<meta property="og:site_name" content="acelibin">
+<meta property="og:description" content="微信现在是越发的强大了，小程序也是越来越强悍，但是回想起来自己第一次接触微信授权相关的时候，一头雾水不知从何做起。现在已经写了好多需要微信授权登录的页面，所以来总结一下。">
+<meta property="og:updated_time" content="2018-05-27T06:37:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信授权相关">
+<meta name="twitter:description" content="微信现在是越发的强大了，小程序也是越来越强悍，但是回想起来自己第一次接触微信授权相关的时候，一头雾水不知从何做起。现在已经写了好多需要微信授权登录的页面，所以来总结一下。">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">acelibin</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">格物致知</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-微信授权相关" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/27/微信授权相关/" class="article-date">
+  <time datetime="2018-05-27T05:35:35.000Z" itemprop="datePublished">2018-05-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/微信/">微信</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      微信授权相关
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>微信现在是越发的强大了，小程序也是越来越强悍，但是回想起来自己第一次接触微信授权相关的时候，一头雾水不知从何做起。现在已经写了好多需要微信授权登录的页面，所以来总结一下。</p>
+<a id="more"></a>
+<h3 id="简单H5跳转授权登录"><a href="#简单H5跳转授权登录" class="headerlink" title="简单H5跳转授权登录"></a>简单H5跳转授权登录</h3><hr>
+<blockquote>
+<p>这个其实主要是后端同学的工作，后端给一个带授权的链接，前端只需要在页面跳转的时候用这个链接即可实现：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="built_in">window</span>.location.href=<span class="string">'https://resource.url.com/wxRedirect/?url=https://open.weixin.qq.com/connect/oauth2/authorize?appid='</span>+你的appid+<span class="string">'&amp;redirect_uri=https://pay.url.com/v1/wechat/url_callback.htm&amp;response_type=code&amp;scope=snsapi_base&amp;state=1#wechat_redirect'</span></div></pre></td></tr></table></figure>
+<h3 id="微信H5页面分享"><a href="#微信H5页面分享" class="headerlink" title="微信H5页面分享"></a>微信H5页面分享</h3><hr>
+<blockquote>
+<p>这个主要是引用相关文件，然后写好分享信息即可。当然还是需要后端同学的配合。在很多不同页面中分享时，在config部分的信息基本保持不变，变化的主要是ready部分的分享信息。</p>
+</blockquote>
+<ul>
+<li>在需要调用JS接口的页面引入JS文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">http(s)://res.wx.qq.com/open/js/jweixin-1.2.0.js</div></pre></td></tr></table></figure>
+<ul>
+<li>通过config接口注入权限验证配置（先判断是不是微信UA）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> ua = <span class="built_in">window</span>.navigator.userAgent.toLowerCase();</div><div class="line"><span class="keyword">if</span> (ua.match(<span class="regexp">/MicroMessenger/i</span>) == <span class="string">'micromessenger'</span>) &#123;</div><div class="line">    $.ajax(&#123;</div><div class="line">        <span class="attr">type</span>: <span class="string">'get'</span>,</div><div class="line">        <span class="attr">url</span>: <span class="string">'https://h5.url.com/v1/h5_share/query/signature_jsonp.htm'</span>, <span class="comment">//这个是通用的，基本所有与该公众号相关的页面都用这同一个接口</span></div><div class="line">        dataType: <span class="string">'jsonp'</span>,</div><div class="line">        <span class="attr">data</span>: &#123;</div><div class="line">            <span class="attr">url</span>: location.href.split(<span class="string">'#'</span>)[<span class="number">0</span>],</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (data.returnCode == <span class="number">0</span>) &#123;</div><div class="line">                wx.config(&#123;</div><div class="line">                    <span class="attr">debug</span>: <span class="literal">false</span>, <span class="comment">// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。</span></div><div class="line">                    appId: 你的appId,</div><div class="line">                    <span class="attr">timestamp</span>: data.data.timestamp, <span class="comment">// 必填，生成签名的时间戳</span></div><div class="line">                    nonceStr: data.data.noncestr, <span class="comment">// 必填，生成签名的随机串</span></div><div class="line">                    signature: data.data.sign, <span class="comment">// 必填，签名，见附录1</span></div><div class="line">                    jsApiList: [<span class="string">'onMenuShareAppMessage'</span>, <span class="string">'onMenuShareTimeline'</span>, <span class="string">'onMenuShareQQ'</span>, <span class="string">'onMenuShareWeibo'</span>, <span class="string">'onMenuShareQZone'</span>, <span class="string">'chooseImage'</span>, <span class="string">'uploadImage'</span>, <span class="string">'startRecord'</span>, <span class="string">'stopRecord'</span>, <span class="string">'onVoiceRecordEnd'</span>, <span class="string">'playVoice'</span>, <span class="string">'onVoicePlayEnd'</span>, <span class="string">'pauseVoice'</span>, <span class="string">'stopVoice'</span>, <span class="string">'uploadVoice'</span>, <span class="string">'downloadVoice'</span>] <span class="comment">// 必填，需要使用的JS接口列表，所有JS接口列表见附录2</span></div><div class="line">                &#125;);</div><div class="line"></div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                alert(<span class="string">"接口异常"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            alert(<span class="string">"网络异常"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>通过ready接口处理</li>
+</ul>
+<blockquote>
+<p>特殊需求：带有私密信息的页面是不可以分享的，此时就需要禁掉点击页面右上角调出分享按钮。此时需要设置：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">wx.ready(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">	wx.hideAllNonBaseMenuItem();</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>一般普通设置如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> title = <span class="string">"分享标题"</span>;</div><div class="line"><span class="keyword">var</span> desc = <span class="string">"分享文案"</span>;</div><div class="line"><span class="keyword">var</span> links = <span class="string">"点击时打开的链接，可以是跳转授权接口，也可以是普通页面地址"</span>;</div><div class="line"><span class="keyword">var</span> imgUrl = <span class="string">"图标"</span>;</div><div class="line"></div><div class="line">wx.ready(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//分享给微信好友</span></div><div class="line">    wx.onMenuShareAppMessage(&#123;</div><div class="line">        <span class="attr">title</span>: title, <span class="comment">// 分享标题</span></div><div class="line">        desc: desc, <span class="comment">// 分享描述</span></div><div class="line">        link: links, <span class="comment">// 分享链接</span></div><div class="line">        imgUrl: imgUrl, <span class="comment">// 分享图标</span></div><div class="line">        success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</div><div class="line"></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">cancel</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">fail</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="comment">// 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口</span></div><div class="line">    wx.onMenuShareTimeline(&#123;</div><div class="line">        <span class="attr">title</span>: title, <span class="comment">// 分享标题</span></div><div class="line">        desc: desc, <span class="comment">// 分享描述</span></div><div class="line">        link: links, <span class="comment">// 分享链接</span></div><div class="line">        imgUrl: imgUrl, <span class="comment">// 分享图标</span></div><div class="line">        success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</div><div class="line"></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">cancel</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="comment">// 监听“分享到QQ”按钮点击、自定义分享内容及分享结果接口</span></div><div class="line">    wx.onMenuShareQQ(&#123;</div><div class="line">        <span class="attr">title</span>: title, <span class="comment">// 分享标题</span></div><div class="line">        desc: desc, <span class="comment">// 分享描述</span></div><div class="line">        link: links, <span class="comment">// 分享链接</span></div><div class="line">        imgUrl: imgUrl, <span class="comment">// 分享图标</span></div><div class="line">        complete: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</div><div class="line"></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">cancel</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="comment">// 2.4 监听“分享到微博”按钮点击、自定义分享内容及分享结果接口</span></div><div class="line">    wx.onMenuShareWeibo(&#123;</div><div class="line">        <span class="attr">title</span>: title, <span class="comment">// 分享标题</span></div><div class="line">        desc: desc, <span class="comment">// 分享描述</span></div><div class="line">        link: links, <span class="comment">// 分享链接</span></div><div class="line">        complete: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</div><div class="line"></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">cancel</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    <span class="comment">//分享到qq空间</span></div><div class="line">    wx.onMenuShareQZone(&#123;</div><div class="line">        <span class="attr">title</span>: title, <span class="comment">// 分享标题</span></div><div class="line">        desc: desc, <span class="comment">// 分享描述</span></div><div class="line">        link: links, <span class="comment">// 分享链接</span></div><div class="line">        imgUrl: imgUrl, <span class="comment">// 分享图标</span></div><div class="line">        success: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">        &#125;,</div><div class="line">        <span class="attr">cancel</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="微信H5页面支付"><a href="#微信H5页面支付" class="headerlink" title="微信H5页面支付"></a>微信H5页面支付</h3><hr>
+<p>挖个坑，下次填~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/27/微信授权相关/" data-id="cjhoe6xqe0027s60w5j5a3ltu" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/授权/">授权</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/27/iframe-使用相关/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">iframe 使用相关</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSS/">CSS</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ES-TS/">ES/TS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NodeJS/">NodeJS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其它/">其它</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/基础知识/">基础知识</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/微信/">微信</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/框架-库/">框架/库</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Angular/" style="font-size: 13.33px;">Angular</a> <a href="/tags/BEM/" style="font-size: 16.67px;">BEM</a> <a href="/tags/CSRF/" style="font-size: 10px;">CSRF</a> <a href="/tags/ES6/" style="font-size: 20px;">ES6</a> <a href="/tags/Express/" style="font-size: 10px;">Express</a> <a href="/tags/FormData/" style="font-size: 10px;">FormData</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Mongoose/" style="font-size: 10px;">Mongoose</a> <a href="/tags/SPA/" style="font-size: 13.33px;">SPA</a> <a href="/tags/Sketch/" style="font-size: 10px;">Sketch</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/WEB安全/" style="font-size: 10px;">WEB安全</a> <a href="/tags/XSS/" style="font-size: 10px;">XSS</a> <a href="/tags/base64/" style="font-size: 10px;">base64</a> <a href="/tags/css/" style="font-size: 16.67px;">css</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/express/" style="font-size: 10px;">express</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/postMessage/" style="font-size: 10px;">postMessage</a> <a href="/tags/postcss/" style="font-size: 13.33px;">postcss</a> <a href="/tags/scss/" style="font-size: 16.67px;">scss</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time/" style="font-size: 10px;">time</a> <a href="/tags/vue/" style="font-size: 13.33px;">vue</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a> <a href="/tags/作用域/" style="font-size: 10px;">作用域</a> <a href="/tags/切图/" style="font-size: 10px;">切图</a> <a href="/tags/前端路由/" style="font-size: 10px;">前端路由</a> <a href="/tags/单页面应用/" style="font-size: 13.33px;">单页面应用</a> <a href="/tags/原型/" style="font-size: 10px;">原型</a> <a href="/tags/图片上传/" style="font-size: 10px;">图片上传</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/基础知识/" style="font-size: 16.67px;">基础知识</a> <a href="/tags/小程序/" style="font-size: 10px;">小程序</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/技巧/" style="font-size: 10px;">技巧</a> <a href="/tags/授权/" style="font-size: 10px;">授权</a> <a href="/tags/数组/" style="font-size: 10px;">数组</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/正则/" style="font-size: 10px;">正则</a> <a href="/tags/目标/" style="font-size: 13.33px;">目标</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/组件/" style="font-size: 10px;">组件</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/跨域/" style="font-size: 10px;">跨域</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a> <a href="/tags/面试/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/27/微信授权相关/">微信授权相关</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/27/iframe-使用相关/">iframe 使用相关</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/03/2017总结与2018目标/">2017总结与2018目标</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/10/原来这就是-封装Vue组价/">原来这就是[封装Vue组件]</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/04/ES6简单使用介绍/">ES6简单使用介绍</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    <div class="widget-wrap">
+	<h3 class="widget-title">友情链接</h3> 
+	<div class="widget"> 
+		<ul> 
+			<li><a href="https://github.com/acelibin" title="itmyhome">github</a></li> 
+			<li><a href="https://segmentfault.com/u/libinlibin" title="itmyhome">segmentfault</a></li> 
+		</ul> 
+	</div>
+</div>
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 libin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
