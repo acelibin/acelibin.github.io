@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/04/git使用及操作/index.html">
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="其实用git也是很久了，刚入行就在github安家，靠着各路大神的教程，也能够配合github客户端更新自己的站点。第一家公司使用SVN，用的也算得心应手，但是每隔一段时间，总会有人把别人的代码或者文件覆盖了的情况，而且有时SVN出现问题就只能干等着了。上家公司只有我一个前端和一个Java后端，前后端完全分离，提交代码通过一个shell脚本直接就可以发布到git仓库了，没有分支的概念，全都是我自己">
-<meta property="og:updated_time" content="2017-12-11T03:36:34.000Z">
+<meta property="og:updated_time" content="2019-03-04T02:59:19.085Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git及SourceTree的使用">
 <meta name="twitter:description" content="其实用git也是很久了，刚入行就在github安家，靠着各路大神的教程，也能够配合github客户端更新自己的站点。第一家公司使用SVN，用的也算得心应手，但是每隔一段时间，总会有人把别人的代码或者文件覆盖了的情况，而且有时SVN出现问题就只能干等着了。上家公司只有我一个前端和一个Java后端，前后端完全分离，提交代码通过一个shell脚本直接就可以发布到git仓库了，没有分支的概念，全都是我自己">
@@ -104,27 +104,57 @@
 <p>每个人拉取一份分支到本地干活，然后add修改的具体文件，然后commit然后push到远程分支，在远程仓库下发起一个合并请求，大牛review合格了就会给你合并，over。</p>
 </blockquote>
 <p>代码表示就是：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1、git checkout dev  //切换到本地分支</div><div class="line">2、git add &lt;file&gt;  //最好是具体文件，防止把没改完的也提交上去</div><div class="line">3、git commit -m &quot;提交说明&quot;  //最好要有说明</div><div class="line">4、git push origin dev  //提交到远程分支</div></pre></td></tr></table></figure>
-<p>一些git常用操作：</p>
-<ul>
-<li><code>git init</code> 初始化本地仓库，把当前目录当成git仓库</li>
-<li><code>git status</code> 查看状态</li>
-<li><code>git log</code> 查看提交日志</li>
-<li><code>git log --pertty=oneline</code> 单行显示</li>
-<li><code>git relog</code> 命令历史记录</li>
-<li><code>git reset --hard &lt;commit id&gt;</code> 版本回退，commit id写前几位即可</li>
-<li><code>git diff &lt;filename&gt;</code> 查看上次提交的修改内容</li>
-<li><code>git checkout -- readme.txt</code> 撤销工作区的修改</li>
-<li><code>git reset HEAD readme.txt</code> 撤销暂存区的修改</li>
-<li><code>git rm &lt;filename&gt;</code> 删除仓库文件</li>
-<li><code>git checkout -b dev</code> 创建并切换到dev分支<blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1、git checkout -b 本地分支名  //切换到本地分支</div><div class="line">2、git add &lt;file&gt;  //最好是具体文件，防止把没改完的也提交上去</div><div class="line">3、git commit -m &quot;提交说明&quot;  //最好要有说明</div><div class="line">4、git pull //先拉取远程分支，有冲突先合并后再重复2、3步骤</div><div class="line">4、git push origin 远程分支  //提交到远程分支</div></pre></td></tr></table></figure>
+<h3 id="git常用操作："><a href="#git常用操作：" class="headerlink" title="git常用操作："></a>git常用操作：</h3><ul>
+<li><p><code>git init</code> 初始化本地仓库，把当前目录当成git仓库</p>
+</li>
+<li><p><code>git status</code> 查看状态</p>
+</li>
+<li><p><code>git log</code> 查看提交日志</p>
+</li>
+<li><p><code>git log --pertty=oneline</code> 单行显示</p>
+</li>
+<li><p><code>git relog</code> 命令历史记录</p>
+</li>
+<li><p><code>git reset --hard HEAD</code> 回退到当前版本</p>
+</li>
+<li><p><code>git reset --hard HEAD^</code> 回退到上一个版本</p>
+</li>
+<li><p><code>git reset --hard &lt;commit id&gt;</code> 版本回退，commit id写前几位即可</p>
+</li>
+<li><p><code>git diff &lt;filename&gt;</code> 查看上次提交的修改内容</p>
+</li>
+<li><p><code>git checkout -- readme.txt</code> 撤销工作区的修改</p>
+</li>
+<li><p><code>git reset HEAD readme.txt</code> 撤销暂存区的修改</p>
+</li>
+<li><p><code>git rm &lt;filename&gt;</code> 删除仓库文件</p>
+</li>
+<li><p><code>git checkout -b dev</code> 创建并切换到dev分支</p>
+<blockquote>
 <p>相当于：<br><code>git branch dev</code> 创建dev分支<br><code>git checkout dev</code> 切换到dev分支</p>
 </blockquote>
 </li>
-<li><code>git branch</code> 查看所有分支</li>
-<li><code>git merge dev</code> 合并分支到master（丢掉分支历史信息）</li>
-<li><code>git merge --no-off</code> 保存分支历史信息</li>
-<li><code>git branch -d dev</code> 删除分支</li>
+<li><p><code>git branch</code> 查看所有分支</p>
+</li>
+<li><p><code>git merge master</code> 先切到自己的分支，然后把主分支合并到自己分支（丢掉分支历史信息）</p>
+</li>
+<li><p><code>git merge --no-off</code> 保存分支历史信息</p>
+</li>
+<li><p><code>git branch -d dev</code> 删除分支, -D 强制删除</p>
+</li>
+<li><p><code>git branch -m old new</code> 修改分支名</p>
+</li>
+<li><p><code>git branch -r</code> 找到远程分支</p>
+</li>
+<li><p><code>git checkout --track origin/远程分支名</code> 进入本地的远程对应分支</p>
+</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><p><code>rimraf node_modules</code> 删除 node_modules 文件</p>
+</li>
+<li><p><code>cls node</code> 清空控制台</p>
+</li>
 </ul>
 <h3 id="SourceTree的使用"><a href="#SourceTree的使用" class="headerlink" title="SourceTree的使用"></a>SourceTree的使用</h3><p>以前自己用github客户端也是得心应手，偶尔用一下命令行也是很简单的操作，没有遇到过什么问题。项目复杂一些，需要多人合作，而且要正规的操作，所以再也不能胡来了。于是乎就看中了SourceTree这个神器，简单易用的界面，可以直接看出来代码的变化，用上手了就离不开了，大赞！</p>
 <p>既然是GUI的工具，使用起来也是很简单的：</p>
@@ -154,7 +184,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/04/git使用及操作/" data-id="cjs8rtj4d0018tj0wz184oy9a" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2017/02/04/git使用及操作/" data-id="cjstr8nq6000mzg0wgf31eiis" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/svn/">svn</a></li></ul>
