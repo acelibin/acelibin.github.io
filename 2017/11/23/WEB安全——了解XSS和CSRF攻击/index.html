@@ -106,7 +106,7 @@
 <p><strong> 原理 </strong>：恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。</p>
 <p><strong> 手段 </strong></p>
 <p>(1).反射型：发出请求时，XSS代码出现在URL中，作为输入提交到服务器，服务端解析后响应，XSS代码随响应代码一起返回给浏览器，最后浏览器解析执行XSS代码。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">www.example.com/?url=&lt;img src='' onerror='alert(1)'&gt;//自动触发</div><div class="line">www.example.com/?url=&lt;p onclick='alert(1)'&gt;点我&lt;/p&gt;//引诱触发</div><div class="line">www.example.com/?url=&lt;iframe src='baidu.com'&gt;&lt;/iframe&gt;</div><div class="line"></div><div class="line">//chrome浏览器会默认拦截，如果设置'X-XSS-Protection:0'则取消默认拦截</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">www.example.com/?url=<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">''</span> <span class="attr">onerror</span>=<span class="string">'alert(1)'</span>&gt;</span>//自动触发</span></div><div class="line">www.example.com/?url=<span class="tag">&lt;<span class="name">p</span> <span class="attr">onclick</span>=<span class="string">'alert(1)'</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">p</span>&gt;</span>//引诱触发</div><div class="line">www.example.com/?url=<span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">'baidu.com'</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div><div class="line"></div><div class="line">//chrome浏览器会默认拦截，如果设置'X-XSS-Protection:0'则取消默认拦截</div></pre></td></tr></table></figure>
 <p>(2).存储型：提交的XSS代码会存储在服务端（数据库/内存/文件系统等），下次请求目标页面时不用再提交XSS代码。</p>
 <p><strong> 防范 </strong></p>
 <p>1、编码：避免原样保存，对用户输入的数据进行HTML Entity编码<br><img src="http://on982w4kr.bkt.clouddn.com/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81.png" alt="字符编码"></p>
@@ -131,7 +131,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/23/WEB安全——了解XSS和CSRF攻击/" data-id="cjstr8nqc000zzg0wdf58wge7" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2017/11/23/WEB安全——了解XSS和CSRF攻击/" data-id="ck4uvxkt30012el0wm8zzl369" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSRF/">CSRF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WEB安全/">WEB安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XSS/">XSS</a></li></ul>
@@ -243,7 +243,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 libin<br>
+      &copy; 2020 libin<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
