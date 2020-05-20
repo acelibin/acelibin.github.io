@@ -11,13 +11,13 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/30/一次搞定作用域闭包和原型/index.html">
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="发现自己一直在追求新技术的道路上狂奔，却忽视了最基础的东西。本来我是觉得上手一个新技能很重要，这样在做东西的时候不会被淘汰。最近一个大神点醒了我：新出来的框架/库那么多，一个人精力也很有限，很容易在追新的道路上越来越累，也越来越迷茫。当你掌握了所有基础的东西之后，你就会发现新的东西无非就是在基础上面的拓展。这样在学习使用一个新的框架的时候，根据文档API很快就能上手。我觉得很有道理。">
-<meta property="og:image" content="http://on982w4kr.bkt.clouddn.com/%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1.jpeg">
-<meta property="og:image" content="http://on982w4kr.bkt.clouddn.com/%E7%BB%84%E5%90%88%E5%BC%8F%E7%BB%A7%E6%89%BF%E7%9A%84%E7%BC%BA%E9%99%B7.jpeg">
-<meta property="og:updated_time" content="2017-12-19T03:27:27.000Z">
+<meta property="og:image" content="https://i.loli.net/2020/05/20/GtmciseWgUuHSnM.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/05/20/S1KvW6oD8X7pbRN.jpg">
+<meta property="og:updated_time" content="2020-05-20T06:31:44.945Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一次搞定作用域闭包和原型">
 <meta name="twitter:description" content="发现自己一直在追求新技术的道路上狂奔，却忽视了最基础的东西。本来我是觉得上手一个新技能很重要，这样在做东西的时候不会被淘汰。最近一个大神点醒了我：新出来的框架/库那么多，一个人精力也很有限，很容易在追新的道路上越来越累，也越来越迷茫。当你掌握了所有基础的东西之后，你就会发现新的东西无非就是在基础上面的拓展。这样在学习使用一个新的框架的时候，根据文档API很快就能上手。我觉得很有道理。">
-<meta name="twitter:image" content="http://on982w4kr.bkt.clouddn.com/%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1.jpeg">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/20/GtmciseWgUuHSnM.jpg">
   
   
     <link rel="icon" href="/favicon.png">
@@ -187,7 +187,7 @@
 </li>
 <li>当试图得到一个引用类型（或对象）的某个属性时，如果这个对象本身没有这个属性，那么会去它的<code>__proto__</code>（即它的构造函数的<code>prototype</code>）中查找。</li>
 </ul>
-<p><img src="http://on982w4kr.bkt.clouddn.com/%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%AF%B9%E8%B1%A1.jpeg" alt="理解原型对象"></p>
+<p><img src="https://i.loli.net/2020/05/20/GtmciseWgUuHSnM.jpg" alt="理解原型对象"></p>
 <p>由上面最后一条引申出<strong>原型链</strong>：查找某个对象的属性或方法时，先从对象自身查找，找不到会往上到它的构造函数的原型<code>prototype</code>上查找，直到找到或者null。</p>
 <blockquote>
 <p>确定是本身的对象和方法还是原型上的，可以用isPropertyOf()</p>
@@ -223,7 +223,7 @@
 <blockquote>
 <p>这个方法避免了单独使用原型链和构造函数的缺陷，是较常用的实现继承的方式。但是同样不完美，需要调用两次超类型构造函数，一次是创建子类型原型的时候，一次是在子类型内部。</p>
 </blockquote>
-<p><img src="http://on982w4kr.bkt.clouddn.com/%E7%BB%84%E5%90%88%E5%BC%8F%E7%BB%A7%E6%89%BF%E7%9A%84%E7%BC%BA%E9%99%B7.jpeg" alt="组合式继承的缺陷"></p>
+<p><img src="https://i.loli.net/2020/05/20/S1KvW6oD8X7pbRN.jpg" alt="组合式继承的缺陷"></p>
 <p>4、原型式继承：ES5通过<code>Object.create()</code>方法规范化了原型式继承——类似浅拷贝创建了一个副本，但是同样有缺陷</p>
 <blockquote>
 <p><code>Object.create()</code>第一个参数用作新对象原型的对象，第二个参数为新对象定义额外属性的对象。</p>

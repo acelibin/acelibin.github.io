@@ -13,14 +13,14 @@
 <meta property="og:site_name" content="acelibin">
 <meta property="og:description" content="是不是觉得黑客很神秘，仿佛一个幽灵般来无影去无踪，做的事情又那么神奇，能盗别人的账户，能让别人的网站错乱或者瘫痪，还能更改学习成绩…其实这些怎么弄的，我也不知道~~
 最近在慕课网发现一个好玩的课程，Web安全——XSS，里面讲到了XSS，顺便提了一句CSRF，然后我就顺着去了解了一下。">
-<meta property="og:image" content="http://on982w4kr.bkt.clouddn.com/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81.png">
-<meta property="og:image" content="http://on982w4kr.bkt.clouddn.com/CSRF%E6%94%BB%E5%87%BB.png">
-<meta property="og:updated_time" content="2017-12-11T03:53:21.000Z">
+<meta property="og:image" content="https://i.loli.net/2020/05/20/LuvtDQIeS4mFsXq.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/20/BmrQSva5xgNKjPM.png">
+<meta property="og:updated_time" content="2020-05-20T06:21:52.159Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WEB安全——了解XSS和CSRF攻击">
 <meta name="twitter:description" content="是不是觉得黑客很神秘，仿佛一个幽灵般来无影去无踪，做的事情又那么神奇，能盗别人的账户，能让别人的网站错乱或者瘫痪，还能更改学习成绩…其实这些怎么弄的，我也不知道~~
 最近在慕课网发现一个好玩的课程，Web安全——XSS，里面讲到了XSS，顺便提了一句CSRF，然后我就顺着去了解了一下。">
-<meta name="twitter:image" content="http://on982w4kr.bkt.clouddn.com/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81.png">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/20/LuvtDQIeS4mFsXq.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -106,17 +106,17 @@
 <p><strong> 原理 </strong>：恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的目的。</p>
 <p><strong> 手段 </strong></p>
 <p>(1).反射型：发出请求时，XSS代码出现在URL中，作为输入提交到服务器，服务端解析后响应，XSS代码随响应代码一起返回给浏览器，最后浏览器解析执行XSS代码。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">www.example.com/?url=<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">''</span> <span class="attr">onerror</span>=<span class="string">'alert(1)'</span>&gt;</span>//自动触发</span></div><div class="line">www.example.com/?url=<span class="tag">&lt;<span class="name">p</span> <span class="attr">onclick</span>=<span class="string">'alert(1)'</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">p</span>&gt;</span>//引诱触发</div><div class="line">www.example.com/?url=<span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">'baidu.com'</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></div><div class="line"></div><div class="line">//chrome浏览器会默认拦截，如果设置'X-XSS-Protection:0'则取消默认拦截</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><div class="line">www.example.com/?url=&lt;img src='' onerror='alert(1)'&gt;//自动触发</div><div class="line">www.example.com/?url=&lt;p onclick='alert(1)'&gt;点我&lt;/p&gt;//引诱触发</div><div class="line">www.example.com/?url=&lt;iframe src='baidu.com'&gt;&lt;/iframe&gt;</div><div class="line"></div><div class="line">//chrome浏览器会默认拦截，如果设置'X-XSS-Protection:0'则取消默认拦截</div></pre></td></tr></table></figure>
 <p>(2).存储型：提交的XSS代码会存储在服务端（数据库/内存/文件系统等），下次请求目标页面时不用再提交XSS代码。</p>
 <p><strong> 防范 </strong></p>
-<p>1、编码：避免原样保存，对用户输入的数据进行HTML Entity编码<br><img src="http://on982w4kr.bkt.clouddn.com/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81.png" alt="字符编码"></p>
+<p>1、编码：避免原样保存，对用户输入的数据进行HTML Entity编码<br><img src="https://i.loli.net/2020/05/20/LuvtDQIeS4mFsXq.png" alt="字符编码"></p>
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">htmlEnCode</span>(<span class="params">str</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> s=<span class="string">''</span>;</div><div class="line">    <span class="keyword">if</span>(str.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="string">''</span>;</div><div class="line">    s=str.replace(<span class="regexp">/&amp;/g</span>,<span class="string">'&amp;gt;'</span>);<span class="comment">//&amp;</span></div><div class="line">    s=s.replace(<span class="regexp">/&lt;/g</span>,<span class="string">'&amp;lt;'</span>);<span class="comment">//&lt;</span></div><div class="line">    s=s.replace(<span class="regexp">/&gt;/g</span>,<span class="string">'&amp;gt;'</span>);<span class="comment">//&gt;</span></div><div class="line">    s=s.replace(<span class="regexp">/\s/g</span>,<span class="string">'&amp;nbsp;'</span>);空格</div><div class="line">    s=s.replace(<span class="regexp">/\'/g</span>,<span class="string">'&amp;#39'</span>);<span class="string">''</span></div><div class="line">    s=s.replace(<span class="regexp">/\"/g</span>,<span class="string">'&amp;quot;'</span>);<span class="string">""</span></div><div class="line">    s=s.replace(<span class="regexp">/\n/g</span>,<span class="string">'&lt;br&gt;'</span>);换行符</div><div class="line">    <span class="keyword">return</span> s;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>2、过滤：原样显示内容时先过滤非法内容，移除用户上传的DOM属性，如onerror、onclick、onmouseover等，移除用户上传的style节点、script节点、iframe节点等。</p>
 <p>3、校正：避免恶意破坏页面DOM，避免直接对HTML Entity解码，使用DOM Parse，校正不配对的DOM标签。</p>
 <hr>
 <h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><p><strong> 原理 </strong></p>
 <p>登录受信任网站A，并在本地生成Cookie，在不登出A的情况下，访问危险网站B。</p>
-<p><img src="http://on982w4kr.bkt.clouddn.com/CSRF%E6%94%BB%E5%87%BB.png" alt="CSRF攻击原理"></p>
+<p><img src="https://i.loli.net/2020/05/20/BmrQSva5xgNKjPM.png" alt="CSRF攻击原理"></p>
 <p><strong> 手段 </strong></p>
 <p>1、捕获URL实现攻击</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">http://www.mybank.com/Transfer.php?toBankId</span>=<span class="string">11&amp;money</span>=<span class="string">1000</span>&gt;</span></div><div class="line"></div><div class="line">//危险网站B页面通过img标签来实现GET请求，这个只能针对GET请求</div></pre></td></tr></table></figure>
